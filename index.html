@@ -10,49 +10,65 @@
 <title>Rhythm — Habit & Schedule Tracker</title>
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-:root {
-  --bg:#0F1012;--s1:#181A1E;--s2:#21232A;--s3:#2B2D35;--br:#33363F;
-  --tx:#ECEAE6;--tx2:#8C8A92;--tx3:#5A5862;
-  --ac:#6EE7B7;--ac2:#34D399;--acd:rgba(110,231,183,0.12);
-  --dng:#F87171;--dngd:rgba(248,113,113,0.1);
-  --blue:#60A5FA;--amb:#FBBF24;--rose:#FB7185;--purp:#A78BFA;--cyan:#22D3EE;
-  --r:14px;--font:'Outfit',sans-serif;--mono:'JetBrains Mono',monospace;
-  --st:env(safe-area-inset-top,0px);--sb:env(safe-area-inset-bottom,0px);
-}
+:root{--bg:#0F1012;--s1:#181A1E;--s2:#21232A;--s3:#2B2D35;--br:#33363F;--tx:#ECEAE6;--tx2:#8C8A92;--tx3:#5A5862;--ac:#6EE7B7;--ac2:#34D399;--acd:rgba(110,231,183,0.12);--dng:#F87171;--dngd:rgba(248,113,113,0.1);--blue:#60A5FA;--amb:#FBBF24;--rose:#FB7185;--purp:#A78BFA;--r:14px;--font:'Outfit',sans-serif;--mono:'JetBrains Mono',monospace;--st:env(safe-area-inset-top,0px);--sb:env(safe-area-inset-bottom,0px)}
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
-body{font-family:var(--font);background:var(--bg);color:var(--tx);min-height:100dvh;overflow-x:hidden;padding-top:var(--st);padding-bottom:calc(74px + var(--sb))}
+body{font-family:var(--font);background:var(--bg);color:var(--tx);min-height:100dvh;overflow-x:hidden;padding-top:var(--st)}
 button{font-family:var(--font);cursor:pointer;border:none;outline:none}
-input,select,textarea{font-family:var(--font);outline:none}
+input,select{font-family:var(--font);outline:none}
 ::-webkit-scrollbar{width:0}
-
-@keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
 @keyframes slideIn{from{opacity:0;transform:translateX(-8px)}to{opacity:1;transform:translateX(0)}}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes shake{0%,100%{transform:translateX(0)}20%,60%{transform:translateX(-4px)}40%,80%{transform:translateX(4px)}}
 
-.app{max-width:480px;margin:0 auto;padding:0 16px}
+/* ═══ AUTH SCREENS ═══ */
+.auth-wrap{min-height:100dvh;display:flex;align-items:center;justify-content:center;padding:24px 20px}
+.auth-card{width:100%;max-width:380px;animation:fadeUp .5s ease}
+.auth-logo{font-size:36px;font-weight:800;letter-spacing:-1px;text-align:center;margin-bottom:6px}
+.auth-logo em{font-style:normal;color:var(--ac)}
+.auth-sub{text-align:center;font-size:13px;color:var(--tx2);margin-bottom:36px}
+.auth-form{background:var(--s1);border-radius:18px;padding:28px 24px;border:1px solid var(--br)}
+.auth-title{font-size:20px;font-weight:700;margin-bottom:4px}
+.auth-desc{font-size:12px;color:var(--tx2);margin-bottom:24px}
+.auth-field{margin-bottom:14px}
+.auth-field label{display:block;font-size:11px;font-weight:600;color:var(--tx2);text-transform:uppercase;letter-spacing:.8px;margin-bottom:6px}
+.auth-input{width:100%;padding:12px 14px;border-radius:11px;border:1px solid var(--br);background:var(--s2);color:var(--tx);font-size:14px;transition:border-color .2s}
+.auth-input:focus{border-color:var(--ac)}
+.auth-input::placeholder{color:var(--tx3)}
+.auth-btn{width:100%;padding:14px;border-radius:11px;background:var(--ac);color:var(--bg);font-size:14px;font-weight:700;margin-top:8px;transition:all .2s;display:flex;align-items:center;justify-content:center;gap:8px}
+.auth-btn:active{transform:scale(.98)}
+.auth-btn:disabled{opacity:.6;cursor:not-allowed}
+.auth-link{text-align:center;margin-top:20px;font-size:13px;color:var(--tx2)}
+.auth-link a{color:var(--ac);text-decoration:none;font-weight:600;cursor:pointer}
+.auth-link a:hover{text-decoration:underline}
+.auth-err{background:var(--dngd);color:var(--dng);font-size:12px;font-weight:500;padding:10px 14px;border-radius:10px;margin-bottom:14px;animation:shake .4s ease;display:flex;align-items:center;gap:6px}
+.auth-success{background:var(--acd);color:var(--ac);font-size:12px;font-weight:500;padding:10px 14px;border-radius:10px;margin-bottom:14px}
+.auth-forgot{text-align:right;margin-top:-8px;margin-bottom:14px}
+.auth-forgot a{font-size:11px;color:var(--tx3);text-decoration:none;cursor:pointer}
+.auth-forgot a:hover{color:var(--ac)}
+.spinner{width:18px;height:18px;border:2px solid transparent;border-top-color:var(--bg);border-radius:50%;animation:spin .6s linear infinite}
 
+/* ═══ APP ═══ */
+.app{max-width:480px;margin:0 auto;padding:0 16px;padding-bottom:calc(74px + var(--sb))}
 .hdr{padding:20px 0 16px;display:flex;align-items:center;justify-content:space-between;animation:fadeUp .4s ease}
 .logo{font-size:25px;font-weight:800;letter-spacing:-.5px}
 .logo em{font-style:normal;color:var(--ac)}
 .date-tag{font-family:var(--mono);font-size:10px;color:var(--tx2);background:var(--s1);padding:5px 10px;border-radius:16px;margin-top:4px}
 .ring-w{position:relative;width:50px;height:50px}
 .ring-l{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:12px;font-weight:600;color:var(--ac)}
-
 .notif-banner{background:var(--acd);border:1px solid rgba(110,231,183,0.2);border-radius:12px;padding:12px 14px;margin-bottom:14px;display:flex;align-items:center;gap:10px;animation:fadeUp .3s ease;cursor:pointer}
 .notif-text{font-size:12px;font-weight:500;flex:1}
 .notif-text small{display:block;color:var(--tx2);font-weight:400;margin-top:2px}
-
 .missed-alert{background:linear-gradient(135deg,rgba(248,113,113,0.08),rgba(251,191,36,0.06));border:1px solid rgba(248,113,113,0.15);border-radius:var(--r);padding:14px;margin-bottom:14px;animation:fadeUp .3s ease}
 .missed-title{font-size:13px;font-weight:700;color:var(--dng);margin-bottom:8px;display:flex;align-items:center;gap:6px}
 .missed-item{display:flex;align-items:center;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--br);font-size:12px}
 .missed-item:last-child{border-bottom:none}
 .missed-item button{padding:5px 12px;border-radius:7px;background:var(--ac);color:var(--bg);font-size:11px;font-weight:700}
-
 .bnav{position:fixed;bottom:0;left:0;right:0;z-index:100;background:rgba(15,16,18,0.92);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-top:1px solid var(--br);padding:6px 0 calc(6px + var(--sb));display:flex;justify-content:space-around}
 .nb{display:flex;flex-direction:column;align-items:center;gap:2px;background:none;color:var(--tx3);font-size:9px;font-weight:500;padding:6px 12px;border-radius:10px;position:relative}
 .nb.act{color:var(--ac)}
 .nb svg{width:21px;height:21px}
 .nb .badge{position:absolute;top:2px;right:6px;width:16px;height:16px;border-radius:50%;background:var(--dng);color:#fff;font-size:8px;font-weight:700;display:flex;align-items:center;justify-content:center}
-
 .wk-nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
 .wk-nav button{width:34px;height:34px;border-radius:10px;background:var(--s1);color:var(--tx2);font-size:16px;display:flex;align-items:center;justify-content:center;border:1px solid var(--br)}
 .wk-label{font-family:var(--mono);font-size:11px;color:var(--tx2);font-weight:500}
@@ -61,7 +77,6 @@ input,select,textarea{font-family:var(--font);outline:none}
 .dh-c.td{color:var(--ac)}
 .dn{width:21px;height:21px;line-height:21px;border-radius:50%;margin:2px auto 0;font-size:10px;text-align:center}
 .dn.td{background:var(--ac);color:var(--bg);font-weight:700}
-
 .hr{display:grid;grid-template-columns:1fr repeat(7,36px);gap:3px;align-items:center;padding:10px 2px;border-bottom:1px solid var(--br)}
 .hi{display:flex;align-items:center;gap:7px;min-width:0}
 .hic{width:28px;height:28px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0}
@@ -69,7 +84,6 @@ input,select,textarea{font-family:var(--font);outline:none}
 .hm{font-family:var(--mono);font-size:9px;color:var(--tx3);margin-top:1px}
 .cb{width:33px;height:33px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;transition:all .2s}
 .cb.d{color:#fff}.cb.u{background:var(--s2);color:var(--br);transform:scale(.88)}
-
 .cal-feed-box{background:var(--s1);border-radius:var(--r);padding:16px;margin-bottom:14px;animation:fadeUp .3s ease}
 .cal-feed-box label{font-size:12px;font-weight:600;color:var(--tx2);display:block;margin-bottom:8px}
 .cal-input-row{display:flex;gap:6px}
@@ -84,7 +98,6 @@ input,select,textarea{font-family:var(--font);outline:none}
 .cal-day-hdr{font-family:var(--mono);font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1.2px;color:var(--tx3);margin:16px 0 8px;display:flex;align-items:center;gap:6px}
 .cal-day-hdr.td{color:var(--ac)}
 .sec-title{font-size:11px;font-weight:700;color:var(--tx3);text-transform:uppercase;letter-spacing:.8px;margin:20px 0 10px;padding-bottom:6px;border-bottom:1px solid var(--br)}
-
 .rc{background:var(--s1);border-radius:var(--r);padding:16px;margin-bottom:12px}
 .rt{font-size:12px;font-weight:700;color:var(--tx2);text-transform:uppercase;letter-spacing:.5px;margin-bottom:12px}
 .sg{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:14px}
@@ -101,7 +114,6 @@ input,select,textarea{font-family:var(--font);outline:none}
 .hbb{flex:1;height:7px;background:var(--s2);border-radius:4px;overflow:hidden}
 .hbf{height:100%;border-radius:4px;transition:width .6s ease}
 .hp{font-family:var(--mono);font-size:11px;font-weight:600;min-width:34px;text-align:right}
-
 .fw{background:var(--s1);border-radius:var(--r);padding:16px;margin-top:10px;animation:fadeUp .25s ease}
 .ftt{font-size:14px;font-weight:700;margin-bottom:14px}
 .fi{width:100%;padding:10px 12px;border-radius:10px;border:1px solid var(--br);background:var(--s2);color:var(--tx);font-size:13px;margin-bottom:8px}
@@ -121,7 +133,6 @@ input,select,textarea{font-family:var(--font);outline:none}
 .dr{display:flex;justify-content:flex-end;padding-top:6px;grid-column:1/-1}
 .db{padding:5px 12px;border-radius:6px;background:var(--dngd);color:var(--dng);font-size:10px;font-weight:600}
 .empty{text-align:center;padding:36px 0;color:var(--tx3);font-size:12px}
-
 .set-row{display:flex;align-items:center;justify-content:space-between;padding:14px 0;border-bottom:1px solid var(--br)}
 .set-row:last-child{border-bottom:none}
 .set-label{font-size:13px;font-weight:500}
@@ -130,70 +141,273 @@ input,select,textarea{font-family:var(--font);outline:none}
 .toggle.on{background:var(--ac)}
 .toggle-knob{width:20px;height:20px;border-radius:50%;background:#fff;position:absolute;top:2px;left:2px;transition:all .2s}
 .toggle.on .toggle-knob{left:22px}
+.user-pill{display:flex;align-items:center;gap:8px;background:var(--s1);border-radius:10px;padding:8px 12px;margin-bottom:14px;font-size:12px}
+.user-avatar{width:28px;height:28px;border-radius:50%;background:var(--ac);color:var(--bg);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:12px;flex-shrink:0}
+.loading-screen{min-height:100dvh;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:12px}
+.loading-screen .spinner{width:28px;height:28px;border-width:3px;border-top-color:var(--ac)}
 </style>
 </head>
 <body>
-<div class="app" id="app"></div>
+
+<div id="root"></div>
+
+<!-- Firebase SDK -->
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+
 <script>
+// ╔══════════════════════════════════════════════════════════╗
+// ║  FIREBASE CONFIG — Replace with your own Firebase keys  ║
+// ╚══════════════════════════════════════════════════════════╝
+const firebaseConfig = {
+  apiKey: "YOUR_API_KEY",
+  authDomain: "YOUR_PROJECT.firebaseapp.com",
+  projectId: "YOUR_PROJECT_ID",
+  storageBucket: "YOUR_PROJECT.appspot.com",
+  messagingSenderId: "YOUR_SENDER_ID",
+  appId: "YOUR_APP_ID"
+};
+
+firebase.initializeApp(firebaseConfig);
+const auth = firebase.auth();
+const db = firebase.firestore();
+
+// ─── CONSTANTS ───
 const DAYS=["Sun","Mon","Tue","Wed","Thu","Fri","Sat"],MO=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
 const CL=[{bg:"#D1FAE5",fill:"#10B981"},{bg:"#DBEAFE",fill:"#3B82F6"},{bg:"#FEF3C7",fill:"#F59E0B"},{bg:"#FCE7F3",fill:"#EC4899"},{bg:"#EDE9FE",fill:"#8B5CF6"},{bg:"#CFFAFE",fill:"#06B6D4"},{bg:"#FEE2E2",fill:"#EF4444"},{bg:"#E0E7FF",fill:"#6366F1"}];
 const IC=["✦","◆","●","▲","★","♦","◉","⊕","⬡","⏣","♠","⧫"];
+const DEF_HABITS=[{id:"h1",name:"Morning Run",icon:"✦",ci:0,time:"06:30",cat:"Health"},{id:"h2",name:"Read 30 min",icon:"◆",ci:4,time:"21:00",cat:"Growth"},{id:"h3",name:"Meditate",icon:"●",ci:5,time:"07:00",cat:"Wellness"}];
+
 function dk(d){return`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`}
 function wkd(o=0){const n=new Date,s=new Date(n);s.setDate(n.getDate()-n.getDay()+o*7);return Array.from({length:7},(_,i)=>{const d=new Date(s);d.setDate(s.getDate()+i);return d})}
 function gS(id,c){let s=0;const t=new Date;for(let i=0;i<365;i++){const d=new Date(t);d.setDate(t.getDate()-i);if(c[id+"::"+dk(d)])s++;else if(i>0)break}return s}
 function fT(h,m){return`${((h%12)||12)}:${String(m).padStart(2,"0")} ${h>=12?"PM":"AM"}`}
 function pT(s){const p=s.split(":");return{h:parseInt(p[0]),m:parseInt(p[1]||0)}}
 
-let S={habits:[{id:"h1",name:"Morning Run",icon:"✦",ci:0,time:"06:30",cat:"Health"},{id:"h2",name:"Read 30 min",icon:"◆",ci:4,time:"21:00",cat:"Growth"},{id:"h3",name:"Meditate",icon:"●",ci:5,time:"07:00",cat:"Wellness"}],comp:{},sched:[],calUrl:"",calEvents:[],calLastSync:null,calSyncing:false,view:"habits",wo:0,showAdd:false,showAddS:false,editH:null,editS:null,notifOn:false,notifDis:{},eodH:21,eodM:0};
-function load(){try{const d=localStorage.getItem("rhythm3");if(d){const p=JSON.parse(d);Object.assign(S,p);S.calSyncing=false}}catch(e){}}
-function save(){try{const s={...S};delete s.calSyncing;localStorage.setItem("rhythm3",JSON.stringify(s))}catch(e){}}
-load();
+// ─── APP STATE ───
+let currentUser=null;
+let authScreen="login"; // login | signup | forgot
+let authLoading=false;
+let authError="";
+let authSuccess="";
+let appLoading=true;
 
-// ICS Parser
+let S={habits:[...DEF_HABITS],comp:{},sched:[],calUrl:"",calEvents:[],calLastSync:null,calSyncing:false,view:"habits",wo:0,showAdd:false,showAddS:false,editH:null,editS:null,notifOn:false,notifDis:{},eodH:21,eodM:0};
+
+// ─── FIRESTORE SYNC ───
+let unsubFirestore=null;
+
+function userDocRef(){
+  if(!currentUser)return null;
+  return db.collection("users").doc(currentUser.uid);
+}
+
+async function saveToCloud(){
+  const ref=userDocRef();
+  if(!ref)return;
+  try{
+    const data={habits:S.habits,comp:S.comp,sched:S.sched,calUrl:S.calUrl,calEvents:S.calEvents,calLastSync:S.calLastSync,notifOn:S.notifOn,eodH:S.eodH,eodM:S.eodM,updatedAt:firebase.firestore.FieldValue.serverTimestamp()};
+    await ref.set(data,{merge:true});
+  }catch(e){console.error("Save error:",e)}
+}
+
+async function loadFromCloud(){
+  const ref=userDocRef();
+  if(!ref)return;
+  try{
+    const doc=await ref.get();
+    if(doc.exists){
+      const d=doc.data();
+      S.habits=d.habits||[...DEF_HABITS];
+      S.comp=d.comp||{};
+      S.sched=d.sched||[];
+      S.calUrl=d.calUrl||"";
+      S.calEvents=d.calEvents||[];
+      S.calLastSync=d.calLastSync||null;
+      S.notifOn=d.notifOn||false;
+      S.eodH=d.eodH||21;
+      S.eodM=d.eodM||0;
+    }
+  }catch(e){console.error("Load error:",e)}
+}
+
+function save(){saveToCloud()}
+
+// Debounce save
+let saveTimer=null;
+function debounceSave(){clearTimeout(saveTimer);saveTimer=setTimeout(save,800)}
+
+// ─── AUTH LISTENERS ───
+auth.onAuthStateChanged(async(user)=>{
+  currentUser=user;
+  if(user){
+    await loadFromCloud();
+    appLoading=false;
+    if(S.notifOn)schedN();
+    render();
+  }else{
+    appLoading=false;
+    S={habits:[...DEF_HABITS],comp:{},sched:[],calUrl:"",calEvents:[],calLastSync:null,calSyncing:false,view:"habits",wo:0,showAdd:false,showAddS:false,editH:null,editS:null,notifOn:false,notifDis:{},eodH:21,eodM:0};
+    render();
+  }
+});
+
+// ─── AUTH ACTIONS ───
+async function doLogin(){
+  const email=document.getElementById("authEmail")?.value?.trim();
+  const pass=document.getElementById("authPass")?.value;
+  if(!email||!pass){authError="Please fill in all fields.";render();return}
+  authLoading=true;authError="";render();
+  try{await auth.signInWithEmailAndPassword(email,pass)}
+  catch(e){authError=friendlyError(e.code);authLoading=false;render()}
+}
+
+async function doSignup(){
+  const name=document.getElementById("authName")?.value?.trim();
+  const email=document.getElementById("authEmail")?.value?.trim();
+  const pass=document.getElementById("authPass")?.value;
+  const pass2=document.getElementById("authPass2")?.value;
+  if(!name||!email||!pass){authError="Please fill in all fields.";render();return}
+  if(pass!==pass2){authError="Passwords don't match.";render();return}
+  if(pass.length<6){authError="Password must be at least 6 characters.";render();return}
+  authLoading=true;authError="";render();
+  try{
+    const cred=await auth.createUserWithEmailAndPassword(email,pass);
+    await cred.user.updateProfile({displayName:name});
+    // Create default data
+    await db.collection("users").doc(cred.user.uid).set({habits:[...DEF_HABITS],comp:{},sched:[],calUrl:"",calEvents:[],calLastSync:null,notifOn:false,eodH:21,eodM:0,createdAt:firebase.firestore.FieldValue.serverTimestamp()});
+  }catch(e){authError=friendlyError(e.code);authLoading=false;render()}
+}
+
+async function doForgot(){
+  const email=document.getElementById("authEmail")?.value?.trim();
+  if(!email){authError="Enter your email address.";render();return}
+  authLoading=true;authError="";render();
+  try{await auth.sendPasswordResetEmail(email);authSuccess="Password reset email sent! Check your inbox.";authLoading=false;render()}
+  catch(e){authError=friendlyError(e.code);authLoading=false;render()}
+}
+
+function doLogout(){auth.signOut()}
+
+function friendlyError(code){
+  const map={"auth/user-not-found":"No account with this email.","auth/wrong-password":"Incorrect password.","auth/email-already-in-use":"Email already registered. Try logging in.","auth/weak-password":"Password too weak (min 6 chars).","auth/invalid-email":"Invalid email address.","auth/too-many-requests":"Too many attempts. Try again later.","auth/invalid-credential":"Invalid email or password."};
+  return map[code]||"Something went wrong. Please try again.";
+}
+
+function switchAuth(screen){authScreen=screen;authError="";authSuccess="";authLoading=false;render()}
+
+// ─── ICS Parser ───
 function parseICS(t){const evs=[];const bl=t.split("BEGIN:VEVENT");for(let i=1;i<bl.length;i++){const b=bl[i].split("END:VEVENT")[0];const g=k=>{const m=b.match(new RegExp(k+"[^:]*:(.+?)\\r?\\n","s"));return m?m[1].replace(/\\n/g," ").trim():""};const ev={title:g("SUMMARY")||"(No title)",location:g("LOCATION"),description:g("DESCRIPTION")};const ds=g("DTSTART"),de=g("DTEND");if(ds){ev.start=pICS(ds);ev.end=de?pICS(de):ev.start;ev.allDay=ds.replace(/TZID=[^:]+:/,"").trim().length===8;evs.push(ev)}}return evs}
 function pICS(s){s=s.replace(/TZID=[^:]+:/,"").trim();if(s.length===8)return new Date(+s.slice(0,4),+s.slice(4,6)-1,+s.slice(6,8));const y=+s.slice(0,4),mo=+s.slice(4,6)-1,d=+s.slice(6,8),h=+s.slice(9,11)||0,mi=+s.slice(11,13)||0;return s.endsWith("Z")?new Date(Date.UTC(y,mo,d,h,mi)):new Date(y,mo,d,h,mi)}
+async function syncCal(){if(!S.calUrl.trim())return;S.calSyncing=true;render();try{let r;try{r=await fetch(S.calUrl.trim())}catch(e){r=await fetch("https://api.allorigins.win/raw?url="+encodeURIComponent(S.calUrl.trim()))}if(!r.ok)throw new Error(r.status);const t=await r.text();S.calEvents=parseICS(t);S.calLastSync=new Date().toISOString();S.calSyncing=false;debounceSave();render()}catch(e){S.calSyncing=false;render();alert("Could not sync. Ensure URL is a public .ics link.\n\nTeams: Outlook > Settings > Calendar > Shared calendars > Publish > Copy ICS.\nApple: iCloud.com > Calendar > Share > Public Calendar.\n\n"+e.message)}}
 
-async function syncCal(){if(!S.calUrl.trim())return;S.calSyncing=true;render();try{let r;try{r=await fetch(S.calUrl.trim())}catch(e){r=await fetch("https://api.allorigins.win/raw?url="+encodeURIComponent(S.calUrl.trim()))}if(!r.ok)throw new Error(r.status);const t=await r.text();S.calEvents=parseICS(t);S.calLastSync=new Date().toISOString();S.calSyncing=false;save();render()}catch(e){S.calSyncing=false;render();alert("Could not sync calendar.\n\nEnsure the URL is a public .ics link.\n\nTeams: Outlook > Settings > Calendar > Shared calendars > Publish a calendar > Copy ICS link.\n\nApple: iCloud.com > Calendar > Share > Public Calendar > Copy link.\n\nError: "+e.message)}}
-
-// Notifications
-async function reqNotif(){if(!("Notification" in window)){alert("Notifications not supported.");return}const p=await Notification.requestPermission();S.notifOn=p==="granted";save();render();if(S.notifOn)schedN()}
+// ─── Notifications ───
+async function reqNotif(){if(!("Notification" in window)){alert("Notifications not supported.");return}const p=await Notification.requestPermission();S.notifOn=p==="granted";debounceSave();render();if(S.notifOn)schedN()}
 let nT=[];
 function schedN(){nT.forEach(t=>clearTimeout(t));nT=[];if(!S.notifOn)return;const now=new Date,tdk=dk(now);
 S.habits.forEach(h=>{const t=pT(h.time),tar=new Date(now);tar.setHours(t.h,t.m,0,0);let d1=tar-now;
-if(d1>0)nT.push(setTimeout(()=>{if(!S.comp[h.id+"::"+tdk])new Notification("Rhythm — "+h.name,{body:"Time to do it! Tap to log.",tag:"h-"+h.id})},d1));
-let d2=d1+3600000;if(d2>0)nT.push(setTimeout(()=>{if(!S.comp[h.id+"::"+tdk])new Notification("Missed: "+h.name,{body:"Still not logged. Don't break your streak!",tag:"m-"+h.id})},d2))});
+if(d1>0)nT.push(setTimeout(()=>{if(!S.comp[h.id+"::"+tdk])new Notification("Rhythm — "+h.name,{body:"Time to do it!",tag:"h-"+h.id})},d1));
+let d2=d1+3600000;if(d2>0)nT.push(setTimeout(()=>{if(!S.comp[h.id+"::"+tdk])new Notification("Missed: "+h.name,{body:"Still not logged!",tag:"m-"+h.id})},d2))});
 const eod=new Date(now);eod.setHours(S.eodH,S.eodM,0,0);let ed=eod-now;
-if(ed>0)nT.push(setTimeout(()=>{const ms=S.habits.filter(h=>!S.comp[h.id+"::"+tdk]);if(ms.length)new Notification("Rhythm — End of Day",{body:ms.length+" incomplete: "+ms.map(h=>h.name).join(", "),tag:"eod"});else new Notification("Rhythm — Perfect Day!",{body:"All habits completed!",tag:"eod"})},ed))}
+if(ed>0)nT.push(setTimeout(()=>{const ms=S.habits.filter(h=>!S.comp[h.id+"::"+tdk]);if(ms.length)new Notification("Rhythm — End of Day",{body:ms.length+" incomplete: "+ms.map(h=>h.name).join(", "),tag:"eod"});else new Notification("Rhythm — Perfect Day!",{body:"All done!",tag:"eod"})},ed))}
 document.addEventListener("visibilitychange",()=>{if(!document.hidden&&S.notifOn)schedN()});
-if(S.notifOn)schedN();
 
-// Actions
+// ─── App Actions ───
 function setV(v){S.view=v;S.showAdd=S.showAddS=false;S.editH=S.editS=null;render();window.scrollTo(0,0)}
 function nW(d){S.wo+=d;render()}
-function tC(hid,d){const k=hid+"::"+d;S.comp[k]?delete S.comp[k]:S.comp[k]=true;save();render();if(S.notifOn)schedN()}
+function tC(hid,d){const k=hid+"::"+d;S.comp[k]?delete S.comp[k]:S.comp[k]=true;debounceSave();render();if(S.notifOn)schedN()}
 function tE(id){S.editH=S.editH===id?null:id;render()}
-function dH(id){S.habits=S.habits.filter(h=>h.id!==id);Object.keys(S.comp).forEach(k=>{if(k.startsWith(id+"::"))delete S.comp[k]});S.editH=null;save();render()}
+function dH(id){S.habits=S.habits.filter(h=>h.id!==id);Object.keys(S.comp).forEach(k=>{if(k.startsWith(id+"::"))delete S.comp[k]});S.editH=null;debounceSave();render()}
 function tES(id){S.editS=S.editS===id?null:id;render()}
-function dS(id){S.sched=S.sched.filter(s=>s.id!==id);S.editS=null;save();render()}
-function dM(){S.notifDis[dk(new Date)]=true;save();render()}
+function dSch(id){S.sched=S.sched.filter(s=>s.id!==id);S.editS=null;debounceSave();render()}
+function dM(){S.notifDis[dk(new Date)]=true;render()}
 let _si="✦",_sc=0,_scs=1;
 function sI(el,ic){_si=ic;document.querySelectorAll(".ib").forEach(b=>b.classList.remove("s"));el.classList.add("s")}
 function sC(el,ci){_sc=ci;document.querySelectorAll("#hF .cd").forEach(b=>b.classList.remove("s"));el.classList.add("s")}
 function sCS(el,ci){_scs=ci;document.querySelectorAll("#sF .cd").forEach(b=>b.classList.remove("s"));el.classList.add("s")}
-function subH(){const n=document.getElementById("hN")?.value?.trim();if(!n)return;S.habits.push({id:"h"+Date.now(),name:n,icon:_si,ci:_sc,time:document.getElementById("hT")?.value||"08:00",cat:document.getElementById("hC")?.value||"General"});S.showAdd=false;_si="✦";_sc=0;save();render();if(S.notifOn)schedN()}
-function subS(){const t=document.getElementById("sT2")?.value?.trim();if(!t)return;S.sched.push({id:"s"+Date.now(),title:t,time:document.getElementById("sTm")?.value||"09:00",day:parseInt(document.getElementById("sD")?.value||0),color:_scs});S.showAddS=false;_scs=1;save();render()}
-function uCU(){S.calUrl=document.getElementById("cU")?.value||"";save()}
+function subH(){const n=document.getElementById("hN")?.value?.trim();if(!n)return;S.habits.push({id:"h"+Date.now(),name:n,icon:_si,ci:_sc,time:document.getElementById("hT")?.value||"08:00",cat:document.getElementById("hC")?.value||"General"});S.showAdd=false;_si="✦";_sc=0;debounceSave();render();if(S.notifOn)schedN()}
+function subS(){const t=document.getElementById("sT2")?.value?.trim();if(!t)return;S.sched.push({id:"s"+Date.now(),title:t,time:document.getElementById("sTm")?.value||"09:00",day:parseInt(document.getElementById("sD")?.value||0),color:_scs});S.showAddS=false;_scs=1;debounceSave();render()}
+function uCU(){S.calUrl=document.getElementById("cU")?.value||"";debounceSave()}
 function exCSV(){let c="Habit,Date,Completed\n";S.habits.forEach(h=>{for(let i=0;i<90;i++){const d=new Date;d.setDate(d.getDate()-i);c+=`"${h.name}",${dk(d)},${S.comp[h.id+"::"+dk(d)]?"Yes":"No"}\n`}});const b=new Blob([c],{type:"text/csv"}),u=URL.createObjectURL(b),a=document.createElement("a");a.href=u;a.download=`rhythm_${dk(new Date)}.csv`;document.body.appendChild(a);a.click();document.body.removeChild(a);URL.revokeObjectURL(u)}
-function resetAll(){if(confirm("Reset everything?")){localStorage.removeItem("rhythm3");location.reload()}}
+function resetAll(){if(confirm("Reset everything?")){const ref=userDocRef();if(ref)ref.delete();S={habits:[...DEF_HABITS],comp:{},sched:[],calUrl:"",calEvents:[],calLastSync:null,calSyncing:false,view:"habits",wo:0,showAdd:false,showAddS:false,editH:null,editS:null,notifOn:false,notifDis:{},eodH:21,eodM:0};debounceSave();render()}}
 
+// ═══════════════════════════════════
+// ═══         RENDER              ═══
+// ═══════════════════════════════════
 function render(){
-const app=document.getElementById("app"),today=dk(new Date),wd=wkd(S.wo),now=new Date;
+const root=document.getElementById("root");
+
+// Loading
+if(appLoading){
+  root.innerHTML=`<div class="loading-screen"><div class="spinner"></div><div style="font-size:13px;color:var(--tx2)">Loading...</div></div>`;
+  return;
+}
+
+// ═══ AUTH SCREENS ═══
+if(!currentUser){
+  let h="";
+  if(authScreen==="login"){
+    h=`<div class="auth-wrap"><div class="auth-card">
+      <div class="auth-logo">R<em>h</em>ythm</div>
+      <div class="auth-sub">Build better habits, one day at a time</div>
+      <div class="auth-form">
+        <div class="auth-title">Welcome back</div>
+        <div class="auth-desc">Sign in to sync your habits across devices</div>
+        ${authError?`<div class="auth-err">⚠ ${authError}</div>`:""}
+        <div class="auth-field"><label>Email</label><input class="auth-input" id="authEmail" type="email" placeholder="you@email.com" autocomplete="email"></div>
+        <div class="auth-field"><label>Password</label><input class="auth-input" id="authPass" type="password" placeholder="••••••••" autocomplete="current-password" onkeydown="if(event.key==='Enter')doLogin()"></div>
+        <div class="auth-forgot"><a onclick="switchAuth('forgot')">Forgot password?</a></div>
+        <button class="auth-btn" onclick="doLogin()" ${authLoading?"disabled":""}>${authLoading?'<div class="spinner"></div>':"Sign In"}</button>
+      </div>
+      <div class="auth-link">Don't have an account? <a onclick="switchAuth('signup')">Sign Up</a></div>
+    </div></div>`;
+  } else if(authScreen==="signup"){
+    h=`<div class="auth-wrap"><div class="auth-card">
+      <div class="auth-logo">R<em>h</em>ythm</div>
+      <div class="auth-sub">Start tracking your habits today</div>
+      <div class="auth-form">
+        <div class="auth-title">Create Account</div>
+        <div class="auth-desc">Free forever — your data, your habits</div>
+        ${authError?`<div class="auth-err">⚠ ${authError}</div>`:""}
+        <div class="auth-field"><label>Full Name</label><input class="auth-input" id="authName" type="text" placeholder="Your name" autocomplete="name"></div>
+        <div class="auth-field"><label>Email</label><input class="auth-input" id="authEmail" type="email" placeholder="you@email.com" autocomplete="email"></div>
+        <div class="auth-field"><label>Password</label><input class="auth-input" id="authPass" type="password" placeholder="Min 6 characters" autocomplete="new-password"></div>
+        <div class="auth-field"><label>Confirm Password</label><input class="auth-input" id="authPass2" type="password" placeholder="••••••••" autocomplete="new-password" onkeydown="if(event.key==='Enter')doSignup()"></div>
+        <button class="auth-btn" onclick="doSignup()" ${authLoading?"disabled":""}>${authLoading?'<div class="spinner"></div>':"Create Account"}</button>
+      </div>
+      <div class="auth-link">Already have an account? <a onclick="switchAuth('login')">Sign In</a></div>
+    </div></div>`;
+  } else {
+    h=`<div class="auth-wrap"><div class="auth-card">
+      <div class="auth-logo">R<em>h</em>ythm</div>
+      <div class="auth-sub">Reset your password</div>
+      <div class="auth-form">
+        <div class="auth-title">Forgot Password</div>
+        <div class="auth-desc">Enter your email and we'll send a reset link</div>
+        ${authError?`<div class="auth-err">⚠ ${authError}</div>`:""}
+        ${authSuccess?`<div class="auth-success">✓ ${authSuccess}</div>`:""}
+        <div class="auth-field"><label>Email</label><input class="auth-input" id="authEmail" type="email" placeholder="you@email.com" autocomplete="email" onkeydown="if(event.key==='Enter')doForgot()"></div>
+        <button class="auth-btn" onclick="doForgot()" ${authLoading?"disabled":""}>${authLoading?'<div class="spinner"></div>':"Send Reset Link"}</button>
+      </div>
+      <div class="auth-link"><a onclick="switchAuth('login')">← Back to Sign In</a></div>
+    </div></div>`;
+  }
+  root.innerHTML=h;return;
+}
+
+// ═══ MAIN APP ═══
+const today=dk(new Date),wd=wkd(S.wo),now=new Date;
 const dT=S.habits.filter(h=>S.comp[h.id+"::"+today]).length;
 const pct=S.habits.length?Math.round(dT/S.habits.length*100):0;
 const missed=S.habits.filter(h=>{if(S.comp[h.id+"::"+today])return false;const t=pT(h.time);return now.getHours()>t.h||(now.getHours()===t.h&&now.getMinutes()>=t.m)});
 const showM=missed.length>0&&!S.notifDis[today];
+const userName=currentUser.displayName||currentUser.email.split("@")[0];
+const initials=userName.split(" ").map(w=>w[0]).join("").toUpperCase().slice(0,2);
 
-let html=`<div class="hdr"><div><div class="logo">R<em>h</em>ythm</div><div class="date-tag">${now.toLocaleDateString("en-US",{weekday:"short",month:"short",day:"numeric"})}</div></div><div class="ring-w"><svg viewBox="0 0 50 50" width="50" height="50"><circle cx="25" cy="25" r="20" fill="none" stroke="var(--s2)" stroke-width="4"/><circle cx="25" cy="25" r="20" fill="none" stroke="var(--ac)" stroke-width="4" stroke-dasharray="${2*Math.PI*20}" stroke-dashoffset="${2*Math.PI*20*(1-pct/100)}" stroke-linecap="round" transform="rotate(-90 25 25)" style="transition:stroke-dashoffset .6s ease"/></svg><div class="ring-l">${pct}%</div></div></div>`;
+let html=`<div class="app">`;
+
+html+=`<div class="hdr"><div><div class="logo">R<em>h</em>ythm</div><div class="date-tag">${now.toLocaleDateString("en-US",{weekday:"short",month:"short",day:"numeric"})}</div></div><div class="ring-w"><svg viewBox="0 0 50 50" width="50" height="50"><circle cx="25" cy="25" r="20" fill="none" stroke="var(--s2)" stroke-width="4"/><circle cx="25" cy="25" r="20" fill="none" stroke="var(--ac)" stroke-width="4" stroke-dasharray="${2*Math.PI*20}" stroke-dashoffset="${2*Math.PI*20*(1-pct/100)}" stroke-linecap="round" transform="rotate(-90 25 25)" style="transition:stroke-dashoffset .6s ease"/></svg><div class="ring-l">${pct}%</div></div></div>`;
 
 if(!S.notifOn&&"Notification" in window&&Notification.permission!=="denied")
   html+=`<div class="notif-banner" onclick="reqNotif()"><div style="font-size:18px">🔔</div><div class="notif-text">Enable reminders<small>Notifications at habit time + end-of-day summary</small></div><div style="color:var(--ac);font-size:12px;font-weight:700">Enable</div></div>`;
@@ -214,16 +428,14 @@ if(S.view==="habits"){
 // SCHEDULE
 if(S.view==="schedule"){
   html+=`<div class="cal-feed-box"><label>📅 Calendar Feed (ICS URL)</label><div class="cal-input-row"><input class="cal-input" id="cU" placeholder="Paste .ics URL from Teams or Apple Calendar..." value="${S.calUrl.replace(/"/g,"&quot;")}" oninput="uCU()"><button class="cal-sync-btn" onclick="syncCal()">${S.calSyncing?"...":"Sync"}</button></div><div class="cal-status">${S.calLastSync?`<span style="width:6px;height:6px;border-radius:50%;background:var(--ac);display:inline-block"></span> Synced: ${new Date(S.calLastSync).toLocaleString("en-US",{month:"short",day:"numeric",hour:"numeric",minute:"2-digit"})} · ${S.calEvents.length} events`:`<span style="width:6px;height:6px;border-radius:50%;background:var(--tx3);display:inline-block"></span> Not synced`}</div></div>`;
-
   if(S.calEvents.length){html+=`<div class="sec-title">Calendar Events (Next 7 Days)</div>`;
-    for(let i=0;i<7;i++){const d=new Date;d.setDate(d.getDate()+i);const dky=dk(d);const evs=S.calEvents.filter(e=>dk(e.start)===dky).sort((a,b)=>a.start-b.start);if(!evs.length)continue;
+    for(let i=0;i<7;i++){const d=new Date;d.setDate(d.getDate()+i);const dky=dk(d);const evs=S.calEvents.filter(e=>dk(new Date(e.start))===dky).sort((a,b)=>new Date(a.start)-new Date(b.start));if(!evs.length)continue;
     const isT=dky===today;html+=`<div class="cal-day-hdr${isT?" td":""}">${isT?'<span style="width:6px;height:6px;border-radius:50%;background:var(--ac);display:inline-block"></span>':""}${DAYS[d.getDay()]} ${MO[d.getMonth()]} ${d.getDate()}${isT?" — Today":""}</div>`;
-    evs.forEach(ev=>{const c=CL[Math.abs(ev.title.charCodeAt(0))%CL.length];html+=`<div class="cal-ev" style="border-left-color:${c.fill}"><span class="cal-ev-time" style="color:${c.fill}">${ev.allDay?"All Day":fT(ev.start.getHours(),ev.start.getMinutes())+(ev.end?" – "+fT(ev.end.getHours(),ev.end.getMinutes()):"")}</span><div style="flex:1;min-width:0"><div class="cal-ev-title">${ev.title}</div>${ev.location?`<div class="cal-ev-loc">📍 ${ev.location}</div>`:""}</div></div>`})}}
-
+    evs.forEach(ev=>{const c=CL[Math.abs(ev.title.charCodeAt(0))%CL.length];const st=new Date(ev.start);html+=`<div class="cal-ev" style="border-left-color:${c.fill}"><span class="cal-ev-time" style="color:${c.fill}">${ev.allDay?"All Day":fT(st.getHours(),st.getMinutes())}</span><div style="flex:1;min-width:0"><div class="cal-ev-title">${ev.title}</div>${ev.location?`<div class="cal-ev-loc">📍 ${ev.location}</div>`:""}</div></div>`})}}
   html+=`<div class="sec-title">Recurring Items</div>`;let hm=false;
   DAYS.forEach((dn,di)=>{const items=S.sched.filter(s=>s.day===di).sort((a,b)=>a.time.localeCompare(b.time));if(!items.length)return;hm=true;const isT=now.getDay()===di;
     html+=`<div class="cal-day-hdr${isT?" td":""}">${isT?'<span style="width:6px;height:6px;border-radius:50%;background:var(--ac);display:inline-block"></span>':""}${dn}${isT?" — Today":""}</div>`;
-    items.forEach(it=>{const c=CL[it.color%CL.length];html+=`<div class="cal-ev" style="border-left-color:${c.fill};cursor:pointer" onclick="tES('${it.id}')"><span class="cal-ev-time" style="color:${c.fill}">${it.time}</span><div style="flex:1"><div class="cal-ev-title">${it.title}</div></div></div>`;if(S.editS===it.id)html+=`<div class="dr" style="margin-bottom:6px"><button class="db" onclick="dS('${it.id}')">Remove</button></div>`})});
+    items.forEach(it=>{const c=CL[it.color%CL.length];html+=`<div class="cal-ev" style="border-left-color:${c.fill};cursor:pointer" onclick="tES('${it.id}')"><span class="cal-ev-time" style="color:${c.fill}">${it.time}</span><div style="flex:1"><div class="cal-ev-title">${it.title}</div></div></div>`;if(S.editS===it.id)html+=`<div class="dr" style="margin-bottom:6px"><button class="db" onclick="dSch('${it.id}')">Remove</button></div>`})});
   if(!hm&&!S.calEvents.length)html+=`<div class="empty">No items yet</div>`;
   if(S.showAddS){html+=`<div class="fw" id="sF"><div class="ftt">New Recurring Item</div><input class="fi" id="sT2" placeholder="Title..." autofocus><div class="fr"><input class="fi" id="sTm" type="time" value="09:00" style="flex:1"><select class="fi" id="sD" style="flex:1">${DAYS.map((d,i)=>`<option value="${i}"${i===now.getDay()?" selected":""}>${d}</option>`).join("")}</select></div><div class="cg">${CL.map((c,i)=>`<button class="cd${i===1?" s":""}" style="background:${c.fill}" onclick="sCS(this,${i})"></button>`).join("")}</div><div class="fa"><button class="bc2" onclick="S.showAddS=false;render()">Cancel</button><button class="bs" onclick="subS()">Add</button></div></div>`}
   else html+=`<button class="ab" onclick="S.showAddS=true;render()"><span style="font-size:15px">+</span> Add Recurring Item</button>`;
@@ -233,39 +445,43 @@ if(S.view==="schedule"){
 if(S.view==="reports"){
   let totalC=0,bestS=0;S.habits.forEach(h=>{const s=gS(h.id,S.comp);if(s>bestS)bestS=s;Object.keys(S.comp).forEach(k=>{if(k.startsWith(h.id+"::"))totalC++})});
   html+=`<div class="rc" style="animation:fadeUp .3s ease"><div class="rt">Overview</div><div class="sg"><div class="sb2"><div class="sv" style="color:var(--ac)">${totalC}</div><div class="sl">Check-ins</div></div><div class="sb2"><div class="sv" style="color:var(--amb)">${bestS}d</div><div class="sl">Best Streak</div></div><div class="sb2"><div class="sv" style="color:var(--blue)">${S.habits.length}</div><div class="sl">Habits</div></div></div></div>`;
-
   html+=`<div class="rc" style="animation:fadeUp .3s ease .05s both"><div class="rt">Weekly Completion</div><div class="bc">`;
-  for(let w=7;w>=0;w--){const ws=wkd(-w);let d2=0,t2=S.habits.length*7;ws.forEach(d=>{S.habits.forEach(h=>{if(S.comp[h.id+"::"+dk(d)])d2++})});const p=t2?Math.round(d2/t2*100):0;
-    html+=`<div class="bcol"><div class="bval">${p}%</div><div class="bar" style="height:${Math.max(p,3)}%;background:${w===0?"var(--ac)":"var(--s3)"}"></div><div class="blbl">${MO[ws[0].getMonth()].slice(0,3)} ${ws[0].getDate()}</div></div>`}
+  for(let w=7;w>=0;w--){const ws=wkd(-w);let d2=0,t2=S.habits.length*7;ws.forEach(d=>{S.habits.forEach(h=>{if(S.comp[h.id+"::"+dk(d)])d2++})});const p=t2?Math.round(d2/t2*100):0;html+=`<div class="bcol"><div class="bval">${p}%</div><div class="bar" style="height:${Math.max(p,3)}%;background:${w===0?"var(--ac)":"var(--s3)"}"></div><div class="blbl">${MO[ws[0].getMonth()].slice(0,3)} ${ws[0].getDate()}</div></div>`}
   html+=`</div></div>`;
-
   html+=`<div class="rc" style="animation:fadeUp .3s ease .1s both"><div class="rt">Last 30 Days</div>`;
-  S.habits.forEach(h=>{const c=CL[h.ci%CL.length];let d30=0;for(let i=0;i<30;i++){const d=new Date;d.setDate(d.getDate()-i);if(S.comp[h.id+"::"+dk(d)])d30++}const p=Math.round(d30/30*100);
-    html+=`<div class="hrr"><div class="hic" style="background:${c.bg};width:24px;height:24px;border-radius:6px;font-size:11px;flex-shrink:0">${h.icon}</div><div style="flex:1;min-width:0"><div style="font-size:11px;font-weight:600;margin-bottom:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${h.name}</div><div class="hbb"><div class="hbf" style="width:${p}%;background:${c.fill}"></div></div></div><div class="hp" style="color:${c.fill}">${p}%</div></div>`});
+  S.habits.forEach(h=>{const c=CL[h.ci%CL.length];let d30=0;for(let i=0;i<30;i++){const d=new Date;d.setDate(d.getDate()-i);if(S.comp[h.id+"::"+dk(d)])d30++}const p=Math.round(d30/30*100);html+=`<div class="hrr"><div class="hic" style="background:${c.bg};width:24px;height:24px;border-radius:6px;font-size:11px;flex-shrink:0">${h.icon}</div><div style="flex:1;min-width:0"><div style="font-size:11px;font-weight:600;margin-bottom:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${h.name}</div><div class="hbb"><div class="hbf" style="width:${p}%;background:${c.fill}"></div></div></div><div class="hp" style="color:${c.fill}">${p}%</div></div>`});
   html+=`</div>`;
-
   html+=`<div class="rc" style="animation:fadeUp .3s ease .15s both"><div class="rt">30-Day Heatmap</div><div style="display:grid;grid-template-columns:repeat(7,1fr);gap:3px">`;
-  for(let i=29;i>=0;i--){const d=new Date;d.setDate(d.getDate()-i);let dn=0;S.habits.forEach(h=>{if(S.comp[h.id+"::"+dk(d)])dn++});const int=S.habits.length?dn/S.habits.length:0;
-    html+=`<div style="aspect-ratio:1;border-radius:4px;background:rgba(110,231,183,${Math.max(.06,int)});position:relative">${dk(d)===today?'<div style="position:absolute;inset:0;border:1.5px solid var(--ac);border-radius:4px"></div>':""}</div>`}
+  for(let i=29;i>=0;i--){const d=new Date;d.setDate(d.getDate()-i);let dn=0;S.habits.forEach(h=>{if(S.comp[h.id+"::"+dk(d)])dn++});const int=S.habits.length?dn/S.habits.length:0;html+=`<div style="aspect-ratio:1;border-radius:4px;background:rgba(110,231,183,${Math.max(.06,int)});position:relative">${dk(d)===today?'<div style="position:absolute;inset:0;border:1.5px solid var(--ac);border-radius:4px"></div>':""}</div>`}
   const rem=(7-30%7)%7;for(let i=0;i<rem;i++)html+=`<div style="aspect-ratio:1;border-radius:4px;background:var(--s2);opacity:.3"></div>`;
   html+=`</div></div>`;
   html+=`<button class="eb" onclick="exCSV()"><svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 11l3.5 3 3.5-3M7.5 2v12"/></svg>Export CSV (90 days)</button>`;
-  html+=`<button class="eb" onclick="resetAll()" style="color:var(--dng);margin-top:4px">Reset All Data</button>`;
 }
 
 // SETTINGS
 if(S.view==="settings"){
-  html+=`<div class="rc" style="animation:fadeUp .3s ease"><div class="rt">Notifications</div>
-    <div class="set-row"><div><div class="set-label">Habit Reminders</div><div class="set-desc">Notify at scheduled time + 1hr if missed</div></div><div class="toggle${S.notifOn?" on":""}" onclick="reqNotif()"><div class="toggle-knob"></div></div></div>
-    <div class="set-row"><div><div class="set-label">End-of-Day Summary</div><div class="set-desc">Summary of incomplete habits</div></div><input type="time" value="${String(S.eodH).padStart(2,"0")}:${String(S.eodM).padStart(2,"0")}" style="background:var(--s2);border:1px solid var(--br);border-radius:8px;padding:6px 10px;color:var(--tx);font-family:var(--mono);font-size:12px" onchange="const p=this.value.split(':');S.eodH=+p[0];S.eodM=+p[1];save();if(S.notifOn)schedN()"></div></div>`;
+  html+=`<div class="rc" style="animation:fadeUp .3s ease">
+    <div class="rt">Account</div>
+    <div style="display:flex;align-items:center;gap:12px;padding:10px 0">
+      <div class="user-avatar">${initials}</div>
+      <div style="flex:1"><div style="font-size:14px;font-weight:600">${userName}</div><div style="font-size:11px;color:var(--tx3)">${currentUser.email}</div></div>
+    </div>
+    <button class="eb" onclick="doLogout()" style="color:var(--dng);margin-top:8px;border-color:rgba(248,113,113,0.2)">Sign Out</button>
+  </div>`;
 
-  html+=`<div class="rc" style="animation:fadeUp .3s ease .05s both"><div class="rt">Calendar Integration</div>
-    <div style="padding:10px 0"><div class="set-label" style="margin-bottom:8px">ICS Feed URL</div>
-    <input class="fi" style="font-size:11px;margin:0" value="${S.calUrl.replace(/"/g,"&quot;")}" oninput="S.calUrl=this.value;save()" placeholder="Paste .ics calendar URL">
-    <div class="set-desc" style="margin-top:8px"><strong>Microsoft Teams / Outlook:</strong><br>Settings → Calendar → Shared calendars → Publish a calendar → Copy ICS link<br><br><strong>Apple Calendar:</strong><br>iCloud.com → Calendar → Click share icon → Public Calendar → Copy link</div></div></div>`;
+  html+=`<div class="rc" style="animation:fadeUp .3s ease .05s both"><div class="rt">Notifications</div>
+    <div class="set-row"><div><div class="set-label">Habit Reminders</div><div class="set-desc">At habit time + 1hr if missed</div></div><div class="toggle${S.notifOn?" on":""}" onclick="reqNotif()"><div class="toggle-knob"></div></div></div>
+    <div class="set-row"><div><div class="set-label">End-of-Day Summary</div><div class="set-desc">Daily incomplete habits summary</div></div><input type="time" value="${String(S.eodH).padStart(2,"0")}:${String(S.eodM).padStart(2,"0")}" style="background:var(--s2);border:1px solid var(--br);border-radius:8px;padding:6px 10px;color:var(--tx);font-family:var(--mono);font-size:12px" onchange="const p=this.value.split(':');S.eodH=+p[0];S.eodM=+p[1];debounceSave();if(S.notifOn)schedN()"></div></div>`;
 
-  html+=`<div class="rc" style="animation:fadeUp .3s ease .1s both"><div class="rt">Install as App</div>
-    <div style="font-size:12px;color:var(--tx2);line-height:1.7;padding:8px 0"><strong>iOS Safari:</strong> Tap Share → "Add to Home Screen"<br><strong>Android Chrome:</strong> Tap ⋮ → "Add to Home Screen"</div></div>`;
+  html+=`<div class="rc" style="animation:fadeUp .3s ease .1s both"><div class="rt">Calendar</div>
+    <div style="padding:8px 0"><div class="set-label" style="margin-bottom:8px">ICS Feed URL</div>
+    <input class="fi" style="font-size:11px;margin:0" value="${S.calUrl.replace(/"/g,"&quot;")}" oninput="S.calUrl=this.value;debounceSave()" placeholder="Paste .ics calendar URL">
+    <div class="set-desc" style="margin-top:8px"><strong>Teams/Outlook:</strong> Settings → Calendar → Shared calendars → Publish → Copy ICS<br><br><strong>Apple Calendar:</strong> iCloud.com → Calendar → Share → Public Calendar → Copy link</div></div></div>`;
+
+  html+=`<div class="rc" style="animation:fadeUp .3s ease .15s both"><div class="rt">Install as App</div>
+    <div style="font-size:12px;color:var(--tx2);line-height:1.7;padding:8px 0"><strong>iPhone:</strong> Safari → Share → Add to Home Screen<br><strong>Android:</strong> Chrome → ⋮ → Add to Home Screen</div></div>`;
+
+  html+=`<button class="eb" onclick="resetAll()" style="color:var(--dng)">Reset All Data</button>`;
 }
 
 // NAV
@@ -276,8 +492,9 @@ html+=`<nav class="bnav">
   <button class="nb${S.view==="settings"?" act":""}" onclick="setV('settings')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 01-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.32 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>Settings</button>
 </nav>`;
 
-app.innerHTML=html}
-render();
+html+=`</div>`;
+root.innerHTML=html;
+}
 </script>
 </body>
 </html>
