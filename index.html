@@ -4,6 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
+<link rel="manifest" href="/manifest.json">
+<link rel="apple-touch-icon" href="/icon-192.png">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="theme-color" content="#0d0d0d">
@@ -97,8 +99,67 @@ function swAuth(s){aScr=s;aErr="";aOk="";aLoad=false;render()}
 function parseICS(t){const evs=[];const bl=t.split("BEGIN:VEVENT");for(let i=1;i<bl.length;i++){const b=bl[i].split("END:VEVENT")[0];const g=k=>{const m=b.match(new RegExp(k+"[^:]*:(.+?)\\r?\\n","s"));return m?m[1].replace(/\\n/g," ").trim():""};const ev={title:g("SUMMARY")||"(No title)",location:g("LOCATION")};const ds=g("DTSTART"),de=g("DTEND");if(ds){ev.start=pICS(ds);ev.end=de?pICS(de):ev.start;ev.allDay=ds.replace(/TZID=[^:]+:/,"").trim().length===8;evs.push(ev)}}return evs}
 function pICS(s){s=s.replace(/TZID=[^:]+:/,"").trim();if(s.length===8)return new Date(+s.slice(0,4),+s.slice(4,6)-1,+s.slice(6,8));const y=+s.slice(0,4),mo=+s.slice(4,6)-1,d=+s.slice(6,8),h=+s.slice(9,11)||0,mi=+s.slice(11,13)||0;return s.endsWith("Z")?new Date(Date.UTC(y,mo,d,h,mi)):new Date(y,mo,d,h,mi)}
 async function syncCal(){if(!S.calUrl.trim())return;S.calBusy=true;render();try{let r;try{r=await fetch(S.calUrl.trim())}catch(e){r=await fetch("https://api.allorigins.win/raw?url="+encodeURIComponent(S.calUrl.trim()))}if(!r.ok)throw new Error(r.status);S.calEv=parseICS(await r.text());S.calSync=new Date().toISOString();S.calBusy=false;save();render()}catch(e){S.calBusy=false;render();alert("Sync failed.\n\nTeams: Outlook > Settings > Calendar > Shared calendars > Publish > ICS.\nApple: iCloud.com > Calendar > Share > Public Calendar.\n\n"+e.message)}}
-async function reqNotif(){if(!("Notification" in window)){alert("Not supported.");return}const p=await Notification.requestPermission();S.notifOn=p==="granted";save();render();if(S.notifOn)schedNotif()}
-let nT2=[];function schedNotif(){nT2.forEach(t=>clearTimeout(t));nT2=[];if(!S.notifOn)return;const now=new Date,tdk=dk(now);S.habits.forEach(h=>{const t=pT(h.time),tar=new Date(now);tar.setHours(t.h,t.m,0,0);let d1=tar-now;if(d1>0)nT2.push(setTimeout(()=>{if(!S.comp[h.id+"::"+tdk])new Notification("Rhythm — "+h.name,{body:"Time to do it!",tag:"h-"+h.id})},d1));let d2=d1+3600000;if(d2>0)nT2.push(setTimeout(()=>{if(!S.comp[h.id+"::"+tdk])new Notification("Missed: "+h.name,{body:"Don't break your streak!",tag:"m-"+h.id})},d2))});const eod=new Date(now);eod.setHours(S.eodH,S.eodM,0,0);let ed=eod-now;if(ed>0)nT2.push(setTimeout(()=>{const ms=S.habits.filter(h=>!S.comp[h.id+"::"+tdk]);if(ms.length)new Notification("Rhythm — End of Day",{body:ms.length+" incomplete: "+ms.map(h=>h.name).join(", "),tag:"eod"});else new Notification("Rhythm — All Done!",{body:"Perfect day!",tag:"eod"})},ed))}
+// ─── SERVICE WORKER & NOTIFICATIONS ───
+let swReg=null;
+async function initSW(){
+  if(!('serviceWorker' in navigator))return;
+  try{
+    swReg=await navigator.serviceWorker.register('/sw.js');
+    console.log('SW registered');
+    // Try periodic background sync for scheduled reminders
+    if('periodicSync' in swReg){
+      try{await swReg.periodicSync.register('habit-check',{minInterval:60*60*1000})}catch(e){console.log('Periodic sync not available')}
+    }
+  }catch(e){console.log('SW registration failed:',e)}
+}
+initSW();
+
+async function reqNotif(){
+  if(!('Notification' in window)){alert('Notifications require iOS 16.4+ with Add to Home Screen, or any modern Android/desktop browser.');return}
+  const perm=await Notification.requestPermission();
+  S.notifOn=perm==='granted';
+  save();render();
+  if(S.notifOn){
+    schedNotif();
+    // Show a test notification
+    if(swReg){
+      swReg.showNotification('Rhythm — Notifications On!',{body:'You\'ll get reminders for missed habits.',tag:'test',icon:'/icon-192.png'});
+    }else{
+      new Notification('Rhythm — Notifications On!',{body:'You\'ll get reminders for missed habits.',tag:'test'});
+    }
+  }
+}
+
+let nT2=[];
+function schedNotif(){
+  nT2.forEach(t=>clearTimeout(t));nT2=[];
+  if(!S.notifOn)return;
+  const now=new Date,tdk=dk(now);
+  
+  function sendNotif(title,body,tag){
+    if(swReg&&swReg.active){
+      swReg.showNotification(title,{body,tag,icon:'/icon-192.png',badge:'/icon-192.png',renotify:true,requireInteraction:true});
+    }else{
+      try{new Notification(title,{body,tag})}catch(e){}
+    }
+  }
+  
+  S.habits.forEach(h=>{
+    const t=pT(h.time),tar=new Date(now);tar.setHours(t.h,t.m,0,0);
+    let d1=tar-now;
+    if(d1>0)nT2.push(setTimeout(()=>{if(!S.comp[h.id+'::'+tdk])sendNotif('Rhythm — '+h.name,'Time to do it! Tap to log.','h-'+h.id)},d1));
+    let d2=d1+3600000;
+    if(d2>0)nT2.push(setTimeout(()=>{if(!S.comp[h.id+'::'+tdk])sendNotif('Missed: '+h.name,'Don\'t break your streak!','m-'+h.id)},d2));
+  });
+  
+  const eod=new Date(now);eod.setHours(S.eodH,S.eodM,0,0);
+  let ed=eod-now;
+  if(ed>0)nT2.push(setTimeout(()=>{
+    const ms=S.habits.filter(h=>!S.comp[h.id+'::'+tdk]);
+    if(ms.length)sendNotif('Rhythm — End of Day',ms.length+' incomplete: '+ms.map(h=>h.name).join(', '),'eod');
+    else sendNotif('Rhythm — All Done!','Perfect day! 🎉','eod');
+  },ed));
+}
 document.addEventListener("visibilitychange",()=>{if(!document.hidden&&S.notifOn)schedNotif()});
 function setV(v){S.view=v;S.showAdd=S.showAddS=false;S.editH=S.editS=null;render();window.scrollTo(0,0)}
 function getYesterday(){const d=new Date;d.setDate(d.getDate()-1);return dk(d)}
