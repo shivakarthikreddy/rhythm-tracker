@@ -23,6 +23,24 @@
 .rc{background:var(--s1);border-radius:var(--r);padding:14px;margin-bottom:10px}.rt2{font-size:11px;font-weight:700;color:var(--tx2);text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px}.sg{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-bottom:12px}.sbox{background:var(--s2);border-radius:11px;padding:12px 6px;text-align:center}.sval{font-family:var(--mono);font-size:20px;font-weight:700}.slab{font-size:9px;color:var(--tx3);margin-top:2px;font-weight:500}.bch{display:flex;align-items:flex-end;gap:3px;height:100px;padding:0 2px}.bcl{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;height:100%;justify-content:flex-end}.bar2{width:100%;border-radius:4px 4px 1px 1px;min-height:2px;transition:height .5s ease}.bll{font-family:var(--mono);font-size:8px;color:var(--tx3)}.bvl{font-family:var(--mono);font-size:8px;color:var(--tx2);font-weight:600}.hrw{display:flex;align-items:center;gap:8px;padding:8px 0;border-bottom:1px solid var(--br)}.hrw:last-child{border-bottom:none}.hbb{flex:1;height:6px;background:var(--s2);border-radius:3px;overflow:hidden}.hbf{height:100%;border-radius:3px;transition:width .5s ease}.hpc{font-family:var(--mono);font-size:11px;font-weight:600;min-width:32px;text-align:right}
 .fw{background:var(--s1);border-radius:var(--r);padding:14px;margin-top:10px;animation:fadeUp .2s ease}.ftl{font-size:14px;font-weight:700;margin-bottom:12px}.fi2{width:100%;padding:10px 12px;border-radius:10px;border:1px solid var(--br);background:var(--s2);color:var(--tx);font-size:14px;margin-bottom:8px;font-family:var(--font)}.fi2::placeholder{color:var(--tx3)}.frow{display:flex;gap:8px}.ipk{display:flex;gap:5px;flex-wrap:wrap;margin:8px 0}.ipo{width:34px;height:34px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:15px;background:var(--s2);border:2px solid transparent;color:var(--tx)}.ipo.s{border-color:var(--ac);background:var(--acd)}.cpk{display:flex;gap:5px;margin:8px 0}.cdo{width:26px;height:26px;border-radius:50%;border:2px solid transparent;transition:all .15s}.cdo.s{border-color:#fff;transform:scale(1.1)}.fac{display:flex;gap:8px;justify-content:flex-end;margin-top:12px}.fbcan{padding:8px 16px;border-radius:8px;background:transparent;color:var(--tx2);font-size:12px;font-weight:500;border:1px solid var(--br)}.fbsav{padding:8px 18px;border-radius:8px;background:var(--ac);color:var(--bg);font-size:12px;font-weight:700}.addb{width:100%;padding:13px;margin-top:10px;border:1.5px dashed var(--br);border-radius:var(--r);background:transparent;color:var(--tx3);font-size:13px;font-weight:500;display:flex;align-items:center;justify-content:center;gap:7px}.expb{width:100%;padding:12px;margin-top:7px;border-radius:var(--r);background:var(--s1);color:var(--ac);font-size:12px;font-weight:600;display:flex;align-items:center;justify-content:center;gap:7px;border:1px solid var(--br)}.delr{display:flex;justify-content:flex-end;padding-top:5px;grid-column:1/-1}.delb{padding:5px 11px;border-radius:6px;background:var(--dngd);color:var(--dng);font-size:10px;font-weight:600}.empty{text-align:center;padding:32px 0;color:var(--tx3);font-size:12px}
 .srow{display:flex;align-items:center;justify-content:space-between;padding:12px 0;border-bottom:1px solid var(--br)}.srow:last-child{border-bottom:none}.slbl{font-size:13px;font-weight:500}.sdsc{font-size:10px;color:var(--tx3);margin-top:2px;line-height:1.5}.tog{width:42px;height:22px;border-radius:11px;background:var(--s3);position:relative;cursor:pointer;transition:all .2s;flex-shrink:0}.tog.on{background:var(--ac)}.tog-k{width:18px;height:18px;border-radius:50%;background:#fff;position:absolute;top:2px;left:2px;transition:all .2s}.tog.on .tog-k{left:22px}.uav{width:30px;height:30px;border-radius:50%;background:var(--ac);color:var(--bg);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:12px;flex-shrink:0}
+
+/* Missed Modal Overlay */
+.missed-overlay{position:fixed;inset:0;z-index:200;background:rgba(0,0,0,.85);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;padding:20px;animation:fadeUp .3s ease}
+.missed-modal{width:100%;max-width:400px;background:var(--s1);border-radius:20px;padding:28px 22px;border:1px solid var(--br);max-height:85dvh;overflow-y:auto}
+.mm-icon{font-size:40px;text-align:center;margin-bottom:8px}
+.mm-title{font-size:20px;font-weight:800;text-align:center;margin-bottom:4px}
+.mm-sub{font-size:13px;color:var(--tx2);text-align:center;margin-bottom:20px}
+.mm-section{font-size:10px;font-weight:700;color:var(--tx3);text-transform:uppercase;letter-spacing:1px;margin:16px 0 8px;display:flex;align-items:center;gap:6px}
+.mm-section .dot{width:6px;height:6px;border-radius:50%;display:inline-block}
+.mm-habit{display:flex;align-items:center;justify-content:space-between;padding:10px 12px;background:var(--s2);border-radius:11px;margin-bottom:6px;animation:slideIn .25s ease both}
+.mm-habit-info{display:flex;align-items:center;gap:8px;flex:1;min-width:0}
+.mm-habit-icon{width:32px;height:32px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0}
+.mm-habit-name{font-size:13px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.mm-habit-streak{font-family:var(--mono);font-size:10px;color:var(--dng);margin-top:1px}
+.mm-log-btn{padding:7px 14px;border-radius:8px;background:var(--ac);color:var(--bg);font-size:11px;font-weight:700;flex-shrink:0}
+.mm-log-btn.done{background:var(--s3);color:var(--ac)}
+.mm-dismiss{width:100%;padding:14px;margin-top:16px;border-radius:12px;background:var(--s2);color:var(--tx2);font-size:13px;font-weight:600;text-align:center;border:1px solid var(--br)}
+.mm-close{width:100%;padding:14px;margin-top:8px;border-radius:12px;background:var(--ac);color:var(--bg);font-size:14px;font-weight:700;text-align:center}
 </style>
 </head>
 <body>
@@ -63,7 +81,7 @@ function wkd(o=0){const n=new Date,s=new Date(n);s.setDate(n.getDate()-n.getDay(
 function gS(id,c){let s=0;const t=new Date;for(let i=0;i<365;i++){const d=new Date(t);d.setDate(t.getDate()-i);if(c[id+"::"+dk(d)])s++;else if(i>0)break}return s}
 function fT(h,m){return`${((h%12)||12)}:${String(m).padStart(2,"0")} ${h>=12?"PM":"AM"}`}
 function pT(s){const p=s.split(":");return{h:parseInt(p[0]),m:parseInt(p[1]||0)}}
-let U=null,aScr="login",aLoad=false,aErr="",aOk="",appLoad=true;
+let U=null,aScr="login",aLoad=false,aErr="",aOk="",appLoad=true,modalDismissed=false;
 let S={habits:[...DEF],comp:{},sched:[],calUrl:"",calEv:[],calSync:null,calBusy:false,view:"habits",wo:0,showAdd:false,showAddS:false,editH:null,editS:null,notifOn:false,notifDis:{},eodH:21,eodM:0,schedOn:false};
 function uRef(){return U?db.collection("users").doc(U.uid):null}
 async function cloudSave(){const r=uRef();if(!r)return;try{await r.set({habits:S.habits,comp:S.comp,sched:S.sched,calUrl:S.calUrl,calEv:S.calEv,calSync:S.calSync,notifOn:S.notifOn,eodH:S.eodH,eodM:S.eodM,schedOn:S.schedOn,up:firebase.firestore.FieldValue.serverTimestamp()},{merge:true})}catch(e){console.error(e)}}
@@ -83,6 +101,11 @@ async function reqNotif(){if(!("Notification" in window)){alert("Not supported."
 let nT2=[];function schedNotif(){nT2.forEach(t=>clearTimeout(t));nT2=[];if(!S.notifOn)return;const now=new Date,tdk=dk(now);S.habits.forEach(h=>{const t=pT(h.time),tar=new Date(now);tar.setHours(t.h,t.m,0,0);let d1=tar-now;if(d1>0)nT2.push(setTimeout(()=>{if(!S.comp[h.id+"::"+tdk])new Notification("Rhythm — "+h.name,{body:"Time to do it!",tag:"h-"+h.id})},d1));let d2=d1+3600000;if(d2>0)nT2.push(setTimeout(()=>{if(!S.comp[h.id+"::"+tdk])new Notification("Missed: "+h.name,{body:"Don't break your streak!",tag:"m-"+h.id})},d2))});const eod=new Date(now);eod.setHours(S.eodH,S.eodM,0,0);let ed=eod-now;if(ed>0)nT2.push(setTimeout(()=>{const ms=S.habits.filter(h=>!S.comp[h.id+"::"+tdk]);if(ms.length)new Notification("Rhythm — End of Day",{body:ms.length+" incomplete: "+ms.map(h=>h.name).join(", "),tag:"eod"});else new Notification("Rhythm — All Done!",{body:"Perfect day!",tag:"eod"})},ed))}
 document.addEventListener("visibilitychange",()=>{if(!document.hidden&&S.notifOn)schedNotif()});
 function setV(v){S.view=v;S.showAdd=S.showAddS=false;S.editH=S.editS=null;render();window.scrollTo(0,0)}
+function getYesterday(){const d=new Date;d.setDate(d.getDate()-1);return dk(d)}
+function getMissed(dateKey){const now=new Date;return S.habits.filter(h=>{if(S.comp[h.id+"::"+dateKey])return false;if(dateKey===dk(now)){const t=pT(h.time);return now.getHours()>t.h||(now.getHours()===t.h&&now.getMinutes()>=t.m)}return true})}
+function dismissModal(){modalDismissed=true;render()}
+function logFromModal(hid,dateKey){tC(hid,dateKey)}
+function vibrateIfPossible(){try{if(navigator.vibrate)navigator.vibrate([100,50,100,50,200])}catch(e){}}
 function nW(d){S.wo+=d;render()}
 function tC(hid,d){const k=hid+"::"+d;S.comp[k]?delete S.comp[k]:S.comp[k]=true;save();render();if(S.notifOn)schedNotif()}
 function tE(id){S.editH=S.editH===id?null:id;render()}
@@ -109,11 +132,39 @@ else if(aScr==="signup"){h=`<div class="auth-wrap"><div class="auth-card"><div c
 else{h=`<div class="auth-wrap"><div class="auth-card"><div class="auth-logo">Rh<span class="y">y</span>thm</div><div class="auth-sub">Reset your password</div><div class="auth-box"><div class="auth-title">Forgot Password</div><div class="auth-desc">We'll send a reset link</div>${aErr?`<div class="auth-err">⚠ ${aErr}</div>`:""}${aOk?`<div class="auth-ok">✓ ${aOk}</div>`:""}<div class="auth-field"><label>Email</label><input class="auth-inp" id="aE" type="email" placeholder="you@email.com" onkeydown="if(event.key==='Enter')doForgot()"></div><button class="auth-btn" onclick="doForgot()" ${aLoad?"disabled":""}>${aLoad?'<div class="spinner"></div>':"Send Reset Link"}</button></div><div class="auth-link"><a onclick="swAuth('login')">← Back to Sign In</a></div></div></div>`}
 R.innerHTML=h;return}
 const today=dk(new Date),wd=wkd(S.wo),now=new Date,dT=S.habits.filter(h=>S.comp[h.id+"::"+today]).length,pct=S.habits.length?Math.round(dT/S.habits.length*100):0;
-const missed=S.habits.filter(h=>{if(S.comp[h.id+"::"+today])return false;const t=pT(h.time);return now.getHours()>t.h||(now.getHours()===t.h&&now.getMinutes()>=t.m)});
+const missed=getMissed(today);
+const yesterday=getYesterday();
+const missedYesterday=S.habits.filter(h=>!S.comp[h.id+"::"+yesterday]);
+const hasMissed=missed.length>0||missedYesterday.length>0;
+const showModal=hasMissed&&!modalDismissed&&!S.notifDis[today];
 const showM=missed.length>0&&!S.notifDis[today],uName=U.displayName||U.email.split("@")[0],ini=uName.split(" ").map(w=>w[0]).join("").toUpperCase().slice(0,2);
+
+// Vibrate on first load if missed habits
+if(showModal&&!window._vibrated){window._vibrated=true;vibrateIfPossible()}
+
 let html=`<div class="app"><div class="hdr"><div><div class="logo">Rh<span class="y">y</span>thm</div><div class="date-tag">${now.toLocaleDateString("en-US",{weekday:"short",month:"short",day:"numeric"})}</div></div><div class="ring-w"><svg viewBox="0 0 50 50" width="50" height="50"><circle cx="25" cy="25" r="20" fill="none" stroke="var(--s2)" stroke-width="4"/><circle cx="25" cy="25" r="20" fill="none" stroke="var(--ac)" stroke-width="4" stroke-dasharray="${2*Math.PI*20}" stroke-dashoffset="${2*Math.PI*20*(1-pct/100)}" stroke-linecap="round" transform="rotate(-90 25 25)" style="transition:stroke-dashoffset .6s ease"/></svg><div class="ring-l">${pct}%</div></div></div>`;
+
+// ─── FULL-SCREEN MISSED MODAL ───
+if(showModal){
+  html+=`<div class="missed-overlay" onclick="event.target===this&&dismissModal()"><div class="missed-modal"><div class="mm-icon">⚡</div><div class="mm-title">Don't Break the Chain!</div><div class="mm-sub">${missed.length>0?missed.length+" habit"+(missed.length>1?"s":"")+" missed today":""}${missed.length>0&&missedYesterday.length>0?" · ":""}${missedYesterday.length>0?missedYesterday.length+" missed yesterday":""}</div>`;
+  if(missed.length>0){
+    html+=`<div class="mm-section"><span class="dot" style="background:var(--dng)"></span> Today — Overdue</div>`;
+    missed.forEach((h,i)=>{const c=CL[h.ci%CL.length];const streak=gS(h.id,S.comp);
+      html+=`<div class="mm-habit" style="animation-delay:${i*.06}s"><div class="mm-habit-info"><div class="mm-habit-icon" style="background:${c.bg}22;border:1.5px solid ${c.bg}66">${h.icon}</div><div style="min-width:0"><div class="mm-habit-name">${h.name}</div>${streak>0?`<div class="mm-habit-streak">🔥 ${streak}d streak at risk!</div>`:""}</div></div><button class="mm-log-btn${S.comp[h.id+"::"+today]?" done":""}" onclick="logFromModal('${h.id}','${today}')">${S.comp[h.id+"::"+today]?"✓ Done":"Log ✓"}</button></div>`});
+  }
+  if(missedYesterday.length>0&&missedYesterday.length<S.habits.length){
+    html+=`<div class="mm-section"><span class="dot" style="background:var(--amb)"></span> Yesterday — Incomplete</div>`;
+    missedYesterday.forEach((h,i)=>{const c=CL[h.ci%CL.length];
+      html+=`<div class="mm-habit" style="animation-delay:${(missed.length+i)*.06}s"><div class="mm-habit-info"><div class="mm-habit-icon" style="background:${c.bg}22;border:1.5px solid ${c.bg}66">${h.icon}</div><div style="min-width:0"><div class="mm-habit-name">${h.name}</div></div></div><button class="mm-log-btn${S.comp[h.id+"::"+yesterday]?" done":""}" onclick="logFromModal('${h.id}','${yesterday}')">${S.comp[h.id+"::"+yesterday]?"✓ Done":"Log ✓"}</button></div>`});
+  }
+  // Check if all are now done
+  const allTodayDone=missed.every(h=>S.comp[h.id+"::"+today]);
+  html+=allTodayDone&&missed.length>0?`<button class="mm-close" onclick="dismissModal()">All Caught Up! 🎉</button>`:`<button class="mm-dismiss" onclick="dismissModal()">I'll do it later</button>`;
+  html+=`</div></div>`;
+}
+
 if(!S.notifOn&&"Notification" in window&&Notification.permission!=="denied")html+=`<div class="notif-bar" onclick="reqNotif()"><div style="font-size:17px">🔔</div><div class="nt">Enable reminders<small>At habit time + end-of-day summary</small></div><div style="color:var(--ac);font-size:12px;font-weight:700">Enable</div></div>`;
-if(showM&&S.view==="habits")html+=`<div class="alert-banner"><div class="alert-title">⚠ ${missed.length} missed today</div>${missed.map(h=>{const c=CL[h.ci%CL.length];return`<div class="alert-item"><div style="display:flex;align-items:center;gap:6px"><span>${h.icon}</span> ${h.name} <span style="color:var(--tx3);font-family:var(--mono);font-size:10px">${h.time}</span></div><button onclick="tC('${h.id}','${today}')">Log ✓</button></div>`}).join("")}<div style="text-align:right;margin-top:5px"><button onclick="dM()" style="background:none;color:var(--tx3);font-size:10px">Dismiss</button></div></div>`;
+if(showM&&S.view==="habits"&&modalDismissed)html+=`<div class="alert-banner"><div class="alert-title">⚠ ${missed.length} missed today</div>${missed.map(h=>{const c=CL[h.ci%CL.length];return`<div class="alert-item"><div style="display:flex;align-items:center;gap:6px"><span>${h.icon}</span> ${h.name} <span style="color:var(--tx3);font-family:var(--mono);font-size:10px">${h.time}</span></div><button onclick="tC('${h.id}','${today}')">Log ✓</button></div>`}).join("")}<div style="text-align:right;margin-top:5px"><button onclick="dM()" style="background:none;color:var(--tx3);font-size:10px">Dismiss</button></div></div>`;
 if(S.view==="habits"){html+=`<div class="wn"><button onclick="nW(-1)">‹</button><span class="wl">${MO[wd[0].getMonth()]} ${wd[0].getDate()} — ${MO[wd[6].getMonth()]} ${wd[6].getDate()}</span><button onclick="nW(1)">›</button></div><div class="dh"><div></div>${wd.map(d=>{const t=dk(d)===today;return`<div class="dc${t?" td":""}"><div>${DAYS[d.getDay()]}</div><div class="dnum${t?" td":""}">${d.getDate()}</div></div>`}).join("")}</div>`;
 S.habits.forEach((h,idx)=>{const c=CL[h.ci%CL.length],st=gS(h.id,S.comp);let w2=0;wd.forEach(d=>{if(S.comp[h.id+"::"+dk(d)])w2++});const wp=Math.round(w2/7*100);
 html+=`<div class="hr" style="animation:slideIn .3s ease ${idx*.04}s both"><div class="hi" onclick="tE('${h.id}')"><div class="hicon" style="background:${c.bg}22;border:1.5px solid ${c.bg}66">${h.icon}</div><div style="min-width:0"><div class="hname">${h.name}</div><div class="hmeta">${st>0?st+"d streak":""}${st>0&&wp>0?" · ":""}${wp>0?wp+"%":""}</div></div></div>${wd.map(d=>{const dn=S.comp[h.id+"::"+dk(d)];return`<button class="ck ${dn?"d":"u"}" style="${dn?`background:${c.fill}33;border-color:${c.fill}`:""}" onclick="tC('${h.id}','${dk(d)}')">${dn?`<svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2.5 7L5.5 10L11.5 4" stroke="${c.fill}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>`:""}</button>`}).join("")}${S.editH===h.id?`<div class="delr"><button class="delb" onclick="dH('${h.id}')">Delete</button></div>`:""}</div>`});
