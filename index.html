@@ -18,14 +18,11 @@
 @keyframes slideUp{from{transform:translateY(100%)}to{transform:translateY(0)}}
 @keyframes spin{to{transform:rotate(360deg)}}
 @keyframes shake{0%,100%{transform:translateX(0)}25%,75%{transform:translateX(-3px)}50%{transform:translateX(3px)}}
-
 /* Auth */
 .aw{min-height:100dvh;display:flex;align-items:center;justify-content:center;padding:24px 20px}.ac{width:100%;max-width:380px;animation:fadeUp .5s ease}.al{font-size:38px;font-weight:800;letter-spacing:-1px;text-align:center;margin-bottom:4px}.al .y{color:var(--ac)}.as{text-align:center;font-size:13px;color:var(--tx2);margin-bottom:32px}.ab2{background:var(--s1);border-radius:18px;padding:28px 24px;border:1px solid var(--br)}.at{font-size:20px;font-weight:700;margin-bottom:4px}.ad{font-size:12px;color:var(--tx2);margin-bottom:22px}.af{margin-bottom:12px}.af label{display:block;font-size:10px;font-weight:700;color:var(--tx3);text-transform:uppercase;letter-spacing:1px;margin-bottom:5px}.ai{width:100%;padding:12px 14px;border-radius:11px;border:1px solid var(--br);background:var(--s2);color:var(--tx);font-size:14px;transition:border .2s}.ai:focus{border-color:var(--ac)}.ai::placeholder{color:var(--tx3)}.abtn{width:100%;padding:14px;border-radius:11px;background:var(--ac);color:var(--bg);font-size:14px;font-weight:700;margin-top:6px;display:flex;align-items:center;justify-content:center;gap:8px}.abtn:disabled{opacity:.5}.alink{text-align:center;margin-top:18px;font-size:13px;color:var(--tx2)}.alink a{color:var(--ac);text-decoration:none;font-weight:600;cursor:pointer}.aerr{background:var(--dngd);color:var(--dng);font-size:12px;padding:10px 14px;border-radius:10px;margin-bottom:12px;animation:shake .35s ease}.aok{background:var(--acd);color:var(--ac);font-size:12px;padding:10px 14px;border-radius:10px;margin-bottom:12px}.afg{text-align:right;margin:-6px 0 12px}.afg a{font-size:11px;color:var(--tx3);text-decoration:none;cursor:pointer}.spinner{width:18px;height:18px;border:2px solid transparent;border-top-color:var(--bg);border-radius:50%;animation:spin .6s linear infinite}.splash{min-height:100dvh;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:14px}.splash .spinner{width:26px;height:26px;border-width:3px;border-top-color:var(--ac)}
-
 /* App */
 .app{max-width:480px;margin:0 auto;padding:0 16px}
 .hdr{padding:20px 0 14px;display:flex;align-items:center;justify-content:space-between;animation:fadeUp .4s ease}.logo{font-size:28px;font-weight:800;letter-spacing:-.5px}.logo .y{color:var(--ac)}.dtag{font-family:var(--mono);font-size:11px;color:var(--tx2);background:var(--s1);padding:4px 10px;border-radius:14px;margin-top:3px;display:inline-block}.rw{position:relative;width:50px;height:50px}.rl{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:12px;font-weight:600;color:var(--ac)}
-
 /* Missed modal */
 .mo{position:fixed;inset:0;z-index:200;background:rgba(0,0,0,.85);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;padding:20px;animation:fadeUp .3s ease}.mm{width:100%;max-width:400px;background:var(--s1);border-radius:20px;padding:28px 22px;border:1px solid var(--br);max-height:85dvh;overflow-y:auto}
 .mmi{font-size:40px;text-align:center;margin-bottom:8px}.mmt{font-size:20px;font-weight:800;text-align:center;margin-bottom:4px}.mms{font-size:13px;color:var(--tx2);text-align:center;margin-bottom:20px}
@@ -37,25 +34,21 @@
 .mmlb{padding:7px 14px;border-radius:8px;background:var(--ac);color:var(--bg);font-size:11px;font-weight:700;flex-shrink:0}.mmlb.dn{background:var(--s3);color:var(--ac)}
 .mmd{width:100%;padding:14px;margin-top:16px;border-radius:12px;background:var(--s2);color:var(--tx2);font-size:13px;font-weight:600;text-align:center;border:1px solid var(--br)}
 .mmc{width:100%;padding:14px;margin-top:8px;border-radius:12px;background:var(--ac);color:var(--bg);font-size:14px;font-weight:700;text-align:center}
-
 /* PWA banner */
 .pwab{background:rgba(251,191,36,.08);border:1px solid rgba(251,191,36,.2);border-radius:12px;padding:12px 14px;margin-bottom:12px;display:flex;align-items:center;gap:10px;cursor:pointer;animation:fadeUp .3s ease;font-size:12px;font-weight:500;color:var(--amb)}
 .pwab small{display:block;color:var(--tx2);font-weight:400;margin-top:2px}
 .nbar{background:var(--acd);border:1px solid rgba(74,222,128,.2);border-radius:12px;padding:12px 14px;margin-bottom:12px;display:flex;align-items:center;gap:10px;cursor:pointer;animation:fadeUp .3s ease}
 .nbar .nt{font-size:12px;font-weight:500;flex:1}.nbar small{display:block;color:var(--tx2);font-weight:400;margin-top:2px}
-
 /* Bottom nav */
 .bnav{position:fixed;bottom:0;left:0;right:0;z-index:100;background:rgba(13,13,13,.94);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-top:1px solid var(--br);padding:6px 0 calc(6px + var(--sb));display:flex;justify-content:space-around}
 .nb{display:flex;flex-direction:column;align-items:center;gap:2px;background:none;color:var(--tx3);font-size:9px;font-weight:500;padding:6px 14px;border-radius:8px;position:relative}.nb.a{color:var(--ac)}.nb svg{width:20px;height:20px}
 .nb .bdg{position:absolute;top:1px;right:8px;min-width:15px;height:15px;border-radius:8px;background:var(--dng);color:#fff;font-size:8px;font-weight:700;display:flex;align-items:center;justify-content:center;padding:0 3px}
-
 /* Week grid */
 .wn{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}.wn button{width:34px;height:34px;border-radius:10px;background:var(--s1);color:var(--tx2);font-size:18px;display:flex;align-items:center;justify-content:center;border:1px solid var(--br)}.wl{font-family:var(--mono);font-size:12px;color:var(--tx2);font-weight:500}
 .dh{display:grid;grid-template-columns:minmax(120px,1fr) repeat(7,32px);gap:2px;margin-bottom:4px;padding:0 2px}.dc{text-align:center;font-family:var(--mono);font-size:9px;font-weight:600;color:var(--tx3)}.dc.td{color:var(--ac)}.dnum{width:20px;height:20px;line-height:20px;border-radius:50%;margin:2px auto 0;font-size:10px;text-align:center}.dnum.td{background:var(--ac);color:var(--bg);font-weight:700}
 .hr{display:grid;grid-template-columns:minmax(120px,1fr) repeat(7,32px);gap:2px;align-items:center;padding:10px 2px;border-bottom:1px solid var(--s2)}
 .hi{display:flex;align-items:center;gap:7px;min-width:0;overflow:hidden}.hicon{width:28px;height:28px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0}.hn{font-size:12px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.hm{font-family:var(--mono);font-size:8px;color:var(--tx3);margin-top:1px}
 .ck{width:30px;height:30px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;transition:all .15s;border:1.5px solid var(--br);background:var(--s1);margin:0 auto}.ck.d{color:#fff}.ck.u{transform:scale(.88)}
-
 /* Form modal */
 .fov{position:fixed;inset:0;z-index:200;background:rgba(0,0,0,.8);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);display:flex;align-items:flex-end;justify-content:center;animation:fadeUp .2s ease}
 .fmd{width:100%;max-width:480px;background:var(--s1);border-radius:20px 20px 0 0;padding:24px 20px calc(24px + var(--sb));max-height:90dvh;overflow-y:auto;animation:slideUp .3s ease}
@@ -74,17 +67,14 @@
 .fbsav{padding:8px 18px;border-radius:8px;background:var(--ac);color:var(--bg);font-size:12px;font-weight:700}
 .delb{padding:8px 14px;border-radius:8px;background:var(--dngd);color:var(--dng);font-size:11px;font-weight:600}
 .addb{width:100%;padding:13px;margin-top:10px;border:1.5px dashed var(--br);border-radius:var(--r);background:transparent;color:var(--tx3);font-size:13px;font-weight:500;display:flex;align-items:center;justify-content:center;gap:7px}
-
 /* Schedule */
 .cfb{background:var(--s1);border-radius:var(--r);padding:14px;margin-bottom:12px;animation:fadeUp .3s ease}.cfb label{font-size:12px;font-weight:600;color:var(--tx2);display:block;margin-bottom:8px}.cir{display:flex;gap:6px}.cin{flex:1;padding:9px 11px;border-radius:10px;border:1px solid var(--br);background:var(--s2);color:var(--tx);font-size:12px;font-family:var(--mono)}.cin::placeholder{color:var(--tx3)}.csb{padding:9px 14px;border-radius:10px;background:var(--ac);color:var(--bg);font-size:12px;font-weight:700}.cst{font-family:var(--mono);font-size:10px;color:var(--tx3);margin-top:6px}.cev{display:flex;align-items:flex-start;gap:10px;padding:11px 13px;background:var(--s1);border-radius:12px;margin-bottom:5px;border-left:3px solid}.cet{font-family:var(--mono);font-size:11px;font-weight:600;min-width:88px;flex-shrink:0}.cen{font-size:13px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.cel{font-size:10px;color:var(--tx3);margin-top:2px}.cdh{font-family:var(--mono);font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1.2px;color:var(--tx3);margin:14px 0 7px;display:flex;align-items:center;gap:6px}.cdh.td{color:var(--ac)}.sct{font-size:11px;font-weight:700;color:var(--tx3);text-transform:uppercase;letter-spacing:.7px;margin:18px 0 8px;padding-bottom:5px;border-bottom:1px solid var(--br)}
-
 /* Reports */
 .rc{background:var(--s1);border-radius:var(--r);padding:14px;margin-bottom:10px}.rt{font-size:11px;font-weight:700;color:var(--tx2);text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px}.sg{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-bottom:12px}.sb{background:var(--s2);border-radius:11px;padding:12px 6px;text-align:center}.sv{font-family:var(--mono);font-size:20px;font-weight:700}.sl{font-size:9px;color:var(--tx3);margin-top:2px;font-weight:500}
 .bch{display:flex;align-items:flex-end;gap:3px;height:100px}.bcl{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;height:100%;justify-content:flex-end}.bar{width:100%;border-radius:4px 4px 1px 1px;min-height:2px;transition:height .5s ease}.bll{font-family:var(--mono);font-size:8px;color:var(--tx3)}.bvl{font-family:var(--mono);font-size:8px;color:var(--tx2);font-weight:600}
 .hrw{display:flex;align-items:center;gap:8px;padding:8px 0;border-bottom:1px solid var(--br)}.hrw:last-child{border-bottom:none}.hbb{flex:1;height:6px;background:var(--s2);border-radius:3px;overflow:hidden}.hbf{height:100%;border-radius:3px;transition:width .5s ease}.hpc{font-family:var(--mono);font-size:11px;font-weight:600;min-width:32px;text-align:right}
 .expb{width:100%;padding:12px;margin-top:7px;border-radius:var(--r);background:var(--s1);color:var(--ac);font-size:12px;font-weight:600;display:flex;align-items:center;justify-content:center;gap:7px;border:1px solid var(--br)}
 .empty{text-align:center;padding:32px 0;color:var(--tx3);font-size:12px}
-
 /* Settings */
 .srow{display:flex;align-items:center;justify-content:space-between;padding:12px 0;border-bottom:1px solid var(--br)}.srow:last-child{border-bottom:none}.slbl{font-size:13px;font-weight:500}.sdsc{font-size:10px;color:var(--tx3);margin-top:2px;line-height:1.5}
 .tog{width:42px;height:22px;border-radius:11px;background:var(--s3);position:relative;cursor:pointer;transition:all .2s;flex-shrink:0}.tog.on{background:var(--ac)}.tok{width:18px;height:18px;border-radius:50%;background:#fff;position:absolute;top:2px;left:2px;transition:all .2s}.tog.on .tok{left:22px}
@@ -97,18 +87,15 @@
 <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
 <script>
-const VER="3.0";
+const VER="3.1";
 const firebaseConfig={apiKey:"AIzaSyA274EZvnH3Iw9hwC1r4KwOCRWTr9oO1R8",authDomain:"rhythm-5b48c.firebaseapp.com",projectId:"rhythm-5b48c",storageBucket:"rhythm-5b48c.firebasestorage.app",messagingSenderId:"83016307894",appId:"1:83016307894:web:af48ef89af534ba68f0217",measurementId:"G-MCRHDHHQJL"};
-
 if(typeof firebase==="undefined"){document.getElementById("root").innerHTML='<div style="padding:40px 20px;text-align:center;color:#f87171"><h2>Failed to load</h2><p style="color:#999;margin-top:12px">Check your connection and refresh.</p></div>';throw new Error("no firebase")}
 let auth,db;try{firebase.initializeApp(firebaseConfig);auth=firebase.auth();db=firebase.firestore();auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL);db.enablePersistence({synchronizeTabs:true}).catch(()=>{})}catch(e){document.getElementById("root").innerHTML='<div style="padding:40px;color:#f87171">'+e.message+'</div>';throw e}
-
 const DAYS=["Sun","Mon","Tue","Wed","Thu","Fri","Sat"],MO=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
 const CL=[{bg:"#a8f0c6",fill:"#4ade80"},{bg:"#c4b5fd",fill:"#a78bfa"},{bg:"#7dd3fc",fill:"#38bdf8"},{bg:"#fcd34d",fill:"#f59e0b"},{bg:"#fda4af",fill:"#fb7185"},{bg:"#86efac",fill:"#22c55e"},{bg:"#fdba74",fill:"#f97316"},{bg:"#67e8f9",fill:"#06b6d4"}];
 const ICONS=["☀️","📖","🧘","🌙","💪","🥗","💧","✍️","🎯","🏃","🎨","🎵","⭐","🌿","🔥"];
 const REMS=[{m:60,l:"1 hr before"},{m:30,l:"30 min before"},{m:15,l:"15 min before"},{m:10,l:"10 min before"},{m:5,l:"5 min before"},{m:0,l:"At habit time"},{m:-5,l:"5 min after"},{m:-60,l:"1 hr after"}];
 const mkDef=()=>[{id:"h1",name:"Morning Routine",icon:"☀️",ci:0,time:"06:30",cat:"Health",startDate:dk(new Date),days:[],rem:[5,0,-5,-60]},{id:"h2",name:"Reading",icon:"📖",ci:1,time:"21:00",cat:"Growth",startDate:dk(new Date),days:[],rem:[5,0,-5,-60]},{id:"h3",name:"Meditation",icon:"🧘",ci:2,time:"07:00",cat:"Wellness",startDate:dk(new Date),days:[],rem:[5,0,-5,-60]},{id:"h4",name:"Sleep by 11pm",icon:"🌙",ci:5,time:"22:30",cat:"Health",startDate:dk(new Date),days:[],rem:[0,-60]}];
-
 function dk(d){return`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`}
 function wkd(o=0){const n=new Date,s=new Date(n);s.setDate(n.getDate()-n.getDay()+o*7);return Array.from({length:7},(_,i)=>{const d=new Date(s);d.setDate(s.getDate()+i);return d})}
 function gS(id,c){let s=0;const t=new Date;for(let i=0;i<365;i++){const d=new Date(t);d.setDate(t.getDate()-i);if(c[id+"::"+dk(d)])s++;else if(i>0)break}return s}
@@ -116,18 +103,15 @@ function fT(h,m){return`${((h%12)||12)}:${String(m).padStart(2,"0")} ${h>=12?"PM
 function pT(s){const p=s.split(":");return{h:parseInt(p[0]),m:parseInt(p[1]||0)}}
 function isPWA(){return window.matchMedia('(display-mode:standalone)').matches||window.navigator.standalone===true}
 function getMissed(dateKey){const now=new Date;return S.habits.filter(h=>{if(S.comp[h.id+"::"+dateKey])return false;if(dateKey===dk(now)){const t=pT(h.time);return now.getHours()>t.h||(now.getHours()===t.h&&now.getMinutes()>=t.m)}return true})}
-
 // State
 let U=null,aScr="login",aLd=false,aErr="",aOk="",appLd=true,modalOff=false;
-const mkS=()=>({habits:mkDef(),comp:{},sched:[],calUrl:"",calEv:[],calSync:null,calBusy:false,view:"habits",wo:0,showAdd:false,showAddS:false,editH:null,editS:null,notifOn:false,notifDis:{},eodH:21,eodM:0,schedOn:false});
+const mkS=()=>({habits:mkDef(),comp:{},sched:[],calUrl:"",calEv:[],calSync:null,calBusy:false,view:"habits",wo:0,showAdd:false,showAddS:false,editH:null,editS:null,notifOn:false,notifDis:{},eodH:21,eodM:0,schedOn:false,remBefore:[5]});
 let S=mkS();
-
 // Firestore
 function uRef(){return U?db.collection("users").doc(U.uid):null}
-async function cloudSave(){const r=uRef();if(!r)return;try{await r.set({habits:S.habits,comp:S.comp,sched:S.sched,calUrl:S.calUrl,calEv:S.calEv,calSync:S.calSync,notifOn:S.notifOn,eodH:S.eodH,eodM:S.eodM,schedOn:S.schedOn,up:firebase.firestore.FieldValue.serverTimestamp()},{merge:true})}catch(e){}}
-async function cloudLoad(){const r=uRef();if(!r)return;try{const d=await r.get();if(d.exists){const v=d.data();S.habits=v.habits||mkDef();S.comp=v.comp||{};S.sched=v.sched||[];S.calUrl=v.calUrl||"";S.calEv=v.calEv||[];S.calSync=v.calSync||null;S.notifOn=v.notifOn||false;S.eodH=v.eodH||21;S.eodM=v.eodM||0;S.schedOn=v.schedOn||false;S.remBefore=v.remBefore||[5];S.habits.forEach(h=>{if(!h.rem)h.rem=[5,0,-5,-60];if(!h.days)h.days=[]})}}catch(e){}}
+async function cloudSave(){const r=uRef();if(!r)return;try{await r.set({habits:S.habits,comp:S.comp,sched:S.sched,calUrl:S.calUrl,calEv:S.calEv,calSync:S.calSync,notifOn:S.notifOn,notifDis:S.notifDis,eodH:S.eodH,eodM:S.eodM,schedOn:S.schedOn,remBefore:S.remBefore,up:firebase.firestore.FieldValue.serverTimestamp()},{merge:true})}catch(e){}}
+async function cloudLoad(){const r=uRef();if(!r)return;try{const d=await r.get();if(d.exists){const v=d.data();S.habits=v.habits||mkDef();S.comp=v.comp||{};S.sched=v.sched||[];S.calUrl=v.calUrl||"";S.calEv=v.calEv||[];S.calSync=v.calSync||null;S.notifOn=v.notifOn||false;S.notifDis=v.notifDis||{};S.eodH=v.eodH||21;S.eodM=v.eodM||0;S.schedOn=v.schedOn||false;S.remBefore=v.remBefore||[5];S.habits.forEach(h=>{if(!h.rem)h.rem=[5,0,-5,-60];if(!h.days)h.days=[]})}}catch(e){}}
 let svT=null;function save(){clearTimeout(svT);svT=setTimeout(cloudSave,800)}
-
 // Auth
 auth.onAuthStateChanged(async u=>{U=u;if(u){await cloudLoad();appLd=false;schedNotif();render()}else{appLd=false;S=mkS();render()}});
 async function doLogin(){const e=document.getElementById("aE")?.value?.trim(),p=document.getElementById("aP")?.value;if(!e||!p){aErr="Please fill in all fields.";render();return}aLd=true;aErr="";render();try{await auth.signInWithEmailAndPassword(e,p)}catch(x){aErr=fErr(x);aLd=false;render()}}
@@ -136,50 +120,45 @@ async function doForgot(){const e=document.getElementById("aE")?.value?.trim();i
 function doLogout(){auth.signOut()}
 function fErr(x){const c=x?.code||"";return{"auth/user-not-found":"No account found.","auth/wrong-password":"Wrong password.","auth/email-already-in-use":"Email already registered.","auth/weak-password":"Password too weak.","auth/invalid-email":"Invalid email.","auth/too-many-requests":"Too many attempts.","auth/invalid-credential":"Invalid email or password.","auth/network-request-failed":"Network error."}[c]||(x?.message||"Something went wrong.")}
 function swAuth(s){aScr=s;aErr="";aOk="";aLd=false;render()}
-
 // Service Worker
 let swReg=null;
 (async()=>{if(!('serviceWorker' in navigator))return;try{swReg=await navigator.serviceWorker.register('./sw.js',{scope:'./'});swReg.update();swReg.addEventListener('updatefound',()=>{const nw=swReg.installing;if(nw)nw.addEventListener('statechange',()=>{if(nw.state==='installed'&&navigator.serviceWorker.controller)nw.postMessage('skipWaiting')})})}catch(e){}})();
-
 // Notifications — per-habit reminders
 let nT=[];
 function schedNotif(){
-  nT.forEach(t=>clearTimeout(t));nT=[];
-  if(!S.notifOn)return;
-  const now=new Date,tdk=dk(now);
-  function send(title,body,tag){
-    try{if(swReg?.showNotification)swReg.showNotification(title,{body,tag,icon:'./icon-192.png',renotify:true,requireInteraction:true});
-    else if(navigator.serviceWorker?.ready)navigator.serviceWorker.ready.then(r=>r.showNotification(title,{body,tag,icon:'./icon-192.png',renotify:true,requireInteraction:true})).catch(()=>new Notification(title,{body,tag}));
-    else new Notification(title,{body,tag})}catch(e){try{new Notification(title,{body,tag})}catch(e2){}}
-  }
-  S.habits.forEach(h=>{
-    const t=pT(h.time),tar=new Date(now);tar.setHours(t.h,t.m,0,0);
-    const hMs=tar-now;
-    const rems=h.rem||[5,0,-5,-60];
-    rems.forEach(r=>{
-      const delay=hMs-(r*60000);
-      if(delay>0){
-        const lbl=r>0?r+"min before":r===0?"now":Math.abs(r)+(Math.abs(r)>=60?"hr":"min")+" overdue";
-        nT.push(setTimeout(()=>{if(!S.comp[h.id+'::'+tdk])send('Rhythm — '+h.name+(r===0?' NOW':r>0?' in '+r+'min':' — '+Math.abs(r)+(Math.abs(r)>=60?'hr':'min')+' ago'),r>=0?'Time for '+h.name+'!':'Don\'t break your streak!','r-'+h.id+'-'+r)},delay))
-      }
-    });
-  });
-  const eod=new Date(now);eod.setHours(S.eodH,S.eodM,0,0);let ed=eod-now;
-  if(ed>0)nT.push(setTimeout(()=>{const ms=S.habits.filter(h=>!S.comp[h.id+'::'+tdk]);if(ms.length)send('Rhythm — End of Day',ms.length+' incomplete: '+ms.map(h=>h.name).join(', '),'eod');else send('Rhythm — All Done!','Perfect day!','eod')},ed));
+nT.forEach(t=>clearTimeout(t));nT=[];
+if(!S.notifOn)return;
+const now=new Date,tdk=dk(now);
+function send(title,body,tag){
+try{if(swReg?.showNotification)swReg.showNotification(title,{body,tag,icon:'./icon-192.png',renotify:true,requireInteraction:true});
+else if(navigator.serviceWorker?.ready)navigator.serviceWorker.ready.then(r=>r.showNotification(title,{body,tag,icon:'./icon-192.png',renotify:true,requireInteraction:true})).catch(()=>new Notification(title,{body,tag}));
+else new Notification(title,{body,tag})}catch(e){try{new Notification(title,{body,tag})}catch(e2){}}
+}
+S.habits.forEach(h=>{
+const t=pT(h.time),tar=new Date(now);tar.setHours(t.h,t.m,0,0);
+const hMs=tar-now;
+const rems=h.rem||[5,0,-5,-60];
+rems.forEach(r=>{
+const delay=hMs-(r*60000);
+if(delay>0){
+const lbl=r>0?r+"min before":r===0?"now":Math.abs(r)+(Math.abs(r)>=60?"hr":"min")+" overdue";
+nT.push(setTimeout(()=>{if(!S.comp[h.id+'::'+tdk])send('Rhythm — '+h.name+(r===0?' NOW':r>0?' in '+r+'min':' — '+Math.abs(r)+(Math.abs(r)>=60?'hr':'min')+' ago'),r>=0?'Time for '+h.name+'!':'Don\'t break your streak!','r-'+h.id+'-'+r)},delay))
+}
+});
+});
+const eod=new Date(now);eod.setHours(S.eodH,S.eodM,0,0);let ed=eod-now;
+if(ed>0)nT.push(setTimeout(()=>{const ms=S.habits.filter(h=>!S.comp[h.id+'::'+tdk]);if(ms.length)send('Rhythm — End of Day',ms.length+' incomplete: '+ms.map(h=>h.name).join(', '),'eod');else send('Rhythm — All Done!','Perfect day!','eod')},ed));
 }
 document.addEventListener("visibilitychange",()=>{if(!document.hidden&&S.notifOn)schedNotif()});
-
 async function reqNotif(){
-  if(!isPWA()){alert('Notifications only work from your Home Screen icon.\n\n1. Tap Share → Add to Home Screen\n2. Open from Home Screen\n3. Enable in Settings');return}
-  if(!('Notification' in window)){alert('Requires iOS 16.4+');return}
-  const p=await Notification.requestPermission();S.notifOn=p==='granted';save();schedNotif();render();
+if(!isPWA()){alert('Notifications only work from your Home Screen icon.\n\n1. Tap Share → Add to Home Screen\n2. Open from Home Screen\n3. Enable in Settings');return}
+if(!('Notification' in window)){alert('Requires iOS 16.4+');return}
+const p=await Notification.requestPermission();S.notifOn=p==='granted';save();schedNotif();render();
 }
-
 // ICS
 function parseICS(t){const evs=[];const bl=t.split("BEGIN:VEVENT");for(let i=1;i<bl.length;i++){const b=bl[i].split("END:VEVENT")[0];const g=k=>{const m=b.match(new RegExp(k+"[^:]*:(.+?)\\r?\\n","s"));return m?m[1].replace(/\\n/g," ").trim():""};const ev={title:g("SUMMARY")||"(No title)",location:g("LOCATION")};const ds=g("DTSTART"),de=g("DTEND");if(ds){ev.start=pICS(ds);ev.end=de?pICS(de):ev.start;ev.allDay=ds.replace(/TZID=[^:]+:/,"").trim().length===8;evs.push(ev)}}return evs}
 function pICS(s){s=s.replace(/TZID=[^:]+:/,"").trim();if(s.length===8)return new Date(+s.slice(0,4),+s.slice(4,6)-1,+s.slice(6,8));const y=+s.slice(0,4),mo=+s.slice(4,6)-1,d=+s.slice(6,8),h=+s.slice(9,11)||0,mi=+s.slice(11,13)||0;return s.endsWith("Z")?new Date(Date.UTC(y,mo,d,h,mi)):new Date(y,mo,d,h,mi)}
 async function syncCal(){if(!S.calUrl.trim())return;S.calBusy=true;render();try{let r;try{r=await fetch(S.calUrl.trim())}catch(e){r=await fetch("https://api.allorigins.win/raw?url="+encodeURIComponent(S.calUrl.trim()))}if(!r.ok)throw new Error(r.status);S.calEv=parseICS(await r.text());S.calSync=new Date().toISOString();S.calBusy=false;save();render()}catch(e){S.calBusy=false;render();alert("Sync failed: "+e.message)}}
-
 // Actions
 function setV(v){S.view=v;S.showAdd=S.showAddS=false;S.editH=S.editS=null;render();window.scrollTo(0,0)}
 function nW(d){S.wo+=d;render()}
@@ -188,7 +167,7 @@ function tE(id){S.editH=S.editH===id?null:id;window._editIcon=null;window._editC
 function dH(id){if(!confirm("Delete this habit?"))return;S.habits=S.habits.filter(h=>h.id!==id);Object.keys(S.comp).forEach(k=>{if(k.startsWith(id+"::"))delete S.comp[k]});S.editH=null;save();render()}
 function tES(id){S.editS=S.editS===id?null:id;render()}
 function dSc(id){S.sched=S.sched.filter(s=>s.id!==id);S.editS=null;save();render()}
-function dM(){S.notifDis[dk(new Date)]=true;modalOff=true;render()}
+function dM(){S.notifDis[dk(new Date)]=true;modalOff=true;window._modalSnap=null;save();render()}
 let _si="⭐",_sc=0,_scs=1;
 function sI(el,ic){_si=ic;document.querySelectorAll("#hF .ipo").forEach(b=>b.classList.remove("s"));el.classList.add("s")}
 function sC(el,ci){_sc=ci;document.querySelectorAll("#hF .cdo").forEach(b=>b.classList.remove("s"));el.classList.add("s")}
@@ -209,190 +188,170 @@ function saveEdit(id){const h=S.habits.find(x=>x.id===id);if(!h)return;const n=d
 function subSc(){const t=document.getElementById("sT2")?.value?.trim();if(!t)return;S.sched.push({id:"s"+Date.now(),title:t,time:document.getElementById("sTm")?.value||"09:00",day:parseInt(document.getElementById("sD")?.value||0),color:_scs});S.showAddS=false;_scs=1;save();render()}
 function uCU(){S.calUrl=document.getElementById("cU")?.value||"";save()}
 function exCSV(){let c="Habit,Date,Completed\n";S.habits.forEach(h=>{for(let i=0;i<90;i++){const d=new Date;d.setDate(d.getDate()-i);c+=`"${h.name}",${dk(d)},${S.comp[h.id+"::"+dk(d)]?"Yes":"No"}\n`}});const b=new Blob([c],{type:"text/csv"}),u=URL.createObjectURL(b),a=document.createElement("a");a.href=u;a.download=`rhythm_${dk(new Date)}.csv`;document.body.appendChild(a);a.click();document.body.removeChild(a);URL.revokeObjectURL(u)}
-function resetAll(){if(confirm("Reset everything?")){const r=uRef();if(r)r.delete();S=mkS();save();render()}}
-
+async function resetAll(){if(!confirm("Reset everything?"))return;const r=uRef();if(r){try{await r.delete()}catch(e){}}clearTimeout(svT);S=mkS();save();render()}
 // Day picker HTML helper
 function dayPicker(containerId,sel){return`<div class="drow">${["S","M","T","W","T","F","S"].map((d,i)=>`<button class="dtog${(sel||[]).includes(i)?" on":""}" data-day="${i}" onclick="togDay(this)">${d}</button>`).join("")}</div>`}
 // Reminder picker HTML helper
 function remPicker(containerId,sel){const s=sel||[5,0,-5,-60];return`<div style="display:flex;flex-wrap:wrap">${REMS.map(r=>`<button class="rtog${s.includes(r.m)?" on":""}" data-rem="${r.m}" onclick="togRem(this)">${r.l}</button>`).join("")}</div>`}
-
 // ═══ RENDER ═══
 function render(){
 const R=document.getElementById("root");
 if(appLd){R.innerHTML=`<div class="splash"><div style="font-size:34px;font-weight:800;letter-spacing:-1px">Rh<span style="color:var(--ac)">y</span>thm</div><div class="spinner"></div></div>`;return}
-
 // Auth
 if(!U){let h="";
 if(aScr==="login")h=`<div class="aw"><div class="ac"><div class="al">Rh<span class="y">y</span>thm</div><div class="as">Build better habits, one day at a time</div><div class="ab2"><div class="at">Welcome back</div><div class="ad">Sign in to your account</div>${aErr?`<div class="aerr">⚠ ${aErr}</div>`:""}<div class="af"><label>Email</label><input class="ai" id="aE" type="email" placeholder="you@email.com" autocomplete="email"></div><div class="af"><label>Password</label><input class="ai" id="aP" type="password" placeholder="••••••••" autocomplete="current-password" onkeydown="if(event.key==='Enter')doLogin()"></div><div class="afg"><a onclick="swAuth('forgot')">Forgot password?</a></div><button class="abtn" onclick="doLogin()" ${aLd?"disabled":""}>${aLd?'<div class="spinner"></div>':"Sign In"}</button></div><div class="alink">No account? <a onclick="swAuth('signup')">Sign Up</a></div></div></div>`;
 else if(aScr==="signup")h=`<div class="aw"><div class="ac"><div class="al">Rh<span class="y">y</span>thm</div><div class="as">Start tracking — free forever</div><div class="ab2"><div class="at">Create Account</div><div class="ad">Syncs across all devices</div>${aErr?`<div class="aerr">⚠ ${aErr}</div>`:""}<div class="af"><label>Name</label><input class="ai" id="aN" type="text" placeholder="Your name"></div><div class="af"><label>Email</label><input class="ai" id="aE" type="email" placeholder="you@email.com"></div><div class="af"><label>Password</label><input class="ai" id="aP" type="password" placeholder="Min 6 characters"></div><div class="af"><label>Confirm</label><input class="ai" id="aP2" type="password" placeholder="••••••••" onkeydown="if(event.key==='Enter')doSignup()"></div><button class="abtn" onclick="doSignup()" ${aLd?"disabled":""}>${aLd?'<div class="spinner"></div>':"Create Account"}</button></div><div class="alink">Have an account? <a onclick="swAuth('login')">Sign In</a></div></div></div>`;
 else h=`<div class="aw"><div class="ac"><div class="al">Rh<span class="y">y</span>thm</div><div class="as">Reset your password</div><div class="ab2"><div class="at">Forgot Password</div><div class="ad">We'll send a reset link</div>${aErr?`<div class="aerr">⚠ ${aErr}</div>`:""}${aOk?`<div class="aok">✓ ${aOk}</div>`:""}<div class="af"><label>Email</label><input class="ai" id="aE" type="email" placeholder="you@email.com" onkeydown="if(event.key==='Enter')doForgot()"></div><button class="abtn" onclick="doForgot()" ${aLd?"disabled":""}>${aLd?'<div class="spinner"></div>':"Send Reset Link"}</button></div><div class="alink"><a onclick="swAuth('login')">← Back to Sign In</a></div></div></div>`;
 R.innerHTML=h;return}
-
 // App
 const today=dk(new Date),wd=wkd(S.wo),now=new Date;
 const dT=S.habits.filter(h=>S.comp[h.id+"::"+today]).length,pct=S.habits.length?Math.round(dT/S.habits.length*100):0;
 const missed=getMissed(today);const yesterday=(()=>{const d=new Date;d.setDate(d.getDate()-1);return dk(d)})();
 const missedY=S.habits.filter(h=>!S.comp[h.id+"::"+yesterday]);
-const showModal=(missed.length>0||missedY.length>0)&&!modalOff&&!S.notifDis[today];
+if((missed.length>0||missedY.length>0)&&!modalOff&&!S.notifDis[today]&&!window._modalSnap)window._modalSnap={t:missed.map(h=>h.id),y:missedY.map(h=>h.id)};
+const allCaughtUp=!!window._modalSnap&&window._modalSnap.t.every(id=>S.comp[id+"::"+today])&&window._modalSnap.y.every(id=>S.comp[id+"::"+yesterday]);
+const showModal=!!window._modalSnap&&!modalOff&&!S.notifDis[today];
 const uName=U.displayName||U.email.split("@")[0];const ini=uName.split(" ").map(w=>w[0]).join("").toUpperCase().slice(0,2);
 if(showModal&&!window._vib){window._vib=true;try{navigator.vibrate?.([100,50,100,50,200])}catch(e){}}
-
 let html=`<div class="app">`;
 // Header
 html+=`<div class="hdr"><div><div class="logo">Rh<span class="y">y</span>thm</div><div class="dtag">${now.toLocaleDateString("en-US",{weekday:"short",month:"short",day:"numeric"})}</div></div><div class="rw"><svg viewBox="0 0 50 50" width="50" height="50"><circle cx="25" cy="25" r="20" fill="none" stroke="var(--s2)" stroke-width="4"/><circle cx="25" cy="25" r="20" fill="none" stroke="var(--ac)" stroke-width="4" stroke-dasharray="${2*Math.PI*20}" stroke-dashoffset="${2*Math.PI*20*(1-pct/100)}" stroke-linecap="round" transform="rotate(-90 25 25)" style="transition:stroke-dashoffset .6s ease"/></svg><div class="rl">${pct}%</div></div></div>`;
-
 // Missed modal
 if(showModal){
-  html+=`<div class="mo" onclick="if(event.target===this)dM()"><div class="mm"><div class="mmi">⚡</div><div class="mmt">Don't Break the Chain!</div><div class="mms">${missed.length?missed.length+" missed today":""}${missed.length&&missedY.length<S.habits.length?" · ":""}${missedY.length>0&&missedY.length<S.habits.length?missedY.length+" missed yesterday":""}</div>`;
-  if(missed.length){html+=`<div class="mmsl"><span style="width:6px;height:6px;border-radius:50%;background:var(--dng);display:inline-block"></span> Today — Overdue</div>`;
-    missed.forEach(h=>{const c=CL[h.ci%CL.length],st=gS(h.id,S.comp);html+=`<div class="mmh"><div class="mmhi"><div class="mmhic" style="background:${c.bg}22;border:1.5px solid ${c.bg}66">${h.icon}</div><div><div class="mmhn">${h.name}</div>${st>0?`<div class="mmhs">🔥 ${st}d streak at risk!</div>`:""}</div></div><button class="mmlb${S.comp[h.id+"::"+today]?" dn":""}" onclick="tC('${h.id}','${today}')">${S.comp[h.id+"::"+today]?"✓ Done":"Log ✓"}</button></div>`})}
-  if(missedY.length>0&&missedY.length<S.habits.length){html+=`<div class="mmsl"><span style="width:6px;height:6px;border-radius:50%;background:var(--amb);display:inline-block"></span> Yesterday</div>`;
-    missedY.forEach(h=>{const c=CL[h.ci%CL.length];html+=`<div class="mmh"><div class="mmhi"><div class="mmhic" style="background:${c.bg}22;border:1.5px solid ${c.bg}66">${h.icon}</div><div><div class="mmhn">${h.name}</div></div></div><button class="mmlb${S.comp[h.id+"::"+yesterday]?" dn":""}" onclick="tC('${h.id}','${yesterday}')">${S.comp[h.id+"::"+yesterday]?"✓ Done":"Log ✓"}</button></div>`})}
-  const allDone=missed.every(h=>S.comp[h.id+"::"+today]);
-  html+=allDone&&missed.length?`<button class="mmc" onclick="dM()">All Caught Up! 🎉</button>`:`<button class="mmd" onclick="dM()">I'll do it later</button>`;
-  html+=`</div></div>`;
+html+=`<div class="mo" onclick="if(event.target===this)dM()"><div class="mm"><div class="mmi">${allCaughtUp?"🎉":"⚡"}</div><div class="mmt">${allCaughtUp?"Nice work!":"Don't Break the Chain!"}</div><div class="mms">${allCaughtUp?"You caught up — streak intact.":(missed.length?missed.length+" missed today":"")+(missed.length&&missedY.length>0&&missedY.length<S.habits.length?" · ":"")+(missedY.length>0&&missedY.length<S.habits.length?missedY.length+" missed yesterday":"")}</div>`;
+if(missed.length){html+=`<div class="mmsl"><span style="width:6px;height:6px;border-radius:50%;background:var(--dng);display:inline-block"></span> Today — Overdue</div>`;
+missed.forEach(h=>{const c=CL[h.ci%CL.length],st=gS(h.id,S.comp);html+=`<div class="mmh"><div class="mmhi"><div class="mmhic" style="background:${c.bg}22;border:1.5px solid ${c.bg}66">${h.icon}</div><div><div class="mmhn">${h.name}</div>${st>0?`<div class="mmhs">🔥 ${st}d streak at risk!</div>`:""}</div></div><button class="mmlb${S.comp[h.id+"::"+today]?" dn":""}" onclick="tC('${h.id}','${today}')">${S.comp[h.id+"::"+today]?"✓ Done":"Log ✓"}</button></div>`})}
+if(missedY.length>0&&missedY.length<S.habits.length){html+=`<div class="mmsl"><span style="width:6px;height:6px;border-radius:50%;background:var(--amb);display:inline-block"></span> Yesterday</div>`;
+missedY.forEach(h=>{const c=CL[h.ci%CL.length];html+=`<div class="mmh"><div class="mmhi"><div class="mmhic" style="background:${c.bg}22;border:1.5px solid ${c.bg}66">${h.icon}</div><div><div class="mmhn">${h.name}</div></div></div><button class="mmlb${S.comp[h.id+"::"+yesterday]?" dn":""}" onclick="tC('${h.id}','${yesterday}')">${S.comp[h.id+"::"+yesterday]?"✓ Done":"Log ✓"}</button></div>`})}
+html+=allCaughtUp?`<button class="mmc" onclick="dM()">All Caught Up! 🎉</button>`:`<button class="mmd" onclick="dM()">I'll do it later</button>`;
+html+=`</div></div>`;
 }
-
 // PWA/notif banner
 if(!S.notifOn){if(isPWA()&&"Notification" in window&&Notification.permission!=="denied")html+=`<div class="nbar" onclick="reqNotif()"><div style="font-size:17px">🔔</div><div class="nt">Enable reminders<small>Per-habit notifications before & after</small></div><div style="color:var(--ac);font-size:12px;font-weight:700">Enable</div></div>`;
 else if(!isPWA())html+=`<div class="pwab" onclick="reqNotif()"><div style="font-size:17px">📲</div><div>Add to Home Screen for notifications<small>Safari doesn't support notifications</small></div></div>`}
-
 // HABITS
 if(S.view==="habits"){
-  html+=`<div class="wn"><button onclick="nW(-1)">‹</button><span class="wl">${MO[wd[0].getMonth()]} ${wd[0].getDate()} — ${MO[wd[6].getMonth()]} ${wd[6].getDate()}</span><button onclick="nW(1)">›</button></div>`;
-  html+=`<div class="dh"><div></div>${wd.map(d=>{const t=dk(d)===today;return`<div class="dc${t?" td":""}"><div>${DAYS[d.getDay()]}</div><div class="dnum${t?" td":""}">${d.getDate()}</div></div>`}).join("")}</div>`;
-  S.habits.forEach((h,idx)=>{const c=CL[h.ci%CL.length],st=gS(h.id,S.comp);let w2=0;wd.forEach(d=>{if(S.comp[h.id+"::"+dk(d)])w2++});const wp=Math.round(w2/7*100);
-    const hDays=h.days||[];const dayLbl=hDays.length>0&&hDays.length<7?hDays.map(d=>DAYS[d].slice(0,2)).join(", "):"";
-    const sd=h.startDate||"";const sdLbl=sd?new Date(sd+"T00:00:00").toLocaleDateString("en-US",{month:"short",day:"numeric"}):"";
-    html+=`<div class="hr" style="animation:slideIn .3s ease ${idx*.04}s both"><div class="hi" onclick="tE('${h.id}')"><div class="hicon" style="background:${c.bg}22;border:1.5px solid ${c.bg}66">${h.icon}</div><div style="min-width:0"><div class="hn">${h.name}</div><div class="hm">${st>0?st+"d":""}${st>0&&wp>0?" · ":""}${wp>0?wp+"%":""}${dayLbl?" · "+dayLbl:""}${sdLbl?" · "+sdLbl:""}</div></div></div>${wd.map(d=>{const dn=S.comp[h.id+"::"+dk(d)];return`<button class="ck ${dn?"d":"u"}" style="${dn?`background:${c.fill}33;border-color:${c.fill}`:""}" onclick="tC('${h.id}','${dk(d)}')">${dn?`<svg width="12" height="12" viewBox="0 0 14 14" fill="none"><path d="M2.5 7L5.5 10L11.5 4" stroke="${c.fill}" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>`:""}</button>`}).join("")}</div>`});
-
-  // Edit habit modal
-  if(S.editH){const h=S.habits.find(x=>x.id===S.editH);if(h){
-    html+=`<div class="fov" onclick="if(event.target===this){S.editH=null;render()}"><div class="fmd" id="eF"><div class="fh"></div><div class="ftl">Edit Habit</div>
-      <input class="fi" id="eN" value="${h.name.replace(/"/g,"&quot;")}"><div class="fr"><input class="fi" id="eT" type="time" value="${h.time}" style="flex:1"><input class="fi" id="eCt" value="${h.cat||"General"}" style="flex:1"></div>
-      <div class="fr"><input class="fi" id="eSD" type="date" value="${h.startDate||dk(new Date)}" style="flex:1"><div style="flex:1;font-size:11px;color:var(--tx3);display:flex;align-items:center;padding-left:8px">Start Date</div></div>
-      <div class="flbl">Repeat on <span>(empty = daily)</span></div>${dayPicker("eF",h.days)}
-      <div class="flbl">Reminders</div>${remPicker("eF",h.rem)}
-      <div class="flbl">Icon</div><div class="ipk">${ICONS.map(ic=>`<button class="ipo${h.icon===ic?" s":""}" onclick="sEI(this,'${ic}')">${ic}</button>`).join("")}</div>
-      <div class="flbl">Color</div><div class="cpk">${CL.map((cl,i)=>`<button class="cdo${h.ci===i?" s":""}" style="background:${cl.fill}" onclick="sEC(this,${i})"></button>`).join("")}</div>
-      <div class="fac"><button class="delb" onclick="dH('${h.id}')" style="margin-right:auto">🗑 Delete</button><button class="fbcan" onclick="S.editH=null;render()">Cancel</button><button class="fbsav" onclick="saveEdit('${h.id}')">Save</button></div>
-    </div></div>`;
-  }}
-  // Add habit
-  html+=`<button class="addb" onclick="S.showAdd=true;render()"><span style="font-size:16px">+</span> Add Habit</button>`;
-  if(S.showAdd){
-    html+=`<div class="fov" onclick="if(event.target===this){S.showAdd=false;render()}"><div class="fmd" id="hF"><div class="fh"></div><div class="ftl">New Habit</div>
-      <input class="fi" id="hN" placeholder="e.g. Morning Walk" autofocus><div class="fr"><input class="fi" id="hT" type="time" value="08:00" style="flex:1"><input class="fi" id="hCt" placeholder="Category" value="General" style="flex:1"></div>
-      <div class="fr"><input class="fi" id="hSD" type="date" value="${dk(new Date)}" style="flex:1"><div style="flex:1;font-size:11px;color:var(--tx3);display:flex;align-items:center;padding-left:8px">Start Date</div></div>
-      <div class="flbl">Repeat on <span>(empty = daily)</span></div>${dayPicker("hF",[])}
-      <div class="flbl">Reminders</div>${remPicker("hF",[5,0,-5,-60])}
-      <div class="flbl">Icon</div><div class="ipk">${ICONS.map(ic=>`<button class="ipo${ic==="⭐"?" s":""}" onclick="sI(this,'${ic}')">${ic}</button>`).join("")}</div>
-      <div class="flbl">Color</div><div class="cpk">${CL.map((c,i)=>`<button class="cdo${i===0?" s":""}" style="background:${c.fill}" onclick="sC(this,${i})"></button>`).join("")}</div>
-      <div class="fac"><button class="fbcan" onclick="S.showAdd=false;render()">Cancel</button><button class="fbsav" onclick="subH()">Add Habit</button></div>
-    </div></div>`;
-  }
+html+=`<div class="wn"><button onclick="nW(-1)">‹</button><span class="wl">${MO[wd[0].getMonth()]} ${wd[0].getDate()} — ${MO[wd[6].getMonth()]} ${wd[6].getDate()}</span><button onclick="nW(1)">›</button></div>`;
+html+=`<div class="dh"><div></div>${wd.map(d=>{const t=dk(d)===today;return`<div class="dc${t?" td":""}"><div>${DAYS[d.getDay()]}</div><div class="dnum${t?" td":""}">${d.getDate()}</div></div>`}).join("")}</div>`;
+S.habits.forEach((h,idx)=>{const c=CL[h.ci%CL.length],st=gS(h.id,S.comp);let w2=0;wd.forEach(d=>{if(S.comp[h.id+"::"+dk(d)])w2++});const wp=Math.round(w2/7*100);
+const hDays=h.days||[];const dayLbl=hDays.length>0&&hDays.length<7?hDays.map(d=>DAYS[d].slice(0,2)).join(", "):"";
+const sd=h.startDate||"";const sdLbl=sd?new Date(sd+"T00:00:00").toLocaleDateString("en-US",{month:"short",day:"numeric"}):"";
+html+=`<div class="hr" style="animation:slideIn .3s ease ${idx*.04}s both"><div class="hi" onclick="tE('${h.id}')"><div class="hicon" style="background:${c.bg}22;border:1.5px solid ${c.bg}66">${h.icon}</div><div style="min-width:0"><div class="hn">${h.name}</div><div class="hm">${st>0?st+"d":""}${st>0&&wp>0?" · ":""}${wp>0?wp+"%":""}${dayLbl?" · "+dayLbl:""}${sdLbl?" · "+sdLbl:""}</div></div></div>${wd.map(d=>{const dn=S.comp[h.id+"::"+dk(d)];return`<button class="ck ${dn?"d":"u"}" style="${dn?`background:${c.fill}33;border-color:${c.fill}`:""}" onclick="tC('${h.id}','${dk(d)}')">${dn?`<svg width="12" height="12" viewBox="0 0 14 14" fill="none"><path d="M2.5 7L5.5 10L11.5 4" stroke="${c.fill}" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>`:""}</button>`}).join("")}</div>`});
+// Edit habit modal
+if(S.editH){const h=S.habits.find(x=>x.id===S.editH);if(h){
+html+=`<div class="fov" onclick="if(event.target===this){S.editH=null;render()}"><div class="fmd" id="eF"><div class="fh"></div><div class="ftl">Edit Habit</div>
+<input class="fi" id="eN" value="${h.name.replace(/"/g,"&quot;")}"><div class="fr"><input class="fi" id="eT" type="time" value="${h.time}" style="flex:1"><input class="fi" id="eCt" value="${h.cat||"General"}" style="flex:1"></div>
+<div class="fr"><input class="fi" id="eSD" type="date" value="${h.startDate||dk(new Date)}" style="flex:1"><div style="flex:1;font-size:11px;color:var(--tx3);display:flex;align-items:center;padding-left:8px">Start Date</div></div>
+<div class="flbl">Repeat on <span>(empty = daily)</span></div>${dayPicker("eF",h.days)}
+<div class="flbl">Reminders</div>${remPicker("eF",h.rem)}
+<div class="flbl">Icon</div><div class="ipk">${ICONS.map(ic=>`<button class="ipo${h.icon===ic?" s":""}" onclick="sEI(this,'${ic}')">${ic}</button>`).join("")}</div>
+<div class="flbl">Color</div><div class="cpk">${CL.map((cl,i)=>`<button class="cdo${h.ci===i?" s":""}" style="background:${cl.fill}" onclick="sEC(this,${i})"></button>`).join("")}</div>
+<div class="fac"><button class="delb" onclick="dH('${h.id}')" style="margin-right:auto">🗑 Delete</button><button class="fbcan" onclick="S.editH=null;render()">Cancel</button><button class="fbsav" onclick="saveEdit('${h.id}')">Save</button></div>
+</div></div>`;
+}}
+// Add habit
+html+=`<button class="addb" onclick="S.showAdd=true;render()"><span style="font-size:16px">+</span> Add Habit</button>`;
+if(S.showAdd){
+html+=`<div class="fov" onclick="if(event.target===this){S.showAdd=false;render()}"><div class="fmd" id="hF"><div class="fh"></div><div class="ftl">New Habit</div>
+<input class="fi" id="hN" placeholder="e.g. Morning Walk" autofocus><div class="fr"><input class="fi" id="hT" type="time" value="08:00" style="flex:1"><input class="fi" id="hCt" placeholder="Category" value="General" style="flex:1"></div>
+<div class="fr"><input class="fi" id="hSD" type="date" value="${dk(new Date)}" style="flex:1"><div style="flex:1;font-size:11px;color:var(--tx3);display:flex;align-items:center;padding-left:8px">Start Date</div></div>
+<div class="flbl">Repeat on <span>(empty = daily)</span></div>${dayPicker("hF",[])}
+<div class="flbl">Reminders</div>${remPicker("hF",[...(S.remBefore||[5]),0,-5,-60])}
+<div class="flbl">Icon</div><div class="ipk">${ICONS.map(ic=>`<button class="ipo${ic==="⭐"?" s":""}" onclick="sI(this,'${ic}')">${ic}</button>`).join("")}</div>
+<div class="flbl">Color</div><div class="cpk">${CL.map((c,i)=>`<button class="cdo${i===0?" s":""}" style="background:${c.fill}" onclick="sC(this,${i})"></button>`).join("")}</div>
+<div class="fac"><button class="fbcan" onclick="S.showAdd=false;render()">Cancel</button><button class="fbsav" onclick="subH()">Add Habit</button></div>
+</div></div>`;
 }
-
+}
 // SCHEDULE
 if(S.view==="schedule"&&S.schedOn){
-  html+=`<div class="cfb"><label>📅 Calendar Feed (ICS URL)</label><div class="cir"><input class="cin" id="cU" placeholder="Paste .ics URL..." value="${S.calUrl.replace(/"/g,"&quot;")}" oninput="uCU()"><button class="csb" onclick="syncCal()">${S.calBusy?"...":"Sync"}</button></div><div class="cst">${S.calSync?`<span style="width:6px;height:6px;border-radius:50%;background:var(--ac);display:inline-block"></span> Synced ${new Date(S.calSync).toLocaleDateString("en-US",{month:"short",day:"numeric"})} · ${S.calEv.length} events`:`Not synced`}</div></div>`;
-  if(S.calEv.length){html+=`<div class="sct">Next 7 Days</div>`;for(let i=0;i<7;i++){const d=new Date;d.setDate(d.getDate()+i);const dky=dk(d);const evs=S.calEv.filter(e=>dk(new Date(e.start))===dky).sort((a,b)=>new Date(a.start)-new Date(b.start));if(!evs.length)continue;const isT=dky===today;html+=`<div class="cdh${isT?" td":""}">${isT?'<span style="width:6px;height:6px;border-radius:50%;background:var(--ac);display:inline-block"></span>':""}${DAYS[d.getDay()]} ${MO[d.getMonth()]} ${d.getDate()}${isT?" — Today":""}</div>`;evs.forEach(ev=>{const c=CL[Math.abs(ev.title.charCodeAt(0))%CL.length];const st=new Date(ev.start);html+=`<div class="cev" style="border-left-color:${c.fill}"><span class="cet" style="color:${c.fill}">${ev.allDay?"All Day":fT(st.getHours(),st.getMinutes())}</span><div style="flex:1;min-width:0"><div class="cen">${ev.title}</div>${ev.location?`<div class="cel">📍 ${ev.location}</div>`:""}</div></div>`})}}
-  html+=`<div class="sct">Recurring</div>`;let hm=false;DAYS.forEach((dn,di)=>{const items=S.sched.filter(s=>s.day===di).sort((a,b)=>a.time.localeCompare(b.time));if(!items.length)return;hm=true;const isT=now.getDay()===di;html+=`<div class="cdh${isT?" td":""}">${isT?'<span style="width:6px;height:6px;border-radius:50%;background:var(--ac);display:inline-block"></span>':""}${dn}${isT?" — Today":""}</div>`;items.forEach(it=>{const c=CL[it.color%CL.length];html+=`<div class="cev" style="border-left-color:${c.fill};cursor:pointer" onclick="tES('${it.id}')"><span class="cet" style="color:${c.fill}">${it.time}</span><div style="flex:1"><div class="cen">${it.title}</div></div></div>`;if(S.editS===it.id)html+=`<div style="display:flex;justify-content:flex-end;margin-bottom:5px"><button class="delb" onclick="dSc('${it.id}')">Remove</button></div>`})});
-  if(!hm&&!S.calEv.length)html+=`<div class="empty">No items yet</div>`;
-  html+=`<button class="addb" onclick="S.showAddS=true;render()"><span style="font-size:16px">+</span> Add Recurring Item</button>`;
-  if(S.showAddS){html+=`<div class="fov" onclick="if(event.target===this){S.showAddS=false;render()}"><div class="fmd" id="sF"><div class="fh"></div><div class="ftl">New Recurring Item</div><input class="fi" id="sT2" placeholder="Title..." autofocus><div class="fr"><input class="fi" id="sTm" type="time" value="09:00" style="flex:1"><select class="fi" id="sD" style="flex:1">${DAYS.map((d,i)=>`<option value="${i}"${i===now.getDay()?" selected":""}>${d}</option>`).join("")}</select></div><div class="cpk">${CL.map((c,i)=>`<button class="cdo${i===1?" s":""}" style="background:${c.fill}" onclick="sCS(this,${i})"></button>`).join("")}</div><div class="fac"><button class="fbcan" onclick="S.showAddS=false;render()">Cancel</button><button class="fbsav" onclick="subSc()">Add</button></div></div></div>`}
+html+=`<div class="cfb"><label>📅 Calendar Feed (ICS URL)</label><div class="cir"><input class="cin" id="cU" placeholder="Paste .ics URL..." value="${S.calUrl.replace(/"/g,"&quot;")}" oninput="uCU()"><button class="csb" onclick="syncCal()">${S.calBusy?"...":"Sync"}</button></div><div class="cst">${S.calSync?`<span style="width:6px;height:6px;border-radius:50%;background:var(--ac);display:inline-block"></span> Synced ${new Date(S.calSync).toLocaleDateString("en-US",{month:"short",day:"numeric"})} · ${S.calEv.length} events`:`Not synced`}</div></div>`;
+if(S.calEv.length){html+=`<div class="sct">Next 7 Days</div>`;for(let i=0;i<7;i++){const d=new Date;d.setDate(d.getDate()+i);const dky=dk(d);const evs=S.calEv.filter(e=>dk(new Date(e.start))===dky).sort((a,b)=>new Date(a.start)-new Date(b.start));if(!evs.length)continue;const isT=dky===today;html+=`<div class="cdh${isT?" td":""}">${isT?'<span style="width:6px;height:6px;border-radius:50%;background:var(--ac);display:inline-block"></span>':""}${DAYS[d.getDay()]} ${MO[d.getMonth()]} ${d.getDate()}${isT?" — Today":""}</div>`;evs.forEach(ev=>{const c=CL[Math.abs(ev.title.charCodeAt(0))%CL.length];const st=new Date(ev.start);html+=`<div class="cev" style="border-left-color:${c.fill}"><span class="cet" style="color:${c.fill}">${ev.allDay?"All Day":fT(st.getHours(),st.getMinutes())}</span><div style="flex:1;min-width:0"><div class="cen">${ev.title}</div>${ev.location?`<div class="cel">📍 ${ev.location}</div>`:""}</div></div>`})}}
+html+=`<div class="sct">Recurring</div>`;let hm=false;DAYS.forEach((dn,di)=>{const items=S.sched.filter(s=>s.day===di).sort((a,b)=>a.time.localeCompare(b.time));if(!items.length)return;hm=true;const isT=now.getDay()===di;html+=`<div class="cdh${isT?" td":""}">${isT?'<span style="width:6px;height:6px;border-radius:50%;background:var(--ac);display:inline-block"></span>':""}${dn}${isT?" — Today":""}</div>`;items.forEach(it=>{const c=CL[it.color%CL.length];html+=`<div class="cev" style="border-left-color:${c.fill};cursor:pointer" onclick="tES('${it.id}')"><span class="cet" style="color:${c.fill}">${it.time}</span><div style="flex:1"><div class="cen">${it.title}</div></div></div>`;if(S.editS===it.id)html+=`<div style="display:flex;justify-content:flex-end;margin-bottom:5px"><button class="delb" onclick="dSc('${it.id}')">Remove</button></div>`})});
+if(!hm&&!S.calEv.length)html+=`<div class="empty">No items yet</div>`;
+html+=`<button class="addb" onclick="S.showAddS=true;render()"><span style="font-size:16px">+</span> Add Recurring Item</button>`;
+if(S.showAddS){html+=`<div class="fov" onclick="if(event.target===this){S.showAddS=false;render()}"><div class="fmd" id="sF"><div class="fh"></div><div class="ftl">New Recurring Item</div><input class="fi" id="sT2" placeholder="Title..." autofocus><div class="fr"><input class="fi" id="sTm" type="time" value="09:00" style="flex:1"><select class="fi" id="sD" style="flex:1">${DAYS.map((d,i)=>`<option value="${i}"${i===now.getDay()?" selected":""}>${d}</option>`).join("")}</select></div><div class="cpk">${CL.map((c,i)=>`<button class="cdo${i===1?" s":""}" style="background:${c.fill}" onclick="sCS(this,${i})"></button>`).join("")}</div><div class="fac"><button class="fbcan" onclick="S.showAddS=false;render()">Cancel</button><button class="fbsav" onclick="subSc()">Add</button></div></div></div>`}
 }
-
 // REPORTS
 if(S.view==="reports"){
-  let totalC=0,bestS=0;S.habits.forEach(h=>{const s=gS(h.id,S.comp);if(s>bestS)bestS=s;Object.keys(S.comp).forEach(k=>{if(k.startsWith(h.id+"::"))totalC++})});
-  html+=`<div class="rc" style="animation:fadeUp .3s ease"><div class="rt">Overview</div><div class="sg"><div class="sb"><div class="sv" style="color:var(--ac)">${totalC}</div><div class="sl">Check-ins</div></div><div class="sb"><div class="sv" style="color:var(--amb)">${bestS}d</div><div class="sl">Best Streak</div></div><div class="sb"><div class="sv" style="color:var(--blue)">${S.habits.length}</div><div class="sl">Habits</div></div></div></div>`;
-  html+=`<div class="rc" style="animation:fadeUp .3s ease .05s both"><div class="rt">Weekly Completion</div><div class="bch">`;for(let w=7;w>=0;w--){const ws=wkd(-w);let d2=0,t2=S.habits.length*7;ws.forEach(d=>{S.habits.forEach(h=>{if(S.comp[h.id+"::"+dk(d)])d2++})});const p=t2?Math.round(d2/t2*100):0;html+=`<div class="bcl"><div class="bvl">${p}%</div><div class="bar" style="height:${Math.max(p,3)}%;background:${w===0?"var(--ac)":"var(--s3)"}"></div><div class="bll">${MO[ws[0].getMonth()].slice(0,3)} ${ws[0].getDate()}</div></div>`}html+=`</div></div>`;
-  html+=`<div class="rc" style="animation:fadeUp .3s ease .1s both"><div class="rt">Last 30 Days</div>`;S.habits.forEach(h=>{const c=CL[h.ci%CL.length];let d30=0;for(let i=0;i<30;i++){const d=new Date;d.setDate(d.getDate()-i);if(S.comp[h.id+"::"+dk(d)])d30++}const p=Math.round(d30/30*100);html+=`<div class="hrw"><div class="hicon" style="background:${c.bg}22;border:1.5px solid ${c.bg}66;width:24px;height:24px;border-radius:7px;font-size:12px;flex-shrink:0">${h.icon}</div><div style="flex:1;min-width:0"><div style="font-size:11px;font-weight:600;margin-bottom:3px">${h.name}</div><div class="hbb"><div class="hbf" style="width:${p}%;background:${c.fill}"></div></div></div><div class="hpc" style="color:${c.fill}">${p}%</div></div>`});html+=`</div>`;
-  html+=`<div class="rc" style="animation:fadeUp .3s ease .15s both"><div class="rt">30-Day Heatmap</div><div style="display:grid;grid-template-columns:repeat(7,1fr);gap:3px">`;for(let i=29;i>=0;i--){const d=new Date;d.setDate(d.getDate()-i);let dn=0;S.habits.forEach(h=>{if(S.comp[h.id+"::"+dk(d)])dn++});const int=S.habits.length?dn/S.habits.length:0;html+=`<div style="aspect-ratio:1;border-radius:4px;background:rgba(74,222,128,${Math.max(.06,int)})">${dk(d)===today?'<div style="position:absolute;inset:0;border:1.5px solid var(--ac);border-radius:4px"></div>':""}</div>`}html+=`</div></div>`;
-  html+=`<button class="expb" onclick="exCSV()">📥 Export CSV (90 days)</button>`;
+let totalC=0,bestS=0;S.habits.forEach(h=>{const s=gS(h.id,S.comp);if(s>bestS)bestS=s;Object.keys(S.comp).forEach(k=>{if(k.startsWith(h.id+"::"))totalC++})});
+html+=`<div class="rc" style="animation:fadeUp .3s ease"><div class="rt">Overview</div><div class="sg"><div class="sb"><div class="sv" style="color:var(--ac)">${totalC}</div><div class="sl">Check-ins</div></div><div class="sb"><div class="sv" style="color:var(--amb)">${bestS}d</div><div class="sl">Best Streak</div></div><div class="sb"><div class="sv" style="color:var(--blue)">${S.habits.length}</div><div class="sl">Habits</div></div></div></div>`;
+html+=`<div class="rc" style="animation:fadeUp .3s ease .05s both"><div class="rt">Weekly Completion</div><div class="bch">`;for(let w=7;w>=0;w--){const ws=wkd(-w);let d2=0,t2=S.habits.length*7;ws.forEach(d=>{S.habits.forEach(h=>{if(S.comp[h.id+"::"+dk(d)])d2++})});const p=t2?Math.round(d2/t2*100):0;html+=`<div class="bcl"><div class="bvl">${p}%</div><div class="bar" style="height:${Math.max(p,3)}%;background:${w===0?"var(--ac)":"var(--s3)"}"></div><div class="bll">${MO[ws[0].getMonth()].slice(0,3)} ${ws[0].getDate()}</div></div>`}html+=`</div></div>`;
+html+=`<div class="rc" style="animation:fadeUp .3s ease .1s both"><div class="rt">Last 30 Days</div>`;S.habits.forEach(h=>{const c=CL[h.ci%CL.length];let d30=0;for(let i=0;i<30;i++){const d=new Date;d.setDate(d.getDate()-i);if(S.comp[h.id+"::"+dk(d)])d30++}const p=Math.round(d30/30*100);html+=`<div class="hrw"><div class="hicon" style="background:${c.bg}22;border:1.5px solid ${c.bg}66;width:24px;height:24px;border-radius:7px;font-size:12px;flex-shrink:0">${h.icon}</div><div style="flex:1;min-width:0"><div style="font-size:11px;font-weight:600;margin-bottom:3px">${h.name}</div><div class="hbb"><div class="hbf" style="width:${p}%;background:${c.fill}"></div></div></div><div class="hpc" style="color:${c.fill}">${p}%</div></div>`});html+=`</div>`;
+html+=`<div class="rc" style="animation:fadeUp .3s ease .15s both"><div class="rt">30-Day Heatmap</div><div style="display:grid;grid-template-columns:repeat(7,1fr);gap:3px">`;for(let i=29;i>=0;i--){const d=new Date;d.setDate(d.getDate()-i);let dn=0;S.habits.forEach(h=>{if(S.comp[h.id+"::"+dk(d)])dn++});const int=S.habits.length?dn/S.habits.length:0;html+=`<div style="aspect-ratio:1;border-radius:4px;background:rgba(74,222,128,${Math.max(.06,int)})">${dk(d)===today?'<div style="position:absolute;inset:0;border:1.5px solid var(--ac);border-radius:4px"></div>':""}</div>`}html+=`</div></div>`;
+html+=`<button class="expb" onclick="exCSV()">📥 Export CSV (90 days)</button>`;
 }
-
 // SETTINGS
 if(S.view==="settings"){
-  // Account
-  html+=`<div class="rc" style="animation:fadeUp .3s ease"><div class="rt">Account</div>
-    <div style="display:flex;align-items:center;gap:12px;padding:10px 0">
-      <div class="uav">${ini}</div>
-      <div style="flex:1"><div style="font-size:14px;font-weight:600">${uName}</div><div style="font-size:11px;color:var(--tx3)">${U.email}</div></div>
-    </div>
-    <button class="expb" onclick="doLogout()" style="color:var(--dng);margin-top:6px;border-color:rgba(248,113,113,.15)">Sign Out</button>
-  </div>`;
-
-  // Notifications
-  html+=`<div class="rc" style="animation:fadeUp .3s ease .04s both"><div class="rt">Notifications</div>
-    <div class="srow"><div><div class="slbl">Habit Reminders</div><div class="sdsc">Get notified before & after each habit</div></div><div class="tog${S.notifOn?" on":""}" onclick="reqNotif()"><div class="tok"></div></div></div>
-    <div class="srow"><div><div class="slbl">End-of-Day Summary</div><div class="sdsc">Summary of incomplete habits</div></div><input type="time" value="${String(S.eodH).padStart(2,"0")}:${String(S.eodM).padStart(2,"0")}" style="background:var(--s2);border:1px solid var(--br);border-radius:8px;padding:5px 9px;color:var(--tx);font-family:var(--mono);font-size:12px" onchange="const p=this.value.split(':');S.eodH=+p[0];S.eodM=+p[1];save();schedNotif()"></div>
-  </div>`;
-
-  // Reminder Timing
-  html+=`<div class="rc" style="animation:fadeUp .3s ease .06s both"><div class="rt">Remind Me Before</div>
-    <div class="sdsc" style="margin-bottom:10px">When to get reminded before each habit</div>
-    <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px">
-      ${[{m:60,l:"1 hour"},{m:30,l:"30 min"},{m:15,l:"15 min"},{m:10,l:"10 min"},{m:5,l:"5 min"}].map(r=>{
-        const active=(S.remBefore||[5]).includes(r.m);
-        return`<button onclick="toggleReminder(${r.m})" style="padding:8px 14px;border-radius:9px;font-size:12px;font-weight:600;border:1.5px solid ${active?"var(--ac)":"var(--br)"};background:${active?"var(--acd)":"var(--s2)"};color:${active?"var(--ac)":"var(--tx2)"}">${active?"✓ ":""}${r.l}</button>`}).join("")}
-    </div>
-    <div style="display:flex;gap:6px;align-items:center">
-      <input class="fi" id="customRemMin" type="number" min="1" max="1440" placeholder="Custom minutes" style="flex:1;margin:0;font-size:12px">
-      <button onclick="addCustomReminder()" style="padding:9px 14px;border-radius:9px;background:var(--ac);color:var(--bg);font-size:12px;font-weight:700">+ Add</button>
-    </div>
-    ${(S.remBefore||[5]).filter(m=>![60,30,15,10,5].includes(m)).length>0?`<div style="margin-top:10px">${(S.remBefore||[5]).filter(m=>![60,30,15,10,5].includes(m)).map(m=>`<div style="display:flex;align-items:center;justify-content:space-between;padding:6px 0"><span style="font-size:12px">${m} min before</span><button onclick="removeReminder(${m})" style="background:var(--dngd);color:var(--dng);border-radius:6px;padding:3px 10px;font-size:10px;font-weight:600">Remove</button></div>`).join("")}</div>`:""}
-  </div>`;
-
-  // Features
-  html+=`<div class="rc" style="animation:fadeUp .3s ease .08s both"><div class="rt">Features</div>
-    <div class="srow"><div><div class="slbl">Schedule & Calendar</div><div class="sdsc">ICS calendar sync & recurring items</div></div><div class="tog${S.schedOn?" on":""}" onclick="S.schedOn=!S.schedOn;if(!S.schedOn&&S.view==='schedule')S.view='habits';save();render()"><div class="tok"></div></div></div>
-  </div>`;
-
-  // Calendar (only if schedule enabled)
-  if(S.schedOn){html+=`<div class="rc" style="animation:fadeUp .3s ease .1s both"><div class="rt">Calendar</div><div style="padding:6px 0"><div class="slbl" style="margin-bottom:6px">ICS Feed URL</div><input class="fi" style="font-size:11px;margin:0" value="${S.calUrl.replace(/"/g,"&quot;")}" oninput="S.calUrl=this.value;save()" placeholder="Paste .ics calendar URL"><div class="sdsc" style="margin-top:8px"><strong>Teams/Outlook:</strong> Settings → Calendar → Shared calendars → Publish → ICS<br><br><strong>Apple Calendar:</strong> iCloud.com → Calendar → Share → Public Calendar</div></div></div>`}
-
-  // About & Help
-  html+=`<div class="rc" style="animation:fadeUp .3s ease .12s both"><div class="rt">About</div>
-    <div style="font-size:12px;color:var(--tx2);line-height:1.8;padding:6px 0">
-      <strong>Rhythm</strong> — Habit & Schedule Tracker<br>
-      To get notifications, open from your Home Screen icon.<br>
-      <span style="font-size:11px;color:var(--tx3)">Requires iOS 16.4+ or Android Chrome</span>
-    </div>
-    <div style="display:flex;align-items:center;justify-content:space-between;padding:8px 0;margin-top:4px;border-top:1px solid var(--br)">
-      <span style="font-size:11px;color:var(--tx3)">Version</span>
-      <span style="font-family:var(--mono);font-size:11px;color:var(--tx3);cursor:pointer" onclick="window._devTaps=(window._devTaps||0)+1;if(window._devTaps>=5){window._devMode=true;render()}" title="Tap 5 times for dev tools">v${VER}</span>
-    </div>
-  </div>`;
-
-  // Hidden Developer Tools — only shown after tapping version 5 times
-  if(window._devMode){
-    html+=`<div class="rc" style="animation:fadeUp .3s ease;border:1px solid rgba(96,165,250,.2)"><div class="rt" style="color:var(--blue)">🛠 Developer Tools</div>
-      <button class="expb" onclick="sendTestNotif()" style="color:var(--ac);margin-bottom:4px">🔔 Send Test Notification</button>
-      <button class="expb" onclick="clearCacheAndReload()" style="color:var(--blue);margin-bottom:4px">🔄 Clear Cache & Reload</button>
-      <button class="expb" onclick="schedNotif();alert('Timers rescheduled: '+nT2.length+' active')" style="color:var(--tx2);margin-bottom:4px">⏱ Reschedule Timers</button>
-      <div style="background:var(--s2);border-radius:8px;padding:8px 10px;margin-top:6px;font-family:var(--mono);font-size:10px;color:var(--tx3);line-height:1.6">
-        PWA: ${isPWA()?"Yes":"No"} · SW: ${swReg?"Yes":"No"} · Timers: ${nT2.length}<br>
-        Permission: ${"Notification" in window?Notification.permission:"N/A"}
-      </div>
-      <button onclick="window._devMode=false;render()" style="width:100%;padding:8px;margin-top:8px;border-radius:8px;background:var(--s2);color:var(--tx3);font-size:11px;border:1px solid var(--br)">Close Dev Tools</button>
-    </div>`;
-  }
-
-  // Danger zone — subtle, at the very bottom
-  html+=`<div style="text-align:center;margin-top:20px;padding-bottom:10px"><button onclick="resetAll()" style="background:none;color:var(--tx3);font-size:11px;text-decoration:underline;opacity:.6">Delete all data & reset</button></div>`;
+// Account
+html+=`<div class="rc" style="animation:fadeUp .3s ease"><div class="rt">Account</div>
+<div style="display:flex;align-items:center;gap:12px;padding:10px 0">
+<div class="uav">${ini}</div>
+<div style="flex:1"><div style="font-size:14px;font-weight:600">${uName}</div><div style="font-size:11px;color:var(--tx3)">${U.email}</div></div>
+</div>
+<button class="expb" onclick="doLogout()" style="color:var(--dng);margin-top:6px;border-color:rgba(248,113,113,.15)">Sign Out</button>
+</div>`;
+// Notifications
+html+=`<div class="rc" style="animation:fadeUp .3s ease .04s both"><div class="rt">Notifications</div>
+<div class="srow"><div><div class="slbl">Habit Reminders</div><div class="sdsc">Get notified before & after each habit</div></div><div class="tog${S.notifOn?" on":""}" onclick="reqNotif()"><div class="tok"></div></div></div>
+<div class="srow"><div><div class="slbl">End-of-Day Summary</div><div class="sdsc">Summary of incomplete habits</div></div><input type="time" value="${String(S.eodH).padStart(2,"0")}:${String(S.eodM).padStart(2,"0")}" style="background:var(--s2);border:1px solid var(--br);border-radius:8px;padding:5px 9px;color:var(--tx);font-family:var(--mono);font-size:12px" onchange="const p=this.value.split(':');S.eodH=+p[0];S.eodM=+p[1];save();schedNotif()"></div>
+</div>`;
+// Reminder Timing
+html+=`<div class="rc" style="animation:fadeUp .3s ease .06s both"><div class="rt">Remind Me Before</div>
+<div class="sdsc" style="margin-bottom:10px">When to get reminded before each habit</div>
+<div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px">
+${[{m:60,l:"1 hour"},{m:30,l:"30 min"},{m:15,l:"15 min"},{m:10,l:"10 min"},{m:5,l:"5 min"}].map(r=>{
+const active=(S.remBefore||[5]).includes(r.m);
+return`<button onclick="toggleReminder(${r.m})" style="padding:8px 14px;border-radius:9px;font-size:12px;font-weight:600;border:1.5px solid ${active?"var(--ac)":"var(--br)"};background:${active?"var(--acd)":"var(--s2)"};color:${active?"var(--ac)":"var(--tx2)"}">${active?"✓ ":""}${r.l}</button>`}).join("")}
+</div>
+<div style="display:flex;gap:6px;align-items:center">
+<input class="fi" id="customRemMin" type="number" min="1" max="1440" placeholder="Custom minutes" style="flex:1;margin:0;font-size:12px">
+<button onclick="addCustomReminder()" style="padding:9px 14px;border-radius:9px;background:var(--ac);color:var(--bg);font-size:12px;font-weight:700">+ Add</button>
+</div>
+${(S.remBefore||[5]).filter(m=>![60,30,15,10,5].includes(m)).length>0?`<div style="margin-top:10px">${(S.remBefore||[5]).filter(m=>![60,30,15,10,5].includes(m)).map(m=>`<div style="display:flex;align-items:center;justify-content:space-between;padding:6px 0"><span style="font-size:12px">${m} min before</span><button onclick="removeReminder(${m})" style="background:var(--dngd);color:var(--dng);border-radius:6px;padding:3px 10px;font-size:10px;font-weight:600">Remove</button></div>`).join("")}</div>`:""}
+</div>`;
+// Features
+html+=`<div class="rc" style="animation:fadeUp .3s ease .08s both"><div class="rt">Features</div>
+<div class="srow"><div><div class="slbl">Schedule & Calendar</div><div class="sdsc">ICS calendar sync & recurring items</div></div><div class="tog${S.schedOn?" on":""}" onclick="S.schedOn=!S.schedOn;if(!S.schedOn&&S.view==='schedule')S.view='habits';save();render()"><div class="tok"></div></div></div>
+</div>`;
+// Calendar (only if schedule enabled)
+if(S.schedOn){html+=`<div class="rc" style="animation:fadeUp .3s ease .1s both"><div class="rt">Calendar</div><div style="padding:6px 0"><div class="slbl" style="margin-bottom:6px">ICS Feed URL</div><input class="fi" style="font-size:11px;margin:0" value="${S.calUrl.replace(/"/g,"&quot;")}" oninput="S.calUrl=this.value;save()" placeholder="Paste .ics calendar URL"><div class="sdsc" style="margin-top:8px"><strong>Teams/Outlook:</strong> Settings → Calendar → Shared calendars → Publish → ICS<br><br><strong>Apple Calendar:</strong> iCloud.com → Calendar → Share → Public Calendar</div></div></div>`}
+// About & Help
+html+=`<div class="rc" style="animation:fadeUp .3s ease .12s both"><div class="rt">About</div>
+<div style="font-size:12px;color:var(--tx2);line-height:1.8;padding:6px 0">
+<strong>Rhythm</strong> — Habit & Schedule Tracker<br>
+To get notifications, open from your Home Screen icon.<br>
+<span style="font-size:11px;color:var(--tx3)">Requires iOS 16.4+ or Android Chrome</span>
+</div>
+<div style="display:flex;align-items:center;justify-content:space-between;padding:8px 0;margin-top:4px;border-top:1px solid var(--br)">
+<span style="font-size:11px;color:var(--tx3)">Version</span>
+<span style="font-family:var(--mono);font-size:11px;color:var(--tx3);cursor:pointer" onclick="window._devTaps=(window._devTaps||0)+1;if(window._devTaps>=5){window._devMode=true;render()}" title="Tap 5 times for dev tools">v${VER}</span>
+</div>
+</div>`;
+// Hidden Developer Tools — only shown after tapping version 5 times
+if(window._devMode){
+html+=`<div class="rc" style="animation:fadeUp .3s ease;border:1px solid rgba(96,165,250,.2)"><div class="rt" style="color:var(--blue)">🛠 Developer Tools</div>
+<button class="expb" onclick="sendTestNotif()" style="color:var(--ac);margin-bottom:4px">🔔 Send Test Notification</button>
+<button class="expb" onclick="clearCacheAndReload()" style="color:var(--blue);margin-bottom:4px">🔄 Clear Cache & Reload</button>
+<button class="expb" onclick="schedNotif();alert('Timers rescheduled: '+nT.length+' active')" style="color:var(--tx2);margin-bottom:4px">⏱ Reschedule Timers</button>
+<div style="background:var(--s2);border-radius:8px;padding:8px 10px;margin-top:6px;font-family:var(--mono);font-size:10px;color:var(--tx3);line-height:1.6">
+PWA: ${isPWA()?"Yes":"No"} · SW: ${swReg?"Yes":"No"} · Timers: ${nT.length}<br>
+Permission: ${"Notification" in window?Notification.permission:"N/A"}
+</div>
+<button onclick="window._devMode=false;render()" style="width:100%;padding:8px;margin-top:8px;border-radius:8px;background:var(--s2);color:var(--tx3);font-size:11px;border:1px solid var(--br)">Close Dev Tools</button>
+</div>`;
 }
-
+// Danger zone — subtle, at the very bottom
+html+=`<div style="text-align:center;margin-top:20px;padding-bottom:10px"><button onclick="resetAll()" style="background:none;color:var(--tx3);font-size:11px;text-decoration:underline;opacity:.6">Delete all data & reset</button></div>`;
+}
 // Nav
 html+=`<nav class="bnav">
-  <button class="nb${S.view==="habits"?" a":""}" onclick="setV('habits')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>${missed.length&&S.view!=="habits"?`<span class="bdg">${missed.length}</span>`:""}Habits</button>
-  ${S.schedOn?`<button class="nb${S.view==="schedule"?" a":""}" onclick="setV('schedule')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>Schedule</button>`:""}
-  <button class="nb${S.view==="reports"?" a":""}" onclick="setV('reports')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 20V10M12 20V4M6 20v-6"/></svg>Reports</button>
-  <button class="nb${S.view==="settings"?" a":""}" onclick="setV('settings')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 01-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.32 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>Settings</button>
+<button class="nb${S.view==="habits"?" a":""}" onclick="setV('habits')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>${missed.length&&S.view!=="habits"?`<span class="bdg">${missed.length}</span>`:""}Habits</button>
+${S.schedOn?`<button class="nb${S.view==="schedule"?" a":""}" onclick="setV('schedule')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>Schedule</button>`:""}
+<button class="nb${S.view==="reports"?" a":""}" onclick="setV('reports')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 20V10M12 20V4M6 20v-6"/></svg>Reports</button>
+<button class="nb${S.view==="settings"?" a":""}" onclick="setV('settings')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 01-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.32 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>Settings</button>
 </nav></div>`;
 R.innerHTML=html}
-
 window.onerror=function(m,s,l){document.getElementById("root").innerHTML='<div style="padding:40px 20px"><h2 style="color:#f87171">Error</h2><p style="color:#999;margin-top:10px;font-size:13px">'+m+'</p><button onclick="location.reload()" style="margin-top:16px;padding:10px 24px;border-radius:10px;background:#4ade80;color:#0d0d0d;border:none;font-weight:700;cursor:pointer">Reload</button></div>'};
 try{render()}catch(e){window.onerror(e.message,"",0)}
 </script>
