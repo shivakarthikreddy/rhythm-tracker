@@ -18,25 +18,8 @@ self.addEventListener('activate', e => {
 
 // Fetch — serve from cache, fallback to network
 self.addEventListener('fetch', e => {
-
-
-
-
-
-
-
-
-
-
-
   e.respondWith(
     caches.match(e.request).then(r => r || fetch(e.request))
-
-
-
-
-
-
   );
 });
 
