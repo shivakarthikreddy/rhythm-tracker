@@ -1,6 +1,6 @@
 // Rhythm Service Worker — Handles push notifications & offline caching
 const CACHE_NAME = 'rhythm-v1';
-const ASSETS = ['/', '/index.html'];
+const ASSETS = ['./', './index.html'];
 
 // Install — cache app shell
 self.addEventListener('install', e => {
@@ -32,12 +32,12 @@ self.addEventListener('push', e => {
   e.waitUntil(
     self.registration.showNotification(data.title || 'Rhythm', {
       body: data.body || 'You have habits to complete!',
-      icon: data.icon || '/icon-192.png',
-      badge: '/icon-192.png',
+      icon: data.icon || './icon-192.png',
+      badge: './icon-192.png',
       tag: data.tag || 'rhythm-reminder',
       renotify: true,
       requireInteraction: true,
-      data: { url: '/' }
+      data: { url: './' }
     })
   );
 });
@@ -49,9 +49,9 @@ self.addEventListener('notificationclick', e => {
     clients.matchAll({ type: 'window', includeUncontrolled: true }).then(cls => {
       if (cls.length > 0) {
         cls[0].focus();
-        return cls[0].navigate('/');
+        return cls[0].navigate('./');
       }
-      return clients.openWindow('/');
+      return clients.openWindow('./');
     })
   );
 });
