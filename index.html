@@ -34,10 +34,15 @@
 // ╔════════════════════════════════════════════════════════════╗
 // ║  Replace with your Firebase config from console           ║
 // ╚════════════════════════════════════════════════════════════╝
-const firebaseConfig={apiKey:"YOUR_API_KEY",authDomain:"YOUR_PROJECT.firebaseapp.com",projectId:"YOUR_PROJECT_ID",storageBucket:"YOUR_PROJECT.appspot.com",messagingSenderId:"YOUR_SENDER_ID",appId:"YOUR_APP_ID"};
-firebase.initializeApp(firebaseConfig);const auth=firebase.auth(),db=firebase.firestore();
-auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL);
-db.enablePersistence({synchronizeTabs:true}).catch(()=>{});
+const firebaseConfig = {
+  apiKey: "AIzaSyA274EZvnH3Iw9hwC1r4KwOCRWTr9oO1R8",
+  authDomain: "rhythm-5b48c.firebaseapp.com",
+  projectId: "rhythm-5b48c",
+  storageBucket: "rhythm-5b48c.firebasestorage.app",
+  messagingSenderId: "83016307894",
+  appId: "1:83016307894:web:ec751422196c7b0f8f0217",
+  measurementId: "G-WYDN5538LS"
+};
 
 const DAYS=["Sun","Mon","Tue","Wed","Thu","Fri","Sat"],MO=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
 const CL=[{bg:"#a8f0c6",fill:"#4ade80"},{bg:"#c4b5fd",fill:"#a78bfa"},{bg:"#7dd3fc",fill:"#38bdf8"},{bg:"#fcd34d",fill:"#f59e0b"},{bg:"#fda4af",fill:"#fb7185"},{bg:"#86efac",fill:"#22c55e"},{bg:"#fdba74",fill:"#f97316"},{bg:"#67e8f9",fill:"#06b6d4"}];
