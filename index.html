@@ -125,7 +125,7 @@ let S=mkS();
 // Firestore
 function uRef(){return U?db.collection("users").doc(U.uid):null}
 async function cloudSave(){const r=uRef();if(!r)return;try{await r.set({habits:S.habits,comp:S.comp,sched:S.sched,calUrl:S.calUrl,calEv:S.calEv,calSync:S.calSync,notifOn:S.notifOn,eodH:S.eodH,eodM:S.eodM,schedOn:S.schedOn,up:firebase.firestore.FieldValue.serverTimestamp()},{merge:true})}catch(e){}}
-async function cloudLoad(){const r=uRef();if(!r)return;try{const d=await r.get();if(d.exists){const v=d.data();S.habits=v.habits||mkDef();S.comp=v.comp||{};S.sched=v.sched||[];S.calUrl=v.calUrl||"";S.calEv=v.calEv||[];S.calSync=v.calSync||null;S.notifOn=v.notifOn||false;S.eodH=v.eodH||21;S.eodM=v.eodM||0;S.schedOn=v.schedOn||false;S.habits.forEach(h=>{if(!h.rem)h.rem=[5,0,-5,-60];if(!h.days)h.days=[]})}}catch(e){}}
+async function cloudLoad(){const r=uRef();if(!r)return;try{const d=await r.get();if(d.exists){const v=d.data();S.habits=v.habits||mkDef();S.comp=v.comp||{};S.sched=v.sched||[];S.calUrl=v.calUrl||"";S.calEv=v.calEv||[];S.calSync=v.calSync||null;S.notifOn=v.notifOn||false;S.eodH=v.eodH||21;S.eodM=v.eodM||0;S.schedOn=v.schedOn||false;S.remBefore=v.remBefore||[5];S.habits.forEach(h=>{if(!h.rem)h.rem=[5,0,-5,-60];if(!h.days)h.days=[]})}}catch(e){}}
 let svT=null;function save(){clearTimeout(svT);svT=setTimeout(cloudSave,800)}
 
 // Auth
@@ -196,6 +196,11 @@ function sCS(el,ci){_scs=ci;document.querySelectorAll("#sF .cdo").forEach(b=>b.c
 function sEI(el,ic){window._editIcon=ic;document.querySelectorAll("#eF .ipo").forEach(b=>b.classList.remove("s"));el.classList.add("s")}
 function sEC(el,ci){window._editColor=ci;document.querySelectorAll("#eF .cdo").forEach(b=>b.classList.remove("s"));el.classList.add("s")}
 function togDay(el){el.classList.toggle("on")}
+function toggleReminder(mins){if(!S.remBefore)S.remBefore=[5];const idx=S.remBefore.indexOf(mins);if(idx>-1)S.remBefore.splice(idx,1);else S.remBefore.push(mins);S.remBefore.sort((a,b)=>b-a);save();schedNotif();render()}
+function addCustomReminder(){const v=parseInt(document.getElementById('customRemMin')?.value);if(!v||v<1||v>1440)return;if(!S.remBefore)S.remBefore=[5];if(!S.remBefore.includes(v))S.remBefore.push(v);S.remBefore.sort((a,b)=>b-a);save();schedNotif();render()}
+function removeReminder(mins){if(!S.remBefore)S.remBefore=[5];S.remBefore=S.remBefore.filter(m=>m!==mins);save();schedNotif();render()}
+async function clearCacheAndReload(){if('caches' in window){const keys=await caches.keys();await Promise.all(keys.map(k=>caches.delete(k)))}if(swReg){try{await swReg.unregister()}catch(e){}}location.reload(true)}
+function sendTestNotif(){try{if(swReg&&swReg.showNotification){swReg.showNotification('Rhythm — Test',{body:'Notifications are working!',tag:'test-'+Date.now(),icon:'./icon-192.png'})}else if(navigator.serviceWorker&&navigator.serviceWorker.ready){navigator.serviceWorker.ready.then(reg=>{reg.showNotification('Rhythm — Test',{body:'Notifications are working!',tag:'test-'+Date.now(),icon:'./icon-192.png'})})}else{new Notification('Rhythm — Test',{body:'Notifications are working!',tag:'test-'+Date.now()})}}catch(e){alert('Notification failed: '+e.message)}}
 function togRem(el){el.classList.toggle("on")}
 function getDays(cid){const d=[];document.querySelectorAll("#"+cid+" .dtog.on").forEach(el=>d.push(+el.dataset.day));return d}
 function getRems(cid){const r=[];document.querySelectorAll("#"+cid+" .rtog.on").forEach(el=>r.push(+el.dataset.rem));return r}
@@ -330,14 +335,14 @@ if(S.view==="settings"){
     <div class="sdsc" style="margin-bottom:10px">When to get reminded before each habit</div>
     <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px">
       ${[{m:60,l:"1 hour"},{m:30,l:"30 min"},{m:15,l:"15 min"},{m:10,l:"10 min"},{m:5,l:"5 min"}].map(r=>{
-        const active=S.remBefore.includes(r.m);
+        const active=(S.remBefore||[5]).includes(r.m);
         return`<button onclick="toggleReminder(${r.m})" style="padding:8px 14px;border-radius:9px;font-size:12px;font-weight:600;border:1.5px solid ${active?"var(--ac)":"var(--br)"};background:${active?"var(--acd)":"var(--s2)"};color:${active?"var(--ac)":"var(--tx2)"}">${active?"✓ ":""}${r.l}</button>`}).join("")}
     </div>
     <div style="display:flex;gap:6px;align-items:center">
       <input class="fi" id="customRemMin" type="number" min="1" max="1440" placeholder="Custom minutes" style="flex:1;margin:0;font-size:12px">
       <button onclick="addCustomReminder()" style="padding:9px 14px;border-radius:9px;background:var(--ac);color:var(--bg);font-size:12px;font-weight:700">+ Add</button>
     </div>
-    ${S.remBefore.filter(m=>![60,30,15,10,5].includes(m)).length>0?`<div style="margin-top:10px">${S.remBefore.filter(m=>![60,30,15,10,5].includes(m)).map(m=>`<div style="display:flex;align-items:center;justify-content:space-between;padding:6px 0"><span style="font-size:12px">${m} min before</span><button onclick="removeReminder(${m})" style="background:var(--dngd);color:var(--dng);border-radius:6px;padding:3px 10px;font-size:10px;font-weight:600">Remove</button></div>`).join("")}</div>`:""}
+    ${(S.remBefore||[5]).filter(m=>![60,30,15,10,5].includes(m)).length>0?`<div style="margin-top:10px">${(S.remBefore||[5]).filter(m=>![60,30,15,10,5].includes(m)).map(m=>`<div style="display:flex;align-items:center;justify-content:space-between;padding:6px 0"><span style="font-size:12px">${m} min before</span><button onclick="removeReminder(${m})" style="background:var(--dngd);color:var(--dng);border-radius:6px;padding:3px 10px;font-size:10px;font-weight:600">Remove</button></div>`).join("")}</div>`:""}
   </div>`;
 
   // Features
