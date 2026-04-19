@@ -84,12 +84,12 @@ function gS(id,c){let s=0;const t=new Date;for(let i=0;i<365;i++){const d=new Da
 function fT(h,m){return`${((h%12)||12)}:${String(m).padStart(2,"0")} ${h>=12?"PM":"AM"}`}
 function pT(s){const p=s.split(":");return{h:parseInt(p[0]),m:parseInt(p[1]||0)}}
 let U=null,aScr="login",aLoad=false,aErr="",aOk="",appLoad=true,modalDismissed=false;
-let S={habits:[...DEF],comp:{},sched:[],calUrl:"",calEv:[],calSync:null,calBusy:false,view:"habits",wo:0,showAdd:false,showAddS:false,editH:null,editS:null,notifOn:false,notifDis:{},eodH:21,eodM:0,schedOn:false};
+let S={habits:[...DEF],comp:{},sched:[],calUrl:"",calEv:[],calSync:null,calBusy:false,view:"habits",wo:0,showAdd:false,showAddS:false,editH:null,editS:null,notifOn:false,notifDis:{},eodH:21,eodM:0,schedOn:false,remBefore:[60,30,10],remCustom:""};
 function uRef(){return U?db.collection("users").doc(U.uid):null}
-async function cloudSave(){const r=uRef();if(!r)return;try{await r.set({habits:S.habits,comp:S.comp,sched:S.sched,calUrl:S.calUrl,calEv:S.calEv,calSync:S.calSync,notifOn:S.notifOn,eodH:S.eodH,eodM:S.eodM,schedOn:S.schedOn,up:firebase.firestore.FieldValue.serverTimestamp()},{merge:true})}catch(e){console.error(e)}}
-async function cloudLoad(){const r=uRef();if(!r)return;try{const d=await r.get();if(d.exists){const v=d.data();S.habits=v.habits||[...DEF];S.comp=v.comp||{};S.sched=v.sched||[];S.calUrl=v.calUrl||"";S.calEv=v.calEv||[];S.calSync=v.calSync||null;S.notifOn=v.notifOn||false;S.eodH=v.eodH||21;S.eodM=v.eodM||0;S.schedOn=v.schedOn||false}}catch(e){console.error(e)}}
+async function cloudSave(){const r=uRef();if(!r)return;try{await r.set({habits:S.habits,comp:S.comp,sched:S.sched,calUrl:S.calUrl,calEv:S.calEv,calSync:S.calSync,notifOn:S.notifOn,eodH:S.eodH,eodM:S.eodM,schedOn:S.schedOn,remBefore:S.remBefore,up:firebase.firestore.FieldValue.serverTimestamp()},{merge:true})}catch(e){console.error(e)}}
+async function cloudLoad(){const r=uRef();if(!r)return;try{const d=await r.get();if(d.exists){const v=d.data();S.habits=v.habits||[...DEF];S.comp=v.comp||{};S.sched=v.sched||[];S.calUrl=v.calUrl||"";S.calEv=v.calEv||[];S.calSync=v.calSync||null;S.notifOn=v.notifOn||false;S.eodH=v.eodH||21;S.eodM=v.eodM||0;S.schedOn=v.schedOn||false;S.remBefore=v.remBefore||[60,30,10]}}catch(e){console.error(e)}}
 let svT=null;function save(){clearTimeout(svT);svT=setTimeout(cloudSave,800)}
-auth.onAuthStateChanged(async u=>{U=u;if(u){await cloudLoad();appLoad=false;if(S.notifOn)schedNotif();render()}else{appLoad=false;S={habits:[...DEF],comp:{},sched:[],calUrl:"",calEv:[],calSync:null,calBusy:false,view:"habits",wo:0,showAdd:false,showAddS:false,editH:null,editS:null,notifOn:false,notifDis:{},eodH:21,eodM:0,schedOn:false};render()}});
+auth.onAuthStateChanged(async u=>{U=u;if(u){await cloudLoad();appLoad=false;if(S.notifOn)schedNotif();render()}else{appLoad=false;S={habits:[...DEF],comp:{},sched:[],calUrl:"",calEv:[],calSync:null,calBusy:false,view:"habits",wo:0,showAdd:false,showAddS:false,editH:null,editS:null,notifOn:false,notifDis:{},eodH:21,eodM:0,schedOn:false,remBefore:[60,30,10],remCustom:""};render()}});
 async function doLogin(){const e=document.getElementById("aE")?.value?.trim(),p=document.getElementById("aP")?.value;if(!e||!p){aErr="Please fill in all fields.";render();return}aLoad=true;aErr="";render();try{await auth.signInWithEmailAndPassword(e,p)}catch(x){aErr=fErr(x);aLoad=false;render()}}
 async function doSignup(){const n=document.getElementById("aN")?.value?.trim(),e=document.getElementById("aE")?.value?.trim(),p=document.getElementById("aP")?.value,p2=document.getElementById("aP2")?.value;if(!n||!e||!p){aErr="Please fill in all fields.";render();return}if(p!==p2){aErr="Passwords don't match.";render();return}if(p.length<6){aErr="Min 6 characters.";render();return}aLoad=true;aErr="";render();try{const c=await auth.createUserWithEmailAndPassword(e,p);await c.user.updateProfile({displayName:n});await db.collection("users").doc(c.user.uid).set({habits:[...DEF],comp:{},sched:[],calUrl:"",calEv:[],calSync:null,notifOn:false,eodH:21,eodM:0,schedOn:false,created:firebase.firestore.FieldValue.serverTimestamp()})}catch(x){aErr=fErr(x);aLoad=false;render()}}
 async function doForgot(){const e=document.getElementById("aE")?.value?.trim();if(!e){aErr="Enter your email.";render();return}aLoad=true;aErr="";render();try{await auth.sendPasswordResetEmail(e);aOk="Reset link sent!";aLoad=false;render()}catch(x){aErr=fErr(x);aLoad=false;render()}}
@@ -101,64 +101,143 @@ function pICS(s){s=s.replace(/TZID=[^:]+:/,"").trim();if(s.length===8)return new
 async function syncCal(){if(!S.calUrl.trim())return;S.calBusy=true;render();try{let r;try{r=await fetch(S.calUrl.trim())}catch(e){r=await fetch("https://api.allorigins.win/raw?url="+encodeURIComponent(S.calUrl.trim()))}if(!r.ok)throw new Error(r.status);S.calEv=parseICS(await r.text());S.calSync=new Date().toISOString();S.calBusy=false;save();render()}catch(e){S.calBusy=false;render();alert("Sync failed.\n\nTeams: Outlook > Settings > Calendar > Shared calendars > Publish > ICS.\nApple: iCloud.com > Calendar > Share > Public Calendar.\n\n"+e.message)}}
 // ─── SERVICE WORKER & NOTIFICATIONS ───
 let swReg=null;
+let notifLog=[];
+function nLog(msg){notifLog.unshift({t:new Date().toLocaleTimeString(),msg});if(notifLog.length>20)notifLog.pop()}
+
 async function initSW(){
-  if(!('serviceWorker' in navigator))return;
+  if(!('serviceWorker' in navigator)){nLog('❌ Service Workers not supported');return}
   try{
-    swReg=await navigator.serviceWorker.register('/sw.js');
-    console.log('SW registered');
-    // Try periodic background sync for scheduled reminders
+    // Use relative path so it works on GitHub Pages subdirectories
+    swReg=await navigator.serviceWorker.register('./sw.js',{scope:'./'});
+    nLog('✅ Service Worker registered');
     if('periodicSync' in swReg){
-      try{await swReg.periodicSync.register('habit-check',{minInterval:60*60*1000})}catch(e){console.log('Periodic sync not available')}
+      try{await swReg.periodicSync.register('habit-check',{minInterval:60*60*1000});nLog('✅ Periodic sync registered')}catch(e){nLog('⚠️ Periodic sync not available: '+e.message)}
     }
-  }catch(e){console.log('SW registration failed:',e)}
+  }catch(e){nLog('❌ SW registration failed: '+e.message);console.error('SW error:',e)}
 }
 initSW();
 
 async function reqNotif(){
-  if(!('Notification' in window)){alert('Notifications require iOS 16.4+ with Add to Home Screen, or any modern Android/desktop browser.');return}
+  if(!('Notification' in window)){
+    nLog('❌ Notification API not available');
+    alert('Notifications require:\n\n• iPhone: iOS 16.4+ and app must be Added to Home Screen\n• Android: Chrome browser\n• Desktop: Any modern browser\n\nIf on iPhone, make sure you opened this from your Home Screen icon, not Safari.');
+    return;
+  }
+  nLog('📋 Current permission: '+Notification.permission);
   const perm=await Notification.requestPermission();
+  nLog('📋 Permission result: '+perm);
   S.notifOn=perm==='granted';
   save();render();
   if(S.notifOn){
     schedNotif();
-    // Show a test notification
-    if(swReg){
-      swReg.showNotification('Rhythm — Notifications On!',{body:'You\'ll get reminders for missed habits.',tag:'test',icon:'/icon-192.png'});
+    // Immediate test notification
+    sendTestNotif();
+  }else{
+    nLog('❌ Permission denied');
+    if(perm==='denied')alert('Notifications are blocked. Go to your browser/device settings to allow notifications for this site.');
+  }
+}
+
+function sendTestNotif(){
+  nLog('🔔 Sending test notification...');
+  try{
+    if(swReg&&swReg.active){
+      swReg.showNotification('Rhythm — Notifications Active!',{
+        body:'You\'ll get reminders before each habit. This is a test!',
+        tag:'test-'+Date.now(),
+        icon:'./icon-192.png',
+        badge:'./icon-192.png',
+        requireInteraction:true
+      });
+      nLog('✅ Test sent via Service Worker');
     }else{
-      new Notification('Rhythm — Notifications On!',{body:'You\'ll get reminders for missed habits.',tag:'test'});
+      new Notification('Rhythm — Notifications Active!',{
+        body:'You\'ll get reminders before each habit. This is a test!',
+        tag:'test-'+Date.now()
+      });
+      nLog('✅ Test sent via Notification API');
     }
+  }catch(e){
+    nLog('❌ Test failed: '+e.message);
+    alert('Notification failed: '+e.message);
   }
 }
 
 let nT2=[];
 function schedNotif(){
   nT2.forEach(t=>clearTimeout(t));nT2=[];
-  if(!S.notifOn)return;
+  if(!S.notifOn){nLog('⏸ Notifications disabled');return}
   const now=new Date,tdk=dk(now);
+  nLog('⏱ Scheduling reminders for '+S.habits.length+' habits...');
   
   function sendNotif(title,body,tag){
+    nLog('🔔 Firing: '+title);
     if(swReg&&swReg.active){
-      swReg.showNotification(title,{body,tag,icon:'/icon-192.png',badge:'/icon-192.png',renotify:true,requireInteraction:true});
+      swReg.showNotification(title,{body,tag,icon:'./icon-192.png',badge:'./icon-192.png',renotify:true,requireInteraction:true});
     }else{
-      try{new Notification(title,{body,tag})}catch(e){}
+      try{new Notification(title,{body,tag})}catch(e){nLog('❌ '+e.message)}
     }
   }
   
+  const intervals=(S.remBefore||[60,30,10]).slice().sort((a,b)=>b-a);
+  let scheduled=0;
+  
   S.habits.forEach(h=>{
     const t=pT(h.time),tar=new Date(now);tar.setHours(t.h,t.m,0,0);
-    let d1=tar-now;
-    if(d1>0)nT2.push(setTimeout(()=>{if(!S.comp[h.id+'::'+tdk])sendNotif('Rhythm — '+h.name,'Time to do it! Tap to log.','h-'+h.id)},d1));
-    let d2=d1+3600000;
-    if(d2>0)nT2.push(setTimeout(()=>{if(!S.comp[h.id+'::'+tdk])sendNotif('Missed: '+h.name,'Don\'t break your streak!','m-'+h.id)},d2));
+    const habitMs=tar-now;
+    
+    intervals.forEach(mins=>{
+      const delay=habitMs-(mins*60000);
+      if(delay>0){
+        scheduled++;
+        const label=mins>=60?(mins/60)+'hr':mins+'min';
+        nT2.push(setTimeout(()=>{
+          if(!S.comp[h.id+'::'+tdk])sendNotif('Rhythm — '+h.name+' in '+label,'Get ready! '+h.name+' is coming up.','pre-'+h.id+'-'+mins);
+        },delay));
+      }
+    });
+    
+    if(habitMs>0){scheduled++;nT2.push(setTimeout(()=>{if(!S.comp[h.id+'::'+tdk])sendNotif('Rhythm — '+h.name+' NOW','Time to do it! Tap to log.','h-'+h.id)},habitMs))}
+    
+    [15,30,60].forEach(mins=>{
+      const delay=habitMs+(mins*60000);
+      if(delay>0){
+        scheduled++;
+        const label=mins>=60?(mins/60)+'hr':mins+'min';
+        nT2.push(setTimeout(()=>{
+          if(!S.comp[h.id+'::'+tdk])sendNotif('Missed: '+h.name+' ('+label+' ago)','Don\'t break your streak! Log it now.','m-'+h.id+'-'+mins);
+        },delay));
+      }
+    });
   });
   
   const eod=new Date(now);eod.setHours(S.eodH,S.eodM,0,0);
   let ed=eod-now;
-  if(ed>0)nT2.push(setTimeout(()=>{
+  if(ed>0){scheduled++;nT2.push(setTimeout(()=>{
     const ms=S.habits.filter(h=>!S.comp[h.id+'::'+tdk]);
     if(ms.length)sendNotif('Rhythm — End of Day',ms.length+' incomplete: '+ms.map(h=>h.name).join(', '),'eod');
     else sendNotif('Rhythm — All Done!','Perfect day! 🎉','eod');
-  },ed));
+  },ed))}
+  
+  nLog('✅ '+scheduled+' timers set ('+nT2.length+' active)');
+}
+// Helpers for settings
+function toggleReminder(mins){
+  const idx=S.remBefore.indexOf(mins);
+  if(idx>-1)S.remBefore.splice(idx,1);else S.remBefore.push(mins);
+  S.remBefore.sort((a,b)=>b-a);
+  save();schedNotif();render();
+}
+function addCustomReminder(){
+  const v=parseInt(document.getElementById('customRemMin')?.value);
+  if(!v||v<1||v>1440)return;
+  if(!S.remBefore.includes(v))S.remBefore.push(v);
+  S.remBefore.sort((a,b)=>b-a);
+  save();schedNotif();render();
+}
+function removeReminder(mins){
+  S.remBefore=S.remBefore.filter(m=>m!==mins);
+  save();schedNotif();render();
 }
 document.addEventListener("visibilitychange",()=>{if(!document.hidden&&S.notifOn)schedNotif()});
 function setV(v){S.view=v;S.showAdd=S.showAddS=false;S.editH=S.editS=null;render();window.scrollTo(0,0)}
@@ -195,7 +274,7 @@ function subH(){const n=document.getElementById("hN")?.value?.trim();if(!n)retur
 function subSc(){const t=document.getElementById("sT2")?.value?.trim();if(!t)return;S.sched.push({id:"s"+Date.now(),title:t,time:document.getElementById("sTm")?.value||"09:00",day:parseInt(document.getElementById("sD")?.value||0),color:_scs});S.showAddS=false;_scs=1;save();render()}
 function uCU(){S.calUrl=document.getElementById("cU")?.value||"";save()}
 function exCSV(){let c="Habit,Date,Completed\n";S.habits.forEach(h=>{for(let i=0;i<90;i++){const d=new Date;d.setDate(d.getDate()-i);c+=`"${h.name}",${dk(d)},${S.comp[h.id+"::"+dk(d)]?"Yes":"No"}\n`}});const b=new Blob([c],{type:"text/csv"}),u=URL.createObjectURL(b),a=document.createElement("a");a.href=u;a.download=`rhythm_${dk(new Date)}.csv`;document.body.appendChild(a);a.click();document.body.removeChild(a);URL.revokeObjectURL(u)}
-function resetAll(){if(confirm("Reset everything?")){const r=uRef();if(r)r.delete();S={habits:[...DEF],comp:{},sched:[],calUrl:"",calEv:[],calSync:null,calBusy:false,view:"habits",wo:0,showAdd:false,showAddS:false,editH:null,editS:null,notifOn:false,notifDis:{},eodH:21,eodM:0,schedOn:false};save();render()}}
+function resetAll(){if(confirm("Reset everything?")){const r=uRef();if(r)r.delete();S={habits:[...DEF],comp:{},sched:[],calUrl:"",calEv:[],calSync:null,calBusy:false,view:"habits",wo:0,showAdd:false,showAddS:false,editH:null,editS:null,notifOn:false,notifDis:{},eodH:21,eodM:0,schedOn:false,remBefore:[60,30,10],remCustom:""};save();render()}}
 
 function render(){
 const R=document.getElementById("root");
@@ -256,10 +335,53 @@ html+=`<div class="rc" style="animation:fadeUp .3s ease .1s both"><div class="rt
 html+=`<div class="rc" style="animation:fadeUp .3s ease .15s both"><div class="rt2">30-Day Heatmap</div><div style="display:grid;grid-template-columns:repeat(7,1fr);gap:3px">`;for(let i=29;i>=0;i--){const d=new Date;d.setDate(d.getDate()-i);let dn=0;S.habits.forEach(h=>{if(S.comp[h.id+"::"+dk(d)])dn++});const int=S.habits.length?dn/S.habits.length:0;html+=`<div style="aspect-ratio:1;border-radius:4px;background:rgba(74,222,128,${Math.max(.06,int)});position:relative">${dk(d)===today?'<div style="position:absolute;inset:0;border:1.5px solid var(--ac);border-radius:4px"></div>':""}</div>`}const rem=(7-30%7)%7;for(let i=0;i<rem;i++)html+=`<div style="aspect-ratio:1;border-radius:4px;background:var(--s2);opacity:.3"></div>`;html+=`</div></div>`;
 html+=`<button class="expb" onclick="exCSV()"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 10l3 3 3-3M7 2v11"/></svg>Export CSV (90 days)</button>`}
 if(S.view==="settings"){html+=`<div class="rc" style="animation:fadeUp .3s ease"><div class="rt2">Account</div><div style="display:flex;align-items:center;gap:12px;padding:10px 0"><div class="uav">${ini}</div><div style="flex:1"><div style="font-size:14px;font-weight:600">${uName}</div><div style="font-size:11px;color:var(--tx3)">${U.email}</div></div></div><button class="expb" onclick="doLogout()" style="color:var(--dng);margin-top:6px;border-color:rgba(248,113,113,.15)">Sign Out</button></div>`;
-html+=`<div class="rc" style="animation:fadeUp .3s ease .05s both"><div class="rt2">Notifications</div><div class="srow"><div><div class="slbl">Habit Reminders</div><div class="sdsc">At habit time + 1hr follow-up</div></div><div class="tog${S.notifOn?" on":""}" onclick="reqNotif()"><div class="tog-k"></div></div></div><div class="srow"><div><div class="slbl">End-of-Day Summary</div><div class="sdsc">Incomplete habits summary</div></div><input type="time" value="${String(S.eodH).padStart(2,"0")}:${String(S.eodM).padStart(2,"0")}" style="background:var(--s2);border:1px solid var(--br);border-radius:8px;padding:5px 9px;color:var(--tx);font-family:var(--mono);font-size:12px" onchange="const p=this.value.split(':');S.eodH=+p[0];S.eodM=+p[1];save();if(S.notifOn)schedNotif()"></div></div>`;
+html+=`<div class="rc" style="animation:fadeUp .3s ease .05s both"><div class="rt2">Notifications</div>
+  <div class="srow"><div><div class="slbl">Habit Reminders</div><div class="sdsc">Get notified before & after habit time</div></div><div class="tog${S.notifOn?" on":""}" onclick="reqNotif()"><div class="tog-k"></div></div></div>
+  <div class="srow"><div><div class="slbl">End-of-Day Summary</div><div class="sdsc">Incomplete habits summary</div></div><input type="time" value="${String(S.eodH).padStart(2,"0")}:${String(S.eodM).padStart(2,"0")}" style="background:var(--s2);border:1px solid var(--br);border-radius:8px;padding:5px 9px;color:var(--tx);font-family:var(--mono);font-size:12px" onchange="const p=this.value.split(':');S.eodH=+p[0];S.eodM=+p[1];save();if(S.notifOn)schedNotif()"></div></div>
+</div>`;
+
+// Reminder Intervals section
+html+=`<div class="rc" style="animation:fadeUp .3s ease .07s both"><div class="rt2">Remind Me Before Habit</div>
+  <div class="sdsc" style="margin-bottom:12px">Choose when to get notified before each habit's scheduled time</div>
+  <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px">
+    ${[{m:60,l:"1 hour"},{m:30,l:"30 min"},{m:15,l:"15 min"},{m:10,l:"10 min"},{m:5,l:"5 min"}].map(r=>{
+      const active=S.remBefore.includes(r.m);
+      return`<button onclick="toggleReminder(${r.m})" style="padding:8px 14px;border-radius:9px;font-size:12px;font-weight:600;border:1.5px solid ${active?"var(--ac)":"var(--br)"};background:${active?"var(--acd)":"var(--s2)"};color:${active?"var(--ac)":"var(--tx2)"};transition:all .15s">${active?"✓ ":""}${r.l}</button>`}).join("")}
+  </div>
+  <div style="display:flex;gap:6px;align-items:center">
+    <input class="fi2" id="customRemMin" type="number" min="1" max="1440" placeholder="Custom minutes" style="flex:1;margin:0;font-size:12px">
+    <button onclick="addCustomReminder()" style="padding:9px 16px;border-radius:9px;background:var(--ac);color:var(--bg);font-size:12px;font-weight:700;white-space:nowrap">+ Add</button>
+  </div>
+  ${S.remBefore.length>0?`<div style="margin-top:14px"><div style="font-size:10px;font-weight:700;color:var(--tx3);text-transform:uppercase;letter-spacing:.8px;margin-bottom:8px">Active Reminders</div>
+    ${S.remBefore.map(m=>{const label=m>=60?(m>=120?(m/60)+" hours":(m/60)+" hour"):m+" min";const isPreset=[60,30,15,10,5].includes(m);return`<div style="display:flex;align-items:center;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--br)"><div style="display:flex;align-items:center;gap:8px"><span style="color:var(--ac);font-size:14px">🔔</span><span style="font-size:13px;font-weight:500">${label} before</span></div>${!isPreset?`<button onclick="removeReminder(${m})" style="background:var(--dngd);color:var(--dng);border-radius:6px;padding:4px 10px;font-size:10px;font-weight:600">Remove</button>`:``}</div>`}).join("")}
+    <div style="display:flex;align-items:center;justify-content:space-between;padding:8px 0"><div style="display:flex;align-items:center;gap:8px"><span style="color:var(--ac);font-size:14px">⏰</span><span style="font-size:13px;font-weight:500">At habit time</span></div><span style="font-size:10px;color:var(--tx3)">Always on</span></div>
+    <div style="display:flex;align-items:center;justify-content:space-between;padding:8px 0"><div style="display:flex;align-items:center;gap:8px"><span style="color:var(--amb);font-size:14px">⚠️</span><span style="font-size:13px;font-weight:500">15, 30, 60 min after (if missed)</span></div><span style="font-size:10px;color:var(--tx3)">Always on</span></div>
+  </div>`:""}</div>`;
 html+=`<div class="rc" style="animation:fadeUp .3s ease .08s both"><div class="rt2">Features</div><div class="srow"><div><div class="slbl">Schedule & Calendar</div><div class="sdsc">Show schedule tab with ICS sync</div></div><div class="tog${S.schedOn?" on":""}" onclick="S.schedOn=!S.schedOn;if(!S.schedOn&&S.view==='schedule')S.view='habits';save();render()"><div class="tog-k"></div></div></div></div>`;
 if(S.schedOn){html+=`<div class="rc" style="animation:fadeUp .3s ease .1s both"><div class="rt2">Calendar</div><div style="padding:6px 0"><div class="slbl" style="margin-bottom:6px">ICS Feed URL</div><input class="fi2" style="font-size:11px;margin:0" value="${S.calUrl.replace(/"/g,"&quot;")}" oninput="S.calUrl=this.value;save()" placeholder="Paste .ics calendar URL"><div class="sdsc" style="margin-top:8px"><strong>Teams/Outlook:</strong> Settings → Calendar → Shared calendars → Publish → ICS<br><br><strong>Apple Calendar:</strong> iCloud.com → Calendar → Share → Public Calendar</div></div></div>`}
-html+=`<div class="rc" style="animation:fadeUp .3s ease .12s both"><div class="rt2">Install as App</div><div style="font-size:12px;color:var(--tx2);line-height:1.7;padding:6px 0"><strong>iPhone:</strong> Safari → Share → Add to Home Screen<br><strong>Android:</strong> Chrome → ⋮ → Add to Home Screen</div></div>`;
+html+=`<div class="rc" style="animation:fadeUp .3s ease .12s both"><div class="rt2">Install as App</div><div style="font-size:12px;color:var(--tx2);line-height:1.7;padding:6px 0"><strong>iPhone:</strong> Safari → Share → Add to Home Screen<br><strong>Android:</strong> Chrome → ⋮ → Add to Home Screen<br><br><strong style="color:var(--dng)">Important:</strong> iPhone notifications ONLY work when opened from Home Screen icon (not Safari tab). Requires iOS 16.4+</div></div>`;
+
+// Test & Debug
+html+=`<div class="rc" style="animation:fadeUp .3s ease .14s both"><div class="rt2">Test & Debug Notifications</div>
+  <div style="display:flex;gap:6px;margin-bottom:12px">
+    <button onclick="sendTestNotif()" style="flex:1;padding:11px;border-radius:10px;background:var(--ac);color:var(--bg);font-size:12px;font-weight:700">🔔 Send Test Now</button>
+    <button onclick="schedNotif();render()" style="flex:1;padding:11px;border-radius:10px;background:var(--s2);color:var(--tx2);font-size:12px;font-weight:600;border:1px solid var(--br)">🔄 Reschedule</button>
+  </div>
+  <div style="background:var(--s2);border-radius:10px;padding:10px 12px;margin-bottom:8px">
+    <div style="font-size:10px;font-weight:700;color:var(--tx3);text-transform:uppercase;letter-spacing:.8px;margin-bottom:4px">Status</div>
+    <div style="font-size:11px;color:var(--tx2);line-height:1.6">
+      Notifications: <span style="color:${S.notifOn?"var(--ac)":"var(--dng)"}"><strong>${S.notifOn?"ON":"OFF"}</strong></span><br>
+      Permission: <strong>${"Notification" in window?Notification.permission:"N/A"}</strong><br>
+      Service Worker: <strong>${swReg?"Registered":"Not registered"}</strong><br>
+      Active timers: <strong>${nT2.length}</strong><br>
+      Reminder intervals: <strong>${(S.remBefore||[]).map(m=>m>=60?(m/60)+"hr":m+"min").join(", ")||"None"}</strong>
+    </div>
+  </div>
+  ${notifLog.length>0?`<div style="background:var(--s2);border-radius:10px;padding:10px 12px;max-height:160px;overflow-y:auto">
+    <div style="font-size:10px;font-weight:700;color:var(--tx3);text-transform:uppercase;letter-spacing:.8px;margin-bottom:6px">Activity Log</div>
+    ${notifLog.map(l=>`<div style="font-size:10px;color:var(--tx2);padding:3px 0;border-bottom:1px solid var(--br);font-family:var(--mono)"><span style="color:var(--tx3)">${l.t}</span> ${l.msg}</div>`).join("")}
+  </div>`:""}
+</div>`;
 html+=`<button class="expb" onclick="resetAll()" style="color:var(--dng)">Reset All Data</button>`}
 html+=`<nav class="bnav"><button class="nb${S.view==="habits"?" a":""}" onclick="setV('habits')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>${missed.length&&S.view!=="habits"?`<span class="bdg">${missed.length}</span>`:""}Habits</button>${S.schedOn?`<button class="nb${S.view==="schedule"?" a":""}" onclick="setV('schedule')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>Schedule</button>`:""}<button class="nb${S.view==="reports"?" a":""}" onclick="setV('reports')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 20V10M12 20V4M6 20v-6"/></svg>Reports</button><button class="nb${S.view==="settings"?" a":""}" onclick="setV('settings')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 01-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.32 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>Settings</button></nav></div>`;
 R.innerHTML=html}
