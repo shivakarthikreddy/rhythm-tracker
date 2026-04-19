@@ -84,12 +84,12 @@ function gS(id,c){let s=0;const t=new Date;for(let i=0;i<365;i++){const d=new Da
 function fT(h,m){return`${((h%12)||12)}:${String(m).padStart(2,"0")} ${h>=12?"PM":"AM"}`}
 function pT(s){const p=s.split(":");return{h:parseInt(p[0]),m:parseInt(p[1]||0)}}
 let U=null,aScr="login",aLoad=false,aErr="",aOk="",appLoad=true,modalDismissed=false;
-let S={habits:[...DEF],comp:{},sched:[],calUrl:"",calEv:[],calSync:null,calBusy:false,view:"habits",wo:0,showAdd:false,showAddS:false,editH:null,editS:null,notifOn:false,notifDis:{},eodH:21,eodM:0,schedOn:false,remBefore:[60,30,10],remCustom:""};
+let S={habits:[...DEF],comp:{},sched:[],calUrl:"",calEv:[],calSync:null,calBusy:false,view:"habits",wo:0,showAdd:false,showAddS:false,editH:null,editS:null,notifOn:false,notifDis:{},eodH:21,eodM:0,schedOn:false,remBefore:[5],remCustom:""};
 function uRef(){return U?db.collection("users").doc(U.uid):null}
 async function cloudSave(){const r=uRef();if(!r)return;try{await r.set({habits:S.habits,comp:S.comp,sched:S.sched,calUrl:S.calUrl,calEv:S.calEv,calSync:S.calSync,notifOn:S.notifOn,eodH:S.eodH,eodM:S.eodM,schedOn:S.schedOn,remBefore:S.remBefore,up:firebase.firestore.FieldValue.serverTimestamp()},{merge:true})}catch(e){console.error(e)}}
-async function cloudLoad(){const r=uRef();if(!r)return;try{const d=await r.get();if(d.exists){const v=d.data();S.habits=v.habits||[...DEF];S.comp=v.comp||{};S.sched=v.sched||[];S.calUrl=v.calUrl||"";S.calEv=v.calEv||[];S.calSync=v.calSync||null;S.notifOn=v.notifOn||false;S.eodH=v.eodH||21;S.eodM=v.eodM||0;S.schedOn=v.schedOn||false;S.remBefore=v.remBefore||[60,30,10]}}catch(e){console.error(e)}}
+async function cloudLoad(){const r=uRef();if(!r)return;try{const d=await r.get();if(d.exists){const v=d.data();S.habits=v.habits||[...DEF];S.comp=v.comp||{};S.sched=v.sched||[];S.calUrl=v.calUrl||"";S.calEv=v.calEv||[];S.calSync=v.calSync||null;S.notifOn=v.notifOn||false;S.eodH=v.eodH||21;S.eodM=v.eodM||0;S.schedOn=v.schedOn||false;S.remBefore=v.remBefore||[5]}}catch(e){console.error(e)}}
 let svT=null;function save(){clearTimeout(svT);svT=setTimeout(cloudSave,800)}
-auth.onAuthStateChanged(async u=>{U=u;if(u){await cloudLoad();appLoad=false;if(S.notifOn)schedNotif();render()}else{appLoad=false;S={habits:[...DEF],comp:{},sched:[],calUrl:"",calEv:[],calSync:null,calBusy:false,view:"habits",wo:0,showAdd:false,showAddS:false,editH:null,editS:null,notifOn:false,notifDis:{},eodH:21,eodM:0,schedOn:false,remBefore:[60,30,10],remCustom:""};render()}});
+auth.onAuthStateChanged(async u=>{U=u;if(u){await cloudLoad();appLoad=false;if(S.notifOn)schedNotif();render()}else{appLoad=false;S={habits:[...DEF],comp:{},sched:[],calUrl:"",calEv:[],calSync:null,calBusy:false,view:"habits",wo:0,showAdd:false,showAddS:false,editH:null,editS:null,notifOn:false,notifDis:{},eodH:21,eodM:0,schedOn:false,remBefore:[5],remCustom:""};render()}});
 async function doLogin(){const e=document.getElementById("aE")?.value?.trim(),p=document.getElementById("aP")?.value;if(!e||!p){aErr="Please fill in all fields.";render();return}aLoad=true;aErr="";render();try{await auth.signInWithEmailAndPassword(e,p)}catch(x){aErr=fErr(x);aLoad=false;render()}}
 async function doSignup(){const n=document.getElementById("aN")?.value?.trim(),e=document.getElementById("aE")?.value?.trim(),p=document.getElementById("aP")?.value,p2=document.getElementById("aP2")?.value;if(!n||!e||!p){aErr="Please fill in all fields.";render();return}if(p!==p2){aErr="Passwords don't match.";render();return}if(p.length<6){aErr="Min 6 characters.";render();return}aLoad=true;aErr="";render();try{const c=await auth.createUserWithEmailAndPassword(e,p);await c.user.updateProfile({displayName:n});await db.collection("users").doc(c.user.uid).set({habits:[...DEF],comp:{},sched:[],calUrl:"",calEv:[],calSync:null,notifOn:false,eodH:21,eodM:0,schedOn:false,created:firebase.firestore.FieldValue.serverTimestamp()})}catch(x){aErr=fErr(x);aLoad=false;render()}}
 async function doForgot(){const e=document.getElementById("aE")?.value?.trim();if(!e){aErr="Enter your email.";render();return}aLoad=true;aErr="";render();try{await auth.sendPasswordResetEmail(e);aOk="Reset link sent!";aLoad=false;render()}catch(x){aErr=fErr(x);aLoad=false;render()}}
@@ -117,10 +117,18 @@ async function initSW(){
 }
 initSW();
 
+// Detect if running as installed PWA (Home Screen) vs browser
+function isPWA(){return window.matchMedia('(display-mode: standalone)').matches||window.navigator.standalone===true}
+
 async function reqNotif(){
+  if(!isPWA()){
+    alert('Notifications only work when opened from your Home Screen icon.\n\n1. Tap the Share button below\n2. Tap "Add to Home Screen"\n3. Open Rhythm from your Home Screen\n4. Then enable notifications in Settings');
+    nLog('⚠️ Not running as PWA — notifications unavailable in Safari');
+    return;
+  }
   if(!('Notification' in window)){
     nLog('❌ Notification API not available');
-    alert('Notifications require:\n\n• iPhone: iOS 16.4+ and app must be Added to Home Screen\n• Android: Chrome browser\n• Desktop: Any modern browser\n\nIf on iPhone, make sure you opened this from your Home Screen icon, not Safari.');
+    alert('Notifications require iOS 16.4 or later.');
     return;
   }
   nLog('📋 Current permission: '+Notification.permission);
@@ -130,18 +138,17 @@ async function reqNotif(){
   save();render();
   if(S.notifOn){
     schedNotif();
-    // Immediate test notification
     sendTestNotif();
   }else{
     nLog('❌ Permission denied');
-    if(perm==='denied')alert('Notifications are blocked. Go to your browser/device settings to allow notifications for this site.');
+    if(perm==='denied')alert('Notifications are blocked. Go to Settings → Rhythm → Notifications → Allow.');
   }
 }
 
 function sendTestNotif(){
   nLog('🔔 Sending test notification...');
   try{
-    if(swReg&&swReg.active){
+    if(swReg&&swReg.showNotification){
       swReg.showNotification('Rhythm — Notifications Active!',{
         body:'You\'ll get reminders before each habit. This is a test!',
         tag:'test-'+Date.now(),
@@ -149,7 +156,18 @@ function sendTestNotif(){
         badge:'./icon-192.png',
         requireInteraction:true
       });
-      nLog('✅ Test sent via Service Worker');
+      nLog('✅ Test sent via SW registration');
+    }else if(swReg&&swReg.active&&navigator.serviceWorker.ready){
+      navigator.serviceWorker.ready.then(reg=>{
+        reg.showNotification('Rhythm — Notifications Active!',{
+          body:'You\'ll get reminders before each habit. This is a test!',
+          tag:'test-'+Date.now(),
+          icon:'./icon-192.png',
+          badge:'./icon-192.png',
+          requireInteraction:true
+        });
+        nLog('✅ Test sent via SW ready');
+      });
     }else{
       new Notification('Rhythm — Notifications Active!',{
         body:'You\'ll get reminders before each habit. This is a test!',
@@ -159,7 +177,14 @@ function sendTestNotif(){
     }
   }catch(e){
     nLog('❌ Test failed: '+e.message);
-    alert('Notification failed: '+e.message);
+    // Last resort fallback
+    try{
+      new Notification('Rhythm — Test',{body:'This is a test notification.',tag:'test-'+Date.now()});
+      nLog('✅ Fallback notification sent');
+    }catch(e2){
+      nLog('❌ All methods failed: '+e2.message);
+      alert('Notification failed: '+e2.message+'\n\nMake sure you:\n1. Added to Home Screen\n2. Allowed notifications\n3. Are on iOS 16.4+');
+    }
   }
 }
 
@@ -172,14 +197,23 @@ function schedNotif(){
   
   function sendNotif(title,body,tag){
     nLog('🔔 Firing: '+title);
-    if(swReg&&swReg.active){
-      swReg.showNotification(title,{body,tag,icon:'./icon-192.png',badge:'./icon-192.png',renotify:true,requireInteraction:true});
-    }else{
-      try{new Notification(title,{body,tag})}catch(e){nLog('❌ '+e.message)}
+    try{
+      if(swReg&&swReg.showNotification){
+        swReg.showNotification(title,{body,tag,icon:'./icon-192.png',badge:'./icon-192.png',renotify:true,requireInteraction:true});
+      }else if(navigator.serviceWorker&&navigator.serviceWorker.ready){
+        navigator.serviceWorker.ready.then(reg=>{
+          reg.showNotification(title,{body,tag,icon:'./icon-192.png',badge:'./icon-192.png',renotify:true,requireInteraction:true});
+        }).catch(()=>{new Notification(title,{body,tag})});
+      }else{
+        new Notification(title,{body,tag});
+      }
+    }catch(e){
+      nLog('❌ '+e.message);
+      try{new Notification(title,{body,tag})}catch(e2){nLog('❌ Fallback failed: '+e2.message)}
     }
   }
   
-  const intervals=(S.remBefore||[60,30,10]).slice().sort((a,b)=>b-a);
+  const intervals=(S.remBefore||[5]).slice().sort((a,b)=>b-a);
   let scheduled=0;
   
   S.habits.forEach(h=>{
@@ -199,7 +233,7 @@ function schedNotif(){
     
     if(habitMs>0){scheduled++;nT2.push(setTimeout(()=>{if(!S.comp[h.id+'::'+tdk])sendNotif('Rhythm — '+h.name+' NOW','Time to do it! Tap to log.','h-'+h.id)},habitMs))}
     
-    [15,30,60].forEach(mins=>{
+    [5,60].forEach(mins=>{
       const delay=habitMs+(mins*60000);
       if(delay>0){
         scheduled++;
@@ -274,7 +308,7 @@ function subH(){const n=document.getElementById("hN")?.value?.trim();if(!n)retur
 function subSc(){const t=document.getElementById("sT2")?.value?.trim();if(!t)return;S.sched.push({id:"s"+Date.now(),title:t,time:document.getElementById("sTm")?.value||"09:00",day:parseInt(document.getElementById("sD")?.value||0),color:_scs});S.showAddS=false;_scs=1;save();render()}
 function uCU(){S.calUrl=document.getElementById("cU")?.value||"";save()}
 function exCSV(){let c="Habit,Date,Completed\n";S.habits.forEach(h=>{for(let i=0;i<90;i++){const d=new Date;d.setDate(d.getDate()-i);c+=`"${h.name}",${dk(d)},${S.comp[h.id+"::"+dk(d)]?"Yes":"No"}\n`}});const b=new Blob([c],{type:"text/csv"}),u=URL.createObjectURL(b),a=document.createElement("a");a.href=u;a.download=`rhythm_${dk(new Date)}.csv`;document.body.appendChild(a);a.click();document.body.removeChild(a);URL.revokeObjectURL(u)}
-function resetAll(){if(confirm("Reset everything?")){const r=uRef();if(r)r.delete();S={habits:[...DEF],comp:{},sched:[],calUrl:"",calEv:[],calSync:null,calBusy:false,view:"habits",wo:0,showAdd:false,showAddS:false,editH:null,editS:null,notifOn:false,notifDis:{},eodH:21,eodM:0,schedOn:false,remBefore:[60,30,10],remCustom:""};save();render()}}
+function resetAll(){if(confirm("Reset everything?")){const r=uRef();if(r)r.delete();S={habits:[...DEF],comp:{},sched:[],calUrl:"",calEv:[],calSync:null,calBusy:false,view:"habits",wo:0,showAdd:false,showAddS:false,editH:null,editS:null,notifOn:false,notifDis:{},eodH:21,eodM:0,schedOn:false,remBefore:[5],remCustom:""};save();render()}}
 
 function render(){
 const R=document.getElementById("root");
@@ -316,7 +350,13 @@ if(showModal){
   html+=`</div></div>`;
 }
 
-if(!S.notifOn&&"Notification" in window&&Notification.permission!=="denied")html+=`<div class="notif-bar" onclick="reqNotif()"><div style="font-size:17px">🔔</div><div class="nt">Enable reminders<small>At habit time + end-of-day summary</small></div><div style="color:var(--ac);font-size:12px;font-weight:700">Enable</div></div>`;
+if(!S.notifOn){
+  if(isPWA()&&"Notification" in window&&Notification.permission!=="denied"){
+    html+=`<div class="notif-bar" onclick="reqNotif()"><div style="font-size:17px">🔔</div><div class="nt">Enable reminders<small>At habit time + end-of-day summary</small></div><div style="color:var(--ac);font-size:12px;font-weight:700">Enable</div></div>`;
+  }else if(!isPWA()){
+    html+=`<div class="notif-bar" style="border-color:rgba(251,191,36,.2);background:rgba(251,191,36,.08)" onclick="reqNotif()"><div style="font-size:17px">📲</div><div class="nt" style="color:var(--amb)">Add to Home Screen for notifications<small>Safari doesn't support notifications — use the Home Screen app</small></div></div>`;
+  }
+}
 if(showM&&S.view==="habits"&&modalDismissed)html+=`<div class="alert-banner"><div class="alert-title">⚠ ${missed.length} missed today</div>${missed.map(h=>{const c=CL[h.ci%CL.length];return`<div class="alert-item"><div style="display:flex;align-items:center;gap:6px"><span>${h.icon}</span> ${h.name} <span style="color:var(--tx3);font-family:var(--mono);font-size:10px">${h.time}</span></div><button onclick="tC('${h.id}','${today}')">Log ✓</button></div>`}).join("")}<div style="text-align:right;margin-top:5px"><button onclick="dM()" style="background:none;color:var(--tx3);font-size:10px">Dismiss</button></div></div>`;
 if(S.view==="habits"){html+=`<div class="wn"><button onclick="nW(-1)">‹</button><span class="wl">${MO[wd[0].getMonth()]} ${wd[0].getDate()} — ${MO[wd[6].getMonth()]} ${wd[6].getDate()}</span><button onclick="nW(1)">›</button></div><div class="dh"><div></div>${wd.map(d=>{const t=dk(d)===today;return`<div class="dc${t?" td":""}"><div>${DAYS[d.getDay()]}</div><div class="dnum${t?" td":""}">${d.getDate()}</div></div>`}).join("")}</div>`;
 S.habits.forEach((h,idx)=>{const c=CL[h.ci%CL.length],st=gS(h.id,S.comp);let w2=0;wd.forEach(d=>{if(S.comp[h.id+"::"+dk(d)])w2++});const wp=Math.round(w2/7*100);
@@ -355,7 +395,7 @@ html+=`<div class="rc" style="animation:fadeUp .3s ease .07s both"><div class="r
   ${S.remBefore.length>0?`<div style="margin-top:14px"><div style="font-size:10px;font-weight:700;color:var(--tx3);text-transform:uppercase;letter-spacing:.8px;margin-bottom:8px">Active Reminders</div>
     ${S.remBefore.map(m=>{const label=m>=60?(m>=120?(m/60)+" hours":(m/60)+" hour"):m+" min";const isPreset=[60,30,15,10,5].includes(m);return`<div style="display:flex;align-items:center;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--br)"><div style="display:flex;align-items:center;gap:8px"><span style="color:var(--ac);font-size:14px">🔔</span><span style="font-size:13px;font-weight:500">${label} before</span></div>${!isPreset?`<button onclick="removeReminder(${m})" style="background:var(--dngd);color:var(--dng);border-radius:6px;padding:4px 10px;font-size:10px;font-weight:600">Remove</button>`:``}</div>`}).join("")}
     <div style="display:flex;align-items:center;justify-content:space-between;padding:8px 0"><div style="display:flex;align-items:center;gap:8px"><span style="color:var(--ac);font-size:14px">⏰</span><span style="font-size:13px;font-weight:500">At habit time</span></div><span style="font-size:10px;color:var(--tx3)">Always on</span></div>
-    <div style="display:flex;align-items:center;justify-content:space-between;padding:8px 0"><div style="display:flex;align-items:center;gap:8px"><span style="color:var(--amb);font-size:14px">⚠️</span><span style="font-size:13px;font-weight:500">15, 30, 60 min after (if missed)</span></div><span style="font-size:10px;color:var(--tx3)">Always on</span></div>
+    <div style="display:flex;align-items:center;justify-content:space-between;padding:8px 0"><div style="display:flex;align-items:center;gap:8px"><span style="color:var(--amb);font-size:14px">⚠️</span><span style="font-size:13px;font-weight:500">5 min & 1 hour after (if missed)</span></div><span style="font-size:10px;color:var(--tx3)">Always on</span></div>
   </div>`:""}</div>`;
 html+=`<div class="rc" style="animation:fadeUp .3s ease .08s both"><div class="rt2">Features</div><div class="srow"><div><div class="slbl">Schedule & Calendar</div><div class="sdsc">Show schedule tab with ICS sync</div></div><div class="tog${S.schedOn?" on":""}" onclick="S.schedOn=!S.schedOn;if(!S.schedOn&&S.view==='schedule')S.view='habits';save();render()"><div class="tog-k"></div></div></div></div>`;
 if(S.schedOn){html+=`<div class="rc" style="animation:fadeUp .3s ease .1s both"><div class="rt2">Calendar</div><div style="padding:6px 0"><div class="slbl" style="margin-bottom:6px">ICS Feed URL</div><input class="fi2" style="font-size:11px;margin:0" value="${S.calUrl.replace(/"/g,"&quot;")}" oninput="S.calUrl=this.value;save()" placeholder="Paste .ics calendar URL"><div class="sdsc" style="margin-top:8px"><strong>Teams/Outlook:</strong> Settings → Calendar → Shared calendars → Publish → ICS<br><br><strong>Apple Calendar:</strong> iCloud.com → Calendar → Share → Public Calendar</div></div></div>`}
@@ -370,6 +410,7 @@ html+=`<div class="rc" style="animation:fadeUp .3s ease .14s both"><div class="r
   <div style="background:var(--s2);border-radius:10px;padding:10px 12px;margin-bottom:8px">
     <div style="font-size:10px;font-weight:700;color:var(--tx3);text-transform:uppercase;letter-spacing:.8px;margin-bottom:4px">Status</div>
     <div style="font-size:11px;color:var(--tx2);line-height:1.6">
+      Running as: <span style="color:${isPWA()?"var(--ac)":"var(--amb)"}"><strong>${isPWA()?"Home Screen App ✓":"Safari (limited)"}</strong></span><br>
       Notifications: <span style="color:${S.notifOn?"var(--ac)":"var(--dng)"}"><strong>${S.notifOn?"ON":"OFF"}</strong></span><br>
       Permission: <strong>${"Notification" in window?Notification.permission:"N/A"}</strong><br>
       Service Worker: <strong>${swReg?"Registered":"Not registered"}</strong><br>
